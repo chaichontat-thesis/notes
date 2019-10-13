@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.58.3" />
+
+
+<title>STA 601/360 Homework 5 - A Hugo website</title>
+<meta property="og:title" content="STA 601/360 Homework 5 - A Hugo website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">STA 601/360 Homework 5</h1>
+
+    
+    <span class="article-date">0001-01-01</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="hoff-5.2" class="section level2">
+<h2>Hoff 5.2</h2>
+<pre class="r"><code>mu_0 &lt;- 75; sigma2_0 &lt;- 100
+kv_0 &lt;- c(1, 2, 4, 8, 16, 32, 64)
+n &lt;- 16; iter &lt;- 1000000
+
+yA &lt;- 75.2; sA &lt;- 7.3
+yB &lt;- 77.5; sB &lt;- 8.1
+
+mc &lt;- function(k) {
+  k_n &lt;- k + n; v_n &lt;- k + n
+  
+  gen_sample &lt;- function(ybar, s) {
+    mu_n &lt;- (k*mu_0 + n*ybar)/k_n
+    s2_n &lt;- 1/v_n * (k*sigma2_0 + (n-1)*s^2 + k*n*(ybar-mu_0)^2 / k_n)
+    return(rnorm(iter, mean=mu_n, sd=sqrt(s2_n)))
+  }
+  
+  return(mean(gen_sample(yA, sA) - gen_sample(yB, sB) &lt; 0))
+}
+
+result &lt;- sapply(kv_0, mc)
+ggplot(data.frame(x=kv_0, y=result), aes(x=x, y=y)) + geom_point() +
+  labs(x=TeX(&quot;$(\\kappa_0, \\nu_0)$&quot;), y=TeX(&quot;Pr$(\\theta_A &lt; \\theta_B \\, | \\, y_A, y_B)$&quot;))</code></pre>
+<p><img src="/post/HW5_files/figure-html/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>With low-informative priors (small <span class="math inline">\(\kappa_0, \nu_0\)</span>), the probability that <span class="math inline">\(\theta_A &lt; \theta_B\)</span> is not high to begin with <span class="math inline">\((0.58)\)</span>. With stronger priors <span class="math inline">\(\mu_0=75\approx\bar{x}_A\)</span>, the probability sinks lower as there’s a stronger belief in the prior.</p>
+</div>
+<div id="jeffreys-prior" class="section level2">
+<h2>Jeffrey’s Prior</h2>
+<p><span class="math display">\[
+\begin{align*}
+  p(\theta, \sigma^2) &amp;= \left(\sigma^2\right)^{-3/2} \\
+  Y_1, \dots, Y_n &amp;\sim \mathcal{N}(\theta, \sigma^2)
+  \\~\\
+  p(\theta, \sigma^2 \mid Y_1, \dots, Y_n) &amp;\propto p(\theta, \sigma^2)\ p(Y_1, \dots, Y_n \mid \theta, \sigma^2)\\ 
+  &amp;= (\sigma^2)^{-3/2}\ \left[(\sigma^2)^{-n/2} \exp \left\{ -\frac{1}{2\sigma^2} \sum_{i=1}^n \left(y_i-\theta\right)^2 \right\}\right] \\
+  &amp;= (\sigma^2)^{-(n+3)/2} \exp \left\{ -\frac{1}{2\sigma^2} \sum_{i=1}^n \left((y_i-\bar{y})+(\bar{y}-\theta)\right)^2 \right\} \\
+  &amp;= (\sigma^2)^{-(n+3)/2} \exp \left\{ -\frac{1}{2\sigma^2} \sum_{i=1}^n \left((y_i-\bar{y})^2+2(y_i-\bar{y})(\bar{y}-\theta)+(\bar{y}-\theta)^2\right) \right\} \\
+  &amp;= (\sigma^2)^{-(n+3)/2} \exp \left\{ -\frac{1}{2\sigma^2} \left[\sum_{i=1}^n (y_i-\bar{y})^2+2(\bar{y}-\theta)\left(\sum y_i-n\bar{y}\right)+n(\bar{y}-\theta)^2 \right]\right\} \\
+  &amp;= (\sigma^2)^{-(n+3)/2} \exp \left\{ -\frac{1}{2\sigma^2} \left[\sum_{i=1}^n (y_i-\bar{y})^2+0+n(\bar{y}-\theta)^2 \right]\right\} \\
+  &amp;= (\sigma^2)^{-(n+3)/2} \exp \left\{ -\frac{1}{2\sigma^2} \left[(n-1)s^2+n(\bar{y}-\theta)^2\right]\right\} \\
+  &amp;= \operatorname{Normal-InvGamma}\left(\theta, n, \frac{n+1}{2}, \frac{(n-1)s^2}{2}\right)
+\end{align*}
+\]</span>
+where
+<span class="math display">\[
+s^2 = \frac{1}{n-1} \sum_{i=1}^n (y_i-\bar{y})^2 \\
+\operatorname{Normal-InvGamma}\left(\mu, \lambda, \alpha, \beta \right)
+\]</span></p>
+<p>When <span class="math inline">\(n=0\)</span>, the posterior is improper as the normal-inverse-gamma distribution is only valid for parameters <span class="math inline">\(\lambda, \alpha, \beta &gt; 0\)</span>. With <span class="math inline">\(n=1\)</span>, however, the posterior is proper.</p>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+
