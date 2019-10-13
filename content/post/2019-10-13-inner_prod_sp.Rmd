@@ -25,7 +25,7 @@ A projection of $\mathbf{a}$ on to $\mathbf{b}$ could be defined in terms of the
 ```
 \begin{align*}
   \mathbf{P} &= ||\mathbf{a}|| \cos (\gamma)\, \frac{\mathbf{b}}{||\mathbf{b}||}\\
-  &= \frac{\mathbf{a} \cdot \mathbf{b}}{\mathbf{a}\cdot \mathbf{a}} \, \mathbf{b}
+  &= \frac{\mathbf{a} \cdot \mathbf{b}}{\mathbf{b}\cdot \mathbf{b}} \, \mathbf{b}
 \end{align*}
 
 ```{definition, innerprod, name="Inner product"}
@@ -33,7 +33,7 @@ An inner product is any function $f: V \times V \rightarrow \mathbb{R}$ that sat
 ```
 1. Commutativity $f(a,b) = f(b,a)$
 2. Distributivity $f(a+x,b) = f(ca,b) + f(cx,b)$
-3. Positive-definiteness $f(a,a) > 0, a \neq \mathbf{0}$
+3. Positive-definiteness $f(a,a) > 0 \leftrightarrow \mathbf{a} \neq \mathbf{0}$
 
 This is a generalization of the notion of length.
 

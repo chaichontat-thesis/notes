@@ -51,6 +51,7 @@ code {
 .nav-logo {
   float: left;
   margin-top: -11px;
+  margin-left: -90px;
   transition: transform 150ms ease-out;
 }
 
@@ -59,10 +60,11 @@ code {
 }
 
 .nav-logo img {
+  margin-top: 2px;
   display: block;
+  transform: scale(0.6);
   max-height: 40px;
   width: auto;
-  border-radius: 50%;
 }
 
 .nav-links {
