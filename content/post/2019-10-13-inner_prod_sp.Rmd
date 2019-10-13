@@ -1,0 +1,127 @@
+---
+title: "Inner Product Space"
+author: "Chaichontat Sriworarat"
+date: 2019-10-13
+tags: ["linear algebra"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+An inner product space is a vector space _with_ a defined inner product, not a vector space _of_ inner products.
+
+## Basic Inner Product
+
+```{definition, dotprod, name="Dot Product"}
+$$\mathbf{a} \cdot \mathbf{b} = ||\mathbf{a}||\, ||\mathbf{b}|| \cos(\gamma)$$
+
+Since we are working in an Euclidean space, the dot product is equivalent to the $\ell_2$ norm squared.
+```
+$$\mathbf{a} \cdot \mathbf{a} = \mathbf{a^\top a}$$
+
+```{definition, proj, name="Projection"}
+A projection of $\mathbf{a}$ on to $\mathbf{b}$ could be defined in terms of the dot product.
+```
+\begin{align*}
+  \mathbf{P} &= ||\mathbf{a}|| \cos (\gamma)\, \frac{\mathbf{b}}{||\mathbf{b}||}\\
+  &= \frac{\mathbf{a} \cdot \mathbf{b}}{\mathbf{a}\cdot \mathbf{a}} \, \mathbf{b}
+\end{align*}
+
+```{definition, innerprod, name="Inner product"}
+An inner product is any function $f: V \times V \rightarrow \mathbb{R}$ that satisfies the following properties:
+```
+1. Commutativity $f(a,b) = f(b,a)$
+2. Distributivity $f(a+x,b) = f(ca,b) + f(cx,b)$
+3. Positive-definiteness $f(a,a) > 0, a \neq \mathbf{0}$
+
+This is a generalization of the notion of length.
+
+Let us propose functions for $\mathbb{R}^3$ that may or may not be an inner product function.
+
+* $(\mathbf{a},\mathbf{b}) = 3a_1b_1 + 4a_2b_2$. Breaks positive-definiteness for $a+3$.
+* $(\mathbf{a},\mathbf{b}) = 3a_1b_1 + 4a_2b_2 + 1$. Breaks distributivity.
+* $(\mathbf{a},\mathbf{b}) = a_1b_1 + a_2b_2 + a_3b_3$. Standard inner product.
+* $(\mathbf{a},\mathbf{b}) = a_1b_1 + a_2b_2 + a_3b_3 + a_1b_2$. Breaks commutativity.
+* $(\mathbf{a},\mathbf{b}) = a_1b_1 + a_2b_2 + a_3b_3 + a_1b_2 + a_2b_1$. Only positive-semidefinite.
+
+## Inner product as matrices
+Lets generalize the dot product into matrix form.
+\begin{align*}
+   f(\mathbf{a,b}) &= \mathbf{a^\top A b} \\
+   &=
+   \begin{bmatrix}
+      a_1 & a_2 & a_3
+   \end{bmatrix}
+   \begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & 1
+   \end{bmatrix}
+   \begin{bmatrix}
+      b_1 \\
+      b_2 \\
+      b_3
+\end{bmatrix}
+\end{align*}
+
+One notices that commutativity requires the matrix to be symmetric.
+
+```{definition, psd, name="Positive-definiteness"}
+```
+$$\mathbf{x^\top A x} > 0$$
+   Note that all the diagonals of $\mathbf{A}$ must be positive, otherwise one could plugin a zero matrix except for that column to render the product negative.
+   Let us try the following.
+  
+\begin{align*}
+  \mathbf{x^\top A x} &=
+  \begin{bmatrix}
+     \alpha & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+     a & b \\
+     b & c
+  \end{bmatrix}
+  \begin{bmatrix}
+     \alpha \\
+     1 \\
+\end{bmatrix} \\
+&= a\alpha^2 + 2b\alpha + c
+\end{align*}
+
+This is only positive-definite if there is no root, that is $4(b^2-ac) < 0$, which is the same thing as $\det(\mathbf{A}) > 0$.
+
+What if we define $\mathbf{A = B^\top B}$, is $\mathbf{A}$ positive-definite?
+
+\begin{align*}
+  \mathbf{x^\top A x} &= \mathbf{x^\top B^\top B x} \\
+  &= (\mathbf{Bx})^\top (\mathbf{Bx}) \\
+  &= || \mathbf{Bx} ||^2
+\end{align*}
+
+   Then $A$ is always positive, but only if $A$ is independent. If $A$ is dependent, then there exists a null space where $\mathbf{Bx} = 0$.
+
+   How about $\mathbf{A = B^\top M B}$? If $\mathbf{M}$ is a symmetric, positive-definite matrix. First, is it symmetric?
+
+\begin{align*}
+  \mathbf{A^\top} &= (\mathbf{B^\top M B})^\top \\
+  &= \mathbf{B^\top M^\top B} \\
+  &= \mathbf{B^\top M B} = \mathbf{A}
+\end{align*}
+
+Note, since $\mathbf{M}$ is symmetric, it always has a square-root by eigendecomposition.
+
+```{definition, qrd, name="$QR$ Decomposition"}
+```
+\begin{align*}
+  \mathbf{AR}^{-1} &= \mathbf{Q} \\
+  \mathbf{A} &= \mathbf{QR}
+\end{align*}
+where $\mathbf{R}^{-1}$ is the composition of the Gram-Schmidt orthogonalization procedure.
+
+```{definition, orthom, name="Orthogonal matrix"}
+```
+   An orthogonal matrix $\mathbf{Q}$ is a matrix in which all columns are pairwise orthogonal. Since the matrix multiplication $\mathbf{AB}$ is the dot product of the rows of $\mathbf{A}$ with the columns of $\mathbf{B}$, then $\mathbf{A^\top B}$ is the dot product of columns of $\mathbf{A}$ instead. This leads to the following.
+$$
+\mathbf{Q^\top Q} = \mathbf{I}
+$$

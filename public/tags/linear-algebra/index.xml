@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>A Hugo website</title>
-    <link>/</link>
-    <description>Recent content on A Hugo website</description>
+    <title>linear algebra on A Hugo website</title>
+    <link>/tags/linear-algebra/</link>
+    <description>Recent content in linear algebra on A Hugo website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 13 Oct 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/linear-algebra/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -21,15 +21,6 @@
 Basic Inner Product Definition 1 (Dot Product) \[\mathbf{a} \cdot \mathbf{b} = ||\mathbf{a}||\, ||\mathbf{b}|| \cos(\gamma)\]
 Since we are working in an Euclidean space, the dot product is equivalent to the \(\ell_2\) norm squared.  \[\mathbf{a} \cdot \mathbf{a} = \mathbf{a^\top a}\]
 Definition 2 (Projection) A projection of \(\mathbf{a}\) on to \(\mathbf{b}\) could be defined in terms of the dot product.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>/about/</link>
-      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>/about/</guid>
-      <description>This is a &amp;ldquo;hello world&amp;rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
     </item>
     
   </channel>
