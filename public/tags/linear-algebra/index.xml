@@ -13,10 +13,10 @@
     
     <item>
       <title>Inner Product Space</title>
-      <link>/2019/10/13/inner-product-space/</link>
+      <link>/linear-algebra/2019-10-13-inner_prod_sp/</link>
       <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/10/13/inner-product-space/</guid>
+      <guid>/linear-algebra/2019-10-13-inner_prod_sp/</guid>
       <description>An inner product space is a vector space with a defined inner product, not a vector space of inner products.
 Basic Inner Product Definition 1 (Dot Product) \[\mathbf{a} \cdot \mathbf{b} = ||\mathbf{a}||\, ||\mathbf{b}|| \cos(\gamma)\]
 Since we are working in an Euclidean space, the dot product is equivalent to the \(\ell_2\) norm squared.  \[\mathbf{a} \cdot \mathbf{a} = \mathbf{a^\top a}\]

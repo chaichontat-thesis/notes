@@ -13,10 +13,10 @@
     
     <item>
       <title>Inner Product Space</title>
-      <link>/2019/10/13/inner-product-space/</link>
+      <link>/linear-algebra/2019-10-13-inner_prod_sp/</link>
       <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/10/13/inner-product-space/</guid>
+      <guid>/linear-algebra/2019-10-13-inner_prod_sp/</guid>
       <description>An inner product space is a vector space with a defined inner product, not a vector space of inner products.
 Basic Inner Product Definition 1 (Dot Product) \[\mathbf{a} \cdot \mathbf{b} = ||\mathbf{a}||\, ||\mathbf{b}|| \cos(\gamma)\]
 Since we are working in an Euclidean space, the dot product is equivalent to the \(\ell_2\) norm squared.  \[\mathbf{a} \cdot \mathbf{a} = \mathbf{a^\top a}\]
@@ -25,10 +25,10 @@ Definition 2 (Projection) A projection of \(\mathbf{a}\) on to \(\mathbf{b}\) co
     
     <item>
       <title>Normal Conjugacy</title>
-      <link>/2019/10/13/normal-conjugacy/</link>
+      <link>/bayesian-statistics/2019-10-13-normal_conjugacy/</link>
       <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/10/13/normal-conjugacy/</guid>
+      <guid>/bayesian-statistics/2019-10-13-normal_conjugacy/</guid>
       <description>Problem Statement Let the random variables \(X_1, \dots X_n\) be normally distributed. \[ X_1,\dots, X_n \sim \mathcal{N}(\mu, \sigma^2)\\ \] With the sampling density function \[ p(X_i=x_i\mid \mu, \sigma^2) = (2\pi \sigma^2)^{-1/2} \, \exp \left\{ -\frac{(x_i-\mu)^2}{2\sigma^2}\right\} \]
 After the experiment, each realizations of the random variables has been found. The likelihood function is
 \[ \begin{align} p(X_1=x_1,\dots,X_n=x_n\mid\mu,\sigma^2) &amp;amp;= \prod_{i=1}^n (2\pi \sigma^2)^{-1/2} \, \exp \left\{ -\frac{(x_i-\mu)^2}{2\sigma^2}\right\} \\ &amp;amp;= (2\pi \sigma^2)^{-n/2} \, \exp \left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2\right\} \end{align} \]</description>

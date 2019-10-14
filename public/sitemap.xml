@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/bayesian-statistics/</loc>
+    <lastmod>2019-10-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/bayesian-statistics/</loc>
     <lastmod>2019-10-13T00:00:00+00:00</lastmod>
   </url>
@@ -13,7 +18,7 @@
   </url>
   
   <url>
-    <loc>/2019/10/13/inner-product-space/</loc>
+    <loc>/linear-algebra/2019-10-13-inner_prod_sp/</loc>
     <lastmod>2019-10-13T00:00:00+00:00</lastmod>
   </url>
   
@@ -23,12 +28,12 @@
   </url>
   
   <url>
-    <loc>/2019/10/13/normal-conjugacy/</loc>
+    <loc>/linear-algebra/</loc>
     <lastmod>2019-10-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/</loc>
+    <loc>/bayesian-statistics/2019-10-13-normal_conjugacy/</loc>
     <lastmod>2019-10-13T00:00:00+00:00</lastmod>
   </url>
   
