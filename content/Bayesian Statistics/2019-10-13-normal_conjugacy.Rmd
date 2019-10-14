@@ -115,14 +115,17 @@ $$
 p(\tst \mid \xdots, \mu) &\propto p(\xdots \mid \mu)\ p(\tst\mid \alpha, \beta) \\
 &\propto \left[ (\tst)^{n/2} \, \expb{-\frac{\tst}{2} \summ(x_i-\mu)^2} \right]\, \left[(\tst)^{\alpha-1}\, \expb{-\beta\tst}\right] \\
 &\propto (\tst)^{n/2+\alpha-1} \, \expb{-\tst\left[\frac{1}{2} \summ(x_i-\mu)^2 + \beta\right]} \\
-&\propto (\tst)^{n/2+\alpha-1} \, \expb{-\tst\left[\frac{ns_x^2}{2} + \beta\right]} \\
-&\propto \mathrm{Gamma}\left(\frac{n}{2}+\alpha, \frac{ns_x^2}{2} + \beta\right)
+&\propto (\tst)^{n/2+\alpha-1} \, \expb{-\tst\left[\frac{(n-1)s_x^2}{2} + \beta\right]} \\
+&\propto \mathrm{Gamma}\left(\frac{n}{2}+\alpha, \frac{(n-1)s_x^2}{2} + \beta\right)
 \end{align}
 $$
 If we define $\alpha = \frac{n_0}{2}$ and $\beta=\frac{n_0\sigma_0^2}{2}$, then
 $$
-p(\tst \mid \xdots, \mu) \sim \pp{\frac{n+n_0}{2}, \frac{ns_x^2+n_0\sigma_0^2}{2}}
+p(\tst \mid \xdots, \mu) \sim \mathrm{Gamma}\pp{\frac{n+n_0}{2}, \frac{(n-1)s_x^2+n_0\sigma_0^2}{2}}
 $$
+### Interpretations
+* $n_0$: sample size where $\sigma_0^2$ is obtained.
+* $(n-1)s_x^2+n_0\sigma_0^2$: sum of sum of sqaures of the prior sample and current sample.
 
 # Infer Both $\mu$ and $\sigma^2$
 
@@ -144,22 +147,70 @@ p(\mu\mid\sigma^2,\xdots) &\propto p(\xdots \mid \mu, \sigma^2) \ p(\mu\mid\sigm
 \end{align}
 $$
 
-Let us examine ther second posterior.
+Let us examine the second posterior.
 $$
 \begin{align}
 p(\sigma^2,\xdots) &\propto p(\xdots\mid\sigma^2) \ p(\sigma^2) \\
 &= \left[\int p(\xdots \mid \theta,\sigma^2)\ p(\theta\mid \sigma^2) \, d\theta\right]\ p(\sigma^2) \\
-&= \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}+n}{2}, \frac{1}{n_{0,\sigma^2}+n}\left[n_{0,\sigma^2}\sigma_0^2+(n-1)s^2+\frac{n_{0,\mu}\, n}{n_{0,\sigma^2}}(\bar{x}-\mu_0)^2\right]}
+&= \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}+n}{2}, \frac{1}{n_{0,\sigma^2}+n}\left[n_{0,\sigma^2}\sigma_0^2+(n-1)s^2+\frac{n_{0,\mu}\, n}{n_{0,\mu}}(\bar{x}-\mu_0)^2\right]} \\
 \end{align}
 $$
+If we assume that $n_{0,\sigma^2} = n_{0,\mu}$.
+$$
+p(\sigma^2,\xdots) = \mathrm{InverseGamma}\pp{\frac{n_{0}+n}{2}, \frac{1}{n_{0}+n}\left[n_{0}\sigma_0^2+(n-1)s^2+ n(\bar{x}-\mu_0)^2\right]}
+$$
 
-To recap, the priors and sampling distribution are as followed.
+### Interpretations
+* $n_{0,\sigma^2}$: sample size in which the variance $\sigma_0^2$ is obtained.
+* $n_{0,\mu}$: sample size in which the mean $\mu_0$ is obtained.
+* $n_{0,\sigma^2}\sigma_0^2+(n-1)s^2$: sum of sums of squares for prior and current sample.
+* $n(\bar{x}-\mu_0)^2$: "interaction term". If our current mean is different from the prior mean, then our uncertainty should be higher.
+
+
+To recap, the priors are as followed.
 $$
 \begin{align}
 \sigma^2 &\sim \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}}{2}, \frac{n_{0,\sigma^2}\sigma_0^2}{2}} \\
-\mu\mid\sigma^2 &\sim \mathcal{N}\pp{\mu_0, \frac{\sigma^2}{n_{0,\mu^2}}} \\
-X_i &\sim \mathcal{N}(\mu, \sigma^2)
+\mu\mid\sigma^2 &\sim \mathcal{N}\pp{\mu_0, \frac{\sigma^2}{n_{0,\mu^2}}}
+\end{align}
+$$
+The posteriors are
+$$
+\begin{align}
+\sigma^2 &\sim \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}+n}{2}, \frac{1}{n_{0,\sigma^2}+n}\left[n_{0,\sigma^2}\sigma_0^2+(n-1)s^2+\frac{n_{0,\mu}\, n}{n_{0,\mu}}(\bar{x}-\mu_0)^2\right]} \\
+\mu\mid\sigma^2 &\sim \mathcal{N}\pp{\frac{n\bar{x}+\mu_0 n_{0,\mu}}{n+n_{0,\mu}}, (n+n_{0,\mu})\tst}
 \end{align}
 $$
 
-Now we can sample this seauentially to get a joint distribution.
+Now we can sample this sequentially to get a joint distribution.
+
+# Independent Priors
+In the previous section, the prior is modeled as another sample set, which necessitates the mean and variance to be dependent on one another. However, if we want to model each parameter $\mu$ and $\sigma^2$ separately, then conjugacy breaks down. The priors are
+
+$$
+\begin{align}
+\sigma^2 &\sim \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}}{2}, \frac{n_{0,\sigma^2}\sigma_0^2}{2}} \\
+\mu &\sim \mathcal{N}\pp{\mu_0, \tau_0^2}
+\end{align}
+$$
+
+Still, it is possible to derive the joint distribution of the posterior by dependent sampling. Note that the each conjugate prior is conjugated to the full conditional of each parameter. 
+
+$$
+\begin{align}
+p(\sigma^2\mid \theta, \xdots) &\propto p(\theta,\sigma^2,\xdots) \\
+&\propto p(\xdots \mid \theta,\sigma^2)\ p(\theta,\sigma^2) \\
+&= p(\xdots \mid \theta,\sigma^2)\ p(\theta\mid\sigma^2) \ p(\sigma^2)\\
+&= p(\xdots \mid \theta,\sigma^2)\ p(\theta) \ p(\sigma^2)\\
+\end{align}
+$$
+Then, note that for all combinations of $\theta$ and $\xdots$, $p(\sigma^2\mid \theta, \xdots)$ has to be a probability distribution function. In each case, however, since $\theta$ and $\xdots$ are fixed, we can push them into our 'proportional to' trash can! This is exactly the same case when we're deriving one parameter at a time.
+
+$$
+\begin{align}
+p(\sigma^2\mid \theta, \xdots) &\propto p(\xdots \mid \theta,\sigma^2)\ p(\sigma^2)\\
+&\propto \mathrm{Gamma}\pp{\frac{n+n_0}{2}, \frac{(n-1)s_x^2+n_0\sigma_0^2}{2}} \\~\\
+p(\theta\mid \sigma^2, \xdots) &\propto p(\xdots \mid \theta,\sigma^2)\ p(\theta)\\
+&\propto \mathcal{N}\left( \frac{\tilde{\sigma}^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}n\bar{x} + \frac{\tilde{\tau}_0^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}\mu_0, \left(\frac{n}{\sigma^2} +\frac{1}{\tau_0^2}\right)^{-1} \right)
+\end{align}
+$$

@@ -110,14 +110,17 @@ which fits the gamma distribution parameterized with shape and rate. Then</p>
 p(\tst \mid \xdots, \mu) &amp;\propto p(\xdots \mid \mu)\ p(\tst\mid \alpha, \beta) \\
 &amp;\propto \left[ (\tst)^{n/2} \, \expb{-\frac{\tst}{2} \summ(x_i-\mu)^2} \right]\, \left[(\tst)^{\alpha-1}\, \expb{-\beta\tst}\right] \\
 &amp;\propto (\tst)^{n/2+\alpha-1} \, \expb{-\tst\left[\frac{1}{2} \summ(x_i-\mu)^2 + \beta\right]} \\
-&amp;\propto (\tst)^{n/2+\alpha-1} \, \expb{-\tst\left[\frac{ns_x^2}{2} + \beta\right]} \\
-&amp;\propto \mathrm{Gamma}\left(\frac{n}{2}+\alpha, \frac{ns_x^2}{2} + \beta\right)
+&amp;\propto (\tst)^{n/2+\alpha-1} \, \expb{-\tst\left[\frac{(n-1)s_x^2}{2} + \beta\right]} \\
+&amp;\propto \mathrm{Gamma}\left(\frac{n}{2}+\alpha, \frac{(n-1)s_x^2}{2} + \beta\right)
 \end{align}
 \]</span>
 If we define <span class="math inline">\(\alpha = \frac{n_0}{2}\)</span> and <span class="math inline">\(\beta=\frac{n_0\sigma_0^2}{2}\)</span>, then
 <span class="math display">\[
-p(\tst \mid \xdots, \mu) \sim \pp{\frac{n+n_0}{2}, \frac{ns_x^2+n_0\sigma_0^2}{2}}
-\]</span></p>
+p(\tst \mid \xdots, \mu) \sim \mathrm{Gamma}\pp{\frac{n+n_0}{2}, \frac{(n-1)s_x^2+n_0\sigma_0^2}{2}}
+\]</span>
+### Interpretations
+* <span class="math inline">\(n_0\)</span>: sample size where <span class="math inline">\(\sigma_0^2\)</span> is obtained.
+* <span class="math inline">\((n-1)s_x^2+n_0\sigma_0^2\)</span>: sum of sum of sqaures of the prior sample and current sample.</p>
 </div>
 <div id="infer-both-mu-and-sigma2" class="section level1">
 <h1>Infer Both <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span></h1>
@@ -136,21 +139,68 @@ p(\mu\mid\sigma^2,\xdots) &amp;\propto p(\xdots \mid \mu, \sigma^2) \ p(\mu\mid\
 &amp;= \mathcal{N}\pp{\frac{n\bar{x}+\mu_0 n_{0,\mu}}{n+n_{0,\mu}}, (n+n_{0,\mu})\tst}
 \end{align}
 \]</span></p>
-<p>Let us examine ther second posterior.
+<p>Let us examine the second posterior.
 <span class="math display">\[
 \begin{align}
 p(\sigma^2,\xdots) &amp;\propto p(\xdots\mid\sigma^2) \ p(\sigma^2) \\
 &amp;= \left[\int p(\xdots \mid \theta,\sigma^2)\ p(\theta\mid \sigma^2) \, d\theta\right]\ p(\sigma^2) \\
-&amp;= \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}+n}{2}, \frac{1}{n_{0,\sigma^2}+n}\left[n_{0,\sigma^2}\sigma_0^2+(n-1)s^2+\frac{n_{0,\mu}\, n}{n_{0,\sigma^2}}(\bar{x}-\mu_0)^2\right]}
+&amp;= \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}+n}{2}, \frac{1}{n_{0,\sigma^2}+n}\left[n_{0,\sigma^2}\sigma_0^2+(n-1)s^2+\frac{n_{0,\mu}\, n}{n_{0,\mu}}(\bar{x}-\mu_0)^2\right]} \\
 \end{align}
+\]</span>
+If we assume that <span class="math inline">\(n_{0,\sigma^2} = n_{0,\mu}\)</span>.
+<span class="math display">\[
+p(\sigma^2,\xdots) = \mathrm{InverseGamma}\pp{\frac{n_{0}+n}{2}, \frac{1}{n_{0}+n}\left[n_{0}\sigma_0^2+(n-1)s^2+ n(\bar{x}-\mu_0)^2\right]}
 \]</span></p>
-<p>To recap, the priors and sampling distribution are as followed.
+<div id="interpretations" class="section level3">
+<h3>Interpretations</h3>
+<ul>
+<li><span class="math inline">\(n_{0,\sigma^2}\)</span>: sample size in which the variance <span class="math inline">\(\sigma_0^2\)</span> is obtained.</li>
+<li><span class="math inline">\(n_{0,\mu}\)</span>: sample size in which the mean <span class="math inline">\(\mu_0\)</span> is obtained.</li>
+<li><span class="math inline">\(n_{0,\sigma^2}\sigma_0^2+(n-1)s^2\)</span>: sum of sums of squares for prior and current sample.</li>
+<li><span class="math inline">\(n(\bar{x}-\mu_0)^2\)</span>: “interaction term”. If our current mean is different from the prior mean, then our uncertainty should be higher.</li>
+</ul>
+<p>To recap, the priors are as followed.
 <span class="math display">\[
 \begin{align}
 \sigma^2 &amp;\sim \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}}{2}, \frac{n_{0,\sigma^2}\sigma_0^2}{2}} \\
-\mu\mid\sigma^2 &amp;\sim \mathcal{N}\pp{\mu_0, \frac{\sigma^2}{n_{0,\mu^2}}} \\
-X_i &amp;\sim \mathcal{N}(\mu, \sigma^2)
+\mu\mid\sigma^2 &amp;\sim \mathcal{N}\pp{\mu_0, \frac{\sigma^2}{n_{0,\mu^2}}}
+\end{align}
+\]</span>
+The posteriors are
+<span class="math display">\[
+\begin{align}
+\sigma^2 &amp;\sim \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}+n}{2}, \frac{1}{n_{0,\sigma^2}+n}\left[n_{0,\sigma^2}\sigma_0^2+(n-1)s^2+\frac{n_{0,\mu}\, n}{n_{0,\mu}}(\bar{x}-\mu_0)^2\right]} \\
+\mu\mid\sigma^2 &amp;\sim \mathcal{N}\pp{\frac{n\bar{x}+\mu_0 n_{0,\mu}}{n+n_{0,\mu}}, (n+n_{0,\mu})\tst}
 \end{align}
 \]</span></p>
-<p>Now we can sample this seauentially to get a joint distribution.</p>
+<p>Now we can sample this sequentially to get a joint distribution.</p>
+</div>
+</div>
+<div id="independent-priors" class="section level1">
+<h1>Independent Priors</h1>
+<p>In the previous section, the prior is modeled as another sample set, which necessitates the mean and variance to be dependent on one another. However, if we want to model each parameter <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> separately, then conjugacy breaks down. The priors are</p>
+<p><span class="math display">\[
+\begin{align}
+\sigma^2 &amp;\sim \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}}{2}, \frac{n_{0,\sigma^2}\sigma_0^2}{2}} \\
+\mu &amp;\sim \mathcal{N}\pp{\mu_0, \tau_0^2}
+\end{align}
+\]</span></p>
+<p>Still, it is possible to derive the joint distribution of the posterior by dependent sampling. Note that the each conjugate prior is conjugated to the full conditional of each parameter.</p>
+<p><span class="math display">\[
+\begin{align}
+p(\sigma^2\mid \theta, \xdots) &amp;\propto p(\theta,\sigma^2,\xdots) \\
+&amp;\propto p(\xdots \mid \theta,\sigma^2)\ p(\theta,\sigma^2) \\
+&amp;= p(\xdots \mid \theta,\sigma^2)\ p(\theta\mid\sigma^2) \ p(\sigma^2)\\
+&amp;= p(\xdots \mid \theta,\sigma^2)\ p(\theta) \ p(\sigma^2)\\
+\end{align}
+\]</span>
+Then, note that for all combinations of <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\xdots\)</span>, <span class="math inline">\(p(\sigma^2\mid \theta, \xdots)\)</span> has to be a probability distribution function. In each case, however, since <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\xdots\)</span> are fixed, we can push them into our ‘proportional to’ trash can! This is exactly the same case when we’re deriving one parameter at a time.</p>
+<p><span class="math display">\[
+\begin{align}
+p(\sigma^2\mid \theta, \xdots) &amp;\propto p(\xdots \mid \theta,\sigma^2)\ p(\sigma^2)\\
+&amp;\propto \mathrm{Gamma}\pp{\frac{n+n_0}{2}, \frac{(n-1)s_x^2+n_0\sigma_0^2}{2}} \\~\\
+p(\theta\mid \sigma^2, \xdots) &amp;\propto p(\xdots \mid \theta,\sigma^2)\ p(\theta)\\
+&amp;\propto \mathcal{N}\left( \frac{\tilde{\sigma}^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}n\bar{x} + \frac{\tilde{\tau}_0^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}\mu_0, \left(\frac{n}{\sigma^2} +\frac{1}{\tau_0^2}\right)^{-1} \right)
+\end{align}
+\]</span></p>
 </div>
