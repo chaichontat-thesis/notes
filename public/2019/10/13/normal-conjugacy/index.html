@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.58.3" />
+
+
+<title>Normal Conjugacy - Gradually Numerical</title>
+<meta property="og:title" content="Normal Conjugacy - Gradually Numerical">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.svg"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">Normal Conjugacy</h1>
+
+    
+    <span class="article-date">2019-10-13</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="problem-statement" class="section level2">
+<h2>Problem Statement</h2>
+<p>Let the random variables <span class="math inline">\(X_1, \dots X_n\)</span> be normally distributed.
+<span class="math display">\[
+X_1,\dots, X_n \sim \mathcal{N}(\mu, \sigma^2)\\
+\]</span>
+With the sampling density function
+<span class="math display">\[
+p(X_i=x_i\mid \mu, \sigma^2) = (2\pi \sigma^2)^{-1/2} \, \exp \left\{ -\frac{(x_i-\mu)^2}{2\sigma^2}\right\}
+\]</span></p>
+<p>After the experiment, each realizations of the random variables has been found. The likelihood function is</p>
+<p><span class="math display">\[
+\begin{align}
+p(X_1=x_1,\dots,X_n=x_n\mid\mu,\sigma^2) &amp;= \prod_{i=1}^n (2\pi \sigma^2)^{-1/2} \, \exp \left\{ -\frac{(x_i-\mu)^2}{2\sigma^2}\right\} \\
+&amp;= (2\pi \sigma^2)^{-n/2} \, \exp \left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2\right\}
+\end{align}
+\]</span></p>
+<p>Since this is a multi-parameter model, lets start with the case in which <span class="math inline">\(\sigma^2\)</span> is known.</p>
+</div>
+<div id="unknown-mu-known-sigma2" class="section level2">
+<h2>Unknown <span class="math inline">\(\mu\)</span>, known <span class="math inline">\(\sigma^2\)</span></h2>
+<p>Lets find the posterior distribution of <span class="math inline">\(\theta\)</span> given the normally distributed data <span class="math inline">\(X_1=x_1,\dots,X_n=x_n\)</span> with variance <span class="math inline">\(\sigma^2\)</span> and prior distribution <span class="math inline">\(\mu_0\)</span>.</p>
+<p>Given this likelihood, we expect that the posterior will have the form
+<span class="math display">\[
+\begin{align}
+p(\theta \mid x_1,\dots,x_n, \sigma^2) &amp;\propto p(x_1,\dots,x_n\mid \sigma^2)\ p(\theta) \\
+&amp;= (2\pi \sigma^2)^{-n/2} \, \exp \left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2\right\} \ p(\theta) \\
+&amp;\propto \exp \left\{ a\mu^2+b\mu\right\} \ p(\theta)
+\end{align}
+\]</span>
+This suggests that the conjugate prior should have a quadratic exponential term as well and the distribution that has this term is the normal distribution. Let the prior distribution has be <span class="math inline">\(\mathcal{N}(\mu_0, \tau_0^2)\)</span>.
+<span class="math display">\[
+\begin{align}
+p(\theta \mid x_1,\dots,x_n, \sigma^2) &amp;\propto p(x_1,\dots,x_n\mid \sigma^2)\ p(\theta \mid \mu_0, \tau^2_0) \\
+&amp;= \left[ (2\pi \sigma^2)^{-n/2} \, \exp \left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\theta)^2\right\}\right] \left[ (2\pi \tau^2)^{-1/2} \, \exp \left\{ -\frac{(\theta-\mu_0)^2}{2\tau^2}\right\} \right]\\
+&amp;\propto \exp\left\{ -\frac{1}{2}\left[\frac{1}{\sigma^2}\left(\sum_{i=1}^n x_i^2 - 2\theta \sum_{i=1}^n x_i +n\theta^2 \right)+\frac{1}{\tau_0^2}( \theta^2 -2\theta\mu_0 + \mu_0^2)\right]\right\} \\
+&amp;\propto \exp\left\{ -\frac{1}{2}\left[\left(\frac{n}{\sigma^2}+\frac{1}{\tau_0^2}\right)\theta^2- 2\left( \frac{n \bar{x}}{\sigma^2} +\frac{\mu_0}{\tau_0^2} \right)\theta\right]\right\} \\
+\end{align}
+\]</span>
+Let <span class="math inline">\(a=\frac{n}{\sigma^2} +\frac{1}{\tau_0^2}\)</span> and <span class="math inline">\(b=\frac{n \bar{x}}{\sigma^2} +\frac{\mu_0}{\tau_0^2}\)</span>.
+<span class="math display">\[
+\begin{align}
+&amp;\propto \exp\left\{ -\frac{1}{2}(a\theta^2- 2b\theta)\right\} \\
+&amp;\propto \exp\left\{ -\frac{a}{2}\left(\theta - \frac{b}{a}\right)^2\right\} \\
+&amp;\propto \mathcal{N}\left(\frac{b}{a}, \frac{1}{a}\right)
+\end{align}
+\]</span>
+It turns out that working with the inverse of the variance, or the <em>precision</em> is much more convenient. We will denote <span class="math inline">\(\tilde{\sigma}^2\)</span> and <span class="math inline">\(\tilde{\tau_0}^2\)</span> as the precision,</p>
+<p>Then, the posterior mean of the mean <span class="math inline">\(\theta\)</span> is
+<span class="math display">\[
+\begin{align}
+\frac{b}{a} &amp;= \frac{\frac{n \bar{x}}{\sigma^2} +\frac{\mu_0}{\tau_0^2}}{\frac{n}{\sigma^2} +\frac{1}{\tau_0^2}} \\
+&amp;= \frac{n\bar{x}\tilde{\sigma}^2 + \mu_0\tilde{\tau}_0^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2} \\
+&amp;= \frac{\tilde{\sigma}^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}n\bar{x} + \frac{\tilde{\tau}_0^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}\mu_0
+\end{align}
+\]</span>
+which means that</p>
+<p>The posterior precision is
+<span class="math display">\[
+\begin{align}
+\tilde{\tau}_0^2 = \frac{1}{\tau_0^2} &amp;= \frac{n}{\sigma^2} +\frac{1}{\tau_0^2}
+\end{align}
+\]</span></p>
+<p>In summary, the normal sampling distribution has a mean distribution of <span class="math inline">\(\theta\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. <span class="math inline">\(\theta\)</span> is distributed as followed.
+<span class="math display">\[
+\theta \sim \mathcal{N}\left( \frac{\tilde{\sigma}^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}n\bar{x} + \frac{\tilde{\tau}_0^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}\mu_0, 1/\left(\frac{n}{\sigma^2} +\frac{1}{\tau_0^2}\right) \right)
+\]</span></p>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

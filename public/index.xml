@@ -24,6 +24,17 @@ Definition 2 (Projection) A projection of \(\mathbf{a}\) on to \(\mathbf{b}\) co
     </item>
     
     <item>
+      <title>Normal Conjugacy</title>
+      <link>/2019/10/13/normal-conjugacy/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/10/13/normal-conjugacy/</guid>
+      <description>Problem Statement Let the random variables \(X_1, \dots X_n\) be normally distributed. \[ X_1,\dots, X_n \sim \mathcal{N}(\mu, \sigma^2)\\ \] With the sampling density function \[ p(X_i=x_i\mid \mu, \sigma^2) = (2\pi \sigma^2)^{-1/2} \, \exp \left\{ -\frac{(x_i-\mu)^2}{2\sigma^2}\right\} \]
+After the experiment, each realizations of the random variables has been found. The likelihood function is
+\[ \begin{align} p(X_1=x_1,\dots,X_n=x_n\mid\mu,\sigma^2) &amp;amp;= \prod_{i=1}^n (2\pi \sigma^2)^{-1/2} \, \exp \left\{ -\frac{(x_i-\mu)^2}{2\sigma^2}\right\} \\ &amp;amp;= (2\pi \sigma^2)^{-n/2} \, \exp \left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2\right\} \end{align} \]</description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>/about/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>

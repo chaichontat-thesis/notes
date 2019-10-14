@@ -1,0 +1,85 @@
+---
+title: "Normal Conjugacy"
+author: "Chaichontat Sriworarat"
+date: 2019-10-13
+tags: ["bayesian statistics"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+## Problem Statement
+
+Let the random variables $X_1, \dots X_n$ be normally distributed.
+$$
+X_1,\dots, X_n \sim \mathcal{N}(\mu, \sigma^2)\\
+$$
+With the sampling density function
+$$
+p(X_i=x_i\mid \mu, \sigma^2) = (2\pi \sigma^2)^{-1/2} \, \exp \left\{ -\frac{(x_i-\mu)^2}{2\sigma^2}\right\}
+$$
+
+After the experiment, each realizations of the random variables has been found. The likelihood function is
+
+$$
+\begin{align}
+p(X_1=x_1,\dots,X_n=x_n\mid\mu,\sigma^2) &= \prod_{i=1}^n (2\pi \sigma^2)^{-1/2} \, \exp \left\{ -\frac{(x_i-\mu)^2}{2\sigma^2}\right\} \\
+&= (2\pi \sigma^2)^{-n/2} \, \exp \left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2\right\}
+\end{align}
+$$
+
+Since this is a multi-parameter model, lets start with the case in which $\sigma^2$ is known.
+
+
+## Unknown $\mu$, known $\sigma^2$
+Lets find the posterior distribution of $\theta$ given the normally distributed data $X_1=x_1,\dots,X_n=x_n$ with variance $\sigma^2$ and prior distribution $\mu_0$.
+
+Given this likelihood, we expect that the posterior will have the form
+$$
+\begin{align}
+p(\theta \mid x_1,\dots,x_n, \sigma^2) &\propto p(x_1,\dots,x_n\mid \sigma^2)\ p(\theta) \\
+&= (2\pi \sigma^2)^{-n/2} \, \exp \left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2\right\} \ p(\theta) \\
+&\propto \exp \left\{ a\mu^2+b\mu\right\} \ p(\theta)
+\end{align}
+$$
+This suggests that the conjugate prior should have a quadratic exponential term as well and the distribution that has this term is the normal distribution. Let the prior distribution has be $\mathcal{N}(\mu_0, \tau_0^2)$.
+$$
+\begin{align}
+p(\theta \mid x_1,\dots,x_n, \sigma^2) &\propto p(x_1,\dots,x_n\mid \sigma^2)\ p(\theta \mid \mu_0, \tau^2_0) \\
+&= \left[ (2\pi \sigma^2)^{-n/2} \, \exp \left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\theta)^2\right\}\right] \left[ (2\pi \tau^2)^{-1/2} \, \exp \left\{ -\frac{(\theta-\mu_0)^2}{2\tau^2}\right\} \right]\\
+&\propto \exp\left\{ -\frac{1}{2}\left[\frac{1}{\sigma^2}\left(\sum_{i=1}^n x_i^2 - 2\theta \sum_{i=1}^n x_i +n\theta^2 \right)+\frac{1}{\tau_0^2}( \theta^2 -2\theta\mu_0 + \mu_0^2)\right]\right\} \\
+&\propto \exp\left\{ -\frac{1}{2}\left[\left(\frac{n}{\sigma^2}+\frac{1}{\tau_0^2}\right)\theta^2- 2\left( \frac{n \bar{x}}{\sigma^2} +\frac{\mu_0}{\tau_0^2} \right)\theta\right]\right\} \\
+\end{align}
+$$
+Let $a=\frac{n}{\sigma^2} +\frac{1}{\tau_0^2}$ and $b=\frac{n \bar{x}}{\sigma^2} +\frac{\mu_0}{\tau_0^2}$.
+$$
+\begin{align}
+&\propto \exp\left\{ -\frac{1}{2}(a\theta^2- 2b\theta)\right\} \\
+&\propto \exp\left\{ -\frac{a}{2}\left(\theta - \frac{b}{a}\right)^2\right\} \\
+&\propto \mathcal{N}\left(\frac{b}{a}, \frac{1}{a}\right)
+\end{align}
+$$
+It turns out that working with the inverse of the variance, or the _precision_ is much more convenient. We will denote $\tilde{\sigma}^2$ and $\tilde{\tau_0}^2$ as the precision,
+
+Then, the posterior mean of the mean $\theta$ is
+$$
+\begin{align}
+\frac{b}{a} &= \frac{\frac{n \bar{x}}{\sigma^2} +\frac{\mu_0}{\tau_0^2}}{\frac{n}{\sigma^2} +\frac{1}{\tau_0^2}} \\
+&= \frac{n\bar{x}\tilde{\sigma}^2 + \mu_0\tilde{\tau}_0^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2} \\
+&= \frac{\tilde{\sigma}^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}n\bar{x} + \frac{\tilde{\tau}_0^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}\mu_0
+\end{align}
+$$
+which means that
+
+The posterior precision is
+$$
+\begin{align}
+\tilde{\tau}_0^2 = \frac{1}{\tau_0^2} &= \frac{n}{\sigma^2} +\frac{1}{\tau_0^2}
+\end{align}
+$$
+
+In summary, the normal sampling distribution has a mean distribution of $\theta$ and variance $\sigma^2$. $\theta$ is distributed as followed.
+$$
+\theta \sim \mathcal{N}\left( \frac{\tilde{\sigma}^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}n\bar{x} + \frac{\tilde{\tau}_0^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}\mu_0, 1/\left(\frac{n}{\sigma^2} +\frac{1}{\tau_0^2}\right) \right)
+$$
