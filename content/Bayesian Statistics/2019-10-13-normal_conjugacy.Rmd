@@ -4,13 +4,22 @@ section: "Bayesian Statistics"
 author: "Chaichontat Sriworarat"
 date: 2019-10-13
 tags: ["bayesian statistics"]
+include-before:
+  - '$\newcommand{\tst}{\tilde{\sigma}^2}$'
+  - '$\newcommand{\summ}{\sum_{i=1}^n}$'
+  - '$\newcommand{\prodd}{\prod_{i=1}^n}$'
+  - '$\newcommand{\xdots}{x_1, \dots, x_n}$'
+  - '$\newcommand{\expb}[1]{\exp\left\{#1\right\}}$'
+  - '$\newcommand{\pp}[1]{\left(#1\right)}$'
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
+library(blogdown)
 ```
 
-## Problem Statement
+
+# Problem Statement
 
 Let the random variables $X_1, \dots X_n$ be normally distributed.
 $$
@@ -32,23 +41,22 @@ $$
 
 Since this is a multi-parameter model, lets start with the case in which $\sigma^2$ is known.
 
-
-## Unknown $\mu$, known $\sigma^2$
+# Infer Only $\mu$
 Lets find the posterior distribution of $\theta$ given the normally distributed data $X_1=x_1,\dots,X_n=x_n$ with variance $\sigma^2$ and prior distribution $\mu_0$.
 
 Given this likelihood, we expect that the posterior will have the form
 $$
 \begin{align}
-p(\theta \mid x_1,\dots,x_n, \sigma^2) &\propto p(x_1,\dots,x_n\mid \sigma^2)\ p(\theta) \\
-&= (2\pi \sigma^2)^{-n/2} \, \exp \left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2\right\} \ p(\theta) \\
-&\propto \exp \left\{ a\mu^2+b\mu\right\} \ p(\theta)
+p(\theta \mid x_1,\dots,x_n, \sigma^2) &\propto p(x_1,\dots,x_n\mid \theta, \sigma^2)\ p(\theta) \\
+&= (2\pi \sigma^2)^{-n/2} \, \exp \left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\theta)^2\right\} \ p(\theta) \\
+&\propto \exp \left\{ a\theta^2+b\theta\right\} \ p(\theta)
 \end{align}
 $$
 This suggests that the conjugate prior should have a quadratic exponential term as well and the distribution that has this term is the normal distribution. Let the prior distribution has be $\mathcal{N}(\mu_0, \tau_0^2)$.
 $$
 \begin{align}
-p(\theta \mid x_1,\dots,x_n, \sigma^2) &\propto p(x_1,\dots,x_n\mid \sigma^2)\ p(\theta \mid \mu_0, \tau^2_0) \\
-&= \left[ (2\pi \sigma^2)^{-n/2} \, \exp \left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\theta)^2\right\}\right] \left[ (2\pi \tau^2)^{-1/2} \, \exp \left\{ -\frac{(\theta-\mu_0)^2}{2\tau^2}\right\} \right]\\
+p(\theta \mid x_1,\dots,x_n, \sigma^2) &\propto p(x_1,\dots,x_n\mid \theta, \sigma^2)\ p(\theta \mid \mu_0, \tau^2_0) \\
+&= \left[ (2\pi \sigma^2)^{-n/2} \, \exp \left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\theta)^2\right\}\right] \left[ (2\pi \tau_0^2)^{-1/2} \, \exp \left\{ -\frac{(\theta-\mu_0)^2}{2\tau_0^2}\right\} \right]\\
 &\propto \exp\left\{ -\frac{1}{2}\left[\frac{1}{\sigma^2}\left(\sum_{i=1}^n x_i^2 - 2\theta \sum_{i=1}^n x_i +n\theta^2 \right)+\frac{1}{\tau_0^2}( \theta^2 -2\theta\mu_0 + \mu_0^2)\right]\right\} \\
 &\propto \exp\left\{ -\frac{1}{2}\left[\left(\frac{n}{\sigma^2}+\frac{1}{\tau_0^2}\right)\theta^2- 2\left( \frac{n \bar{x}}{\sigma^2} +\frac{\mu_0}{\tau_0^2} \right)\theta\right]\right\} \\
 \end{align}
@@ -82,5 +90,76 @@ $$
 
 In summary, the normal sampling distribution has a mean distribution of $\theta$ and variance $\sigma^2$. $\theta$ is distributed as followed.
 $$
-\theta \sim \mathcal{N}\left( \frac{\tilde{\sigma}^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}n\bar{x} + \frac{\tilde{\tau}_0^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}\mu_0, 1/\left(\frac{n}{\sigma^2} +\frac{1}{\tau_0^2}\right) \right)
+\theta \sim \mathcal{N}\left( \frac{\tilde{\sigma}^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}n\bar{x} + \frac{\tilde{\tau}_0^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}\mu_0, \left(\frac{n}{\sigma^2} +\frac{1}{\tau_0^2}\right)^{-1} \right)
 $$
+
+# Infer Only $\sigma^2$
+Lets find the posterior distribution of $\sigma^2$ given the normally distributed data $X_1=x_1,\dots,X_n=x_n$ with mean $\mu$ with $\sigma^2$ having a prior distribution $p(\sigma_0^2)$.
+
+Given this likelihood, we expect that the posterior will have the form
+$$
+\begin{align}
+p(\sigma^2 \mid x_1,\dots,x_n, \mu) &\propto p(x_1,\dots,x_n\mid \mu, \sigma^2)\ p(\sigma^2) \\
+&= (2\pi \sigma^2)^{-n/2} \, \exp \left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2\right\} \ p(\sigma^2) \\
+&\propto (\sigma^2)^{-n/2} \exp \left\{-\frac{a}{\sigma^2} \right\} \ p(\sigma^2) \\
+\end{align}
+$$
+This matches the form of an inverse gamma distribution. If we reparameterize in terms of precision, we get,
+$$
+\propto (\tilde{\sigma}^2)^{n/2} \exp \left\{-a\tilde{\sigma}^2 \right\} \ p(\theta)
+$$
+which fits the gamma distribution parameterized with shape and rate. Then
+
+$$
+\begin{align}
+p(\tst \mid \xdots, \mu) &\propto p(\xdots \mid \mu)\ p(\tst\mid \alpha, \beta) \\
+&\propto \left[ (\tst)^{n/2} \, \expb{-\frac{\tst}{2} \summ(x_i-\mu)^2} \right]\, \left[(\tst)^{\alpha-1}\, \expb{-\beta\tst}\right] \\
+&\propto (\tst)^{n/2+\alpha-1} \, \expb{-\tst\left[\frac{1}{2} \summ(x_i-\mu)^2 + \beta\right]} \\
+&\propto (\tst)^{n/2+\alpha-1} \, \expb{-\tst\left[\frac{ns_x^2}{2} + \beta\right]} \\
+&\propto \mathrm{Gamma}\left(\frac{n}{2}+\alpha, \frac{ns_x^2}{2} + \beta\right)
+\end{align}
+$$
+If we define $\alpha = \frac{n_0}{2}$ and $\beta=\frac{n_0\sigma_0^2}{2}$, then
+$$
+p(\tst \mid \xdots, \mu) \sim \pp{\frac{n+n_0}{2}, \frac{ns_x^2+n_0\sigma_0^2}{2}}
+$$
+
+# Infer Both $\mu$ and $\sigma^2$
+
+Now, let us infer both parameters together. The posterior distribution would be a joint distribution.
+
+$$
+\begin{align}
+p(\mu,\sigma^2\mid \xdots) &= p(\mu\mid\sigma^2,\xdots)\ p(\sigma^2,\xdots) \\
+\end{align}
+$$
+Notice that we can factor out the joint distribution into two posteriors. Let us examine each posterior. 
+
+$$
+\begin{align}
+p(\mu\mid\sigma^2,\xdots) &\propto p(\xdots \mid \mu, \sigma^2) \ p(\mu\mid\sigma^2) \\
+&\propto \mathcal{N}\pp{\mu\mid\xdots, \sigma^2}\ \mathcal{N}\pp{\mu\mid\mu_0,\frac{\sigma^2}{n_{0,\mu}}}\\
+&= \mathcal{N}\left( \frac{n\tst}{n\tst + n_{0,\mu}\tst} \bar{x} + \frac{n_{0,\mu}\tst}{n\tst + n_{0,\mu}\tst} \mu_0, \left(\frac{n}{\sigma^2} +\frac{n_{0,\mu}}{\sigma^2}\right)^{-1} \right) \\
+&= \mathcal{N}\pp{\frac{n\bar{x}+\mu_0 n_{0,\mu}}{n+n_{0,\mu}}, (n+n_{0,\mu})\tst}
+\end{align}
+$$
+
+Let us examine ther second posterior.
+$$
+\begin{align}
+p(\sigma^2,\xdots) &\propto p(\xdots\mid\sigma^2) \ p(\sigma^2) \\
+&= \left[\int p(\xdots \mid \theta,\sigma^2)\ p(\theta\mid \sigma^2) \, d\theta\right]\ p(\sigma^2) \\
+&= \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}+n}{2}, \frac{1}{n_{0,\sigma^2}+n}\left[n_{0,\sigma^2}\sigma_0^2+(n-1)s^2+\frac{n_{0,\mu}\, n}{n_{0,\sigma^2}}(\bar{x}-\mu_0)^2\right]}
+\end{align}
+$$
+
+To recap, the priors and sampling distribution are as followed.
+$$
+\begin{align}
+\sigma^2 &\sim \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}}{2}, \frac{n_{0,\sigma^2}\sigma_0^2}{2}} \\
+\mu\mid\sigma^2 &\sim \mathcal{N}\pp{\mu_0, \frac{\sigma^2}{n_{0,\mu^2}}} \\
+X_i &\sim \mathcal{N}(\mu, \sigma^2)
+\end{align}
+$$
+
+Now we can sample this seauentially to get a joint distribution.
