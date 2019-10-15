@@ -1,0 +1,24 @@
+---
+title: "Dependent Sampling"
+section: "Bayesian Statistics"
+author: "Chaichontat Sriworarat"
+date: 2019-10-15
+tags: ["bayesian statistics"]
+include-before:
+  - '$\newcommand{\summ}{\sum_{i=1}^n}$'
+  - '$\newcommand{\prodd}{\prod_{i=1}^n}$'
+  - '$\newcommand{\xdots}{x_1, \dots, x_n}$'
+  - '$\newcommand{\expb}[1]{\exp\left\{#1\right\}}$'
+  - '$\newcommand{\pp}[1]{\left(#1\right)}$'
+  - '$\newcommand{\b}[1]{\mathbf{#1}}$'
+  - '$\newcommand{\bs}[1]{\boldsymbol{#1}}$'
+---
+
+# Why dependent sampling?
+
+# Gibbs Sampling
+
+* Gibbs sampling is used to approximate the joint distribution when we have the full conditional distribution of all parameters.
+  * In the normal model, there are two parameters, $\mu$ and $\sigma^2$.
+  * We can estimate $p(\mu, \sigma^2 \mid \xdots)$ using $p(\mu\mid\sigma^2,\xdots)$ and $p(\sigma^2\mid\mu,\xdots)$.
+  * This is like turning a multiparameter model into a single parameter model as each full conditional is the same thing as the posterior of a single parameter model.

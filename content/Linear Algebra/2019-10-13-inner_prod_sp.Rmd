@@ -5,10 +5,6 @@ date: 2019-10-13
 tags: ["linear algebra"]
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE)
-```
-
 An inner product space is a vector space _with_ a defined inner product, not a vector space _of_ inner products.
 
 ## Basic Inner Product
@@ -72,7 +68,7 @@ One notices that commutativity requires the matrix to be symmetric.
 $$\mathbf{x^\top A x} > 0$$
    Note that all the diagonals of $\mathbf{A}$ must be positive, otherwise one could plugin a zero matrix except for that column to render the product negative.
    Let us try the following.
-  
+
 \begin{align*}
   \mathbf{x^\top A x} &=
   \begin{bmatrix}

@@ -1,0 +1,63 @@
+---
+title: "Multivariate Normal Conjugacy"
+section: "Bayesian Statistics"
+author: "Chaichontat Sriworarat"
+date: 2019-10-15
+tags: ["bayesian statistics"]
+include-before:
+  - '$\newcommand{\summ}{\sum_{i=1}^n}$'
+  - '$\newcommand{\prodd}{\prod_{i=1}^n}$'
+  - '$\newcommand{\xdots}{x_1, \dots, x_n}$'
+  - '$\newcommand{\expb}[1]{\exp\left\{#1\right\}}$'
+  - '$\newcommand{\pp}[1]{\left(#1\right)}$'
+  - '$\newcommand{\b}[1]{\mathbf{#1}}$'
+  - '$\newcommand{\bs}[1]{\boldsymbol{#1}}$'
+---
+
+
+<span class="math inline">\(\newcommand{\summ}{\sum_{i=1}^n}\)</span>
+<span class="math inline">\(\newcommand{\prodd}{\prod_{i=1}^n}\)</span>
+<span class="math inline">\(\newcommand{\xdots}{x_1, \dots, x_n}\)</span>
+<span class="math inline">\(\newcommand{\expb}[1]{\exp\left\{#1\right\}}\)</span>
+<span class="math inline">\(\newcommand{\pp}[1]{\left(#1\right)}\)</span>
+<span class="math inline">\(\newcommand{\b}[1]{\mathbf{#1}}\)</span>
+<span class="math inline">\(\newcommand{\bs}[1]{\boldsymbol{#1}}\)</span>
+
+<div id="the-multivariate-normal" class="section level1">
+<h1>The Multivariate Normal</h1>
+<p>Recall the univariate normal
+<span class="math display">\[
+\begin{align}
+p(x\mid\mu,\sigma^2) &amp;= (2\pi\sigma^2)^{-1/2} \, \expb{-\frac{(x-\mu)^2}{2\sigma^2}}\\
+&amp;= (2\pi)^{-1/2}(\sigma^2)^{-1/2}\, \expb{-\frac{1}{2}(x-\mu)(\sigma^2)^{-1}(x-\mu)}
+\end{align}
+\]</span>
+This is the multivariate normal.
+<span class="math display">\[
+p(\b{x}\mid\bs{\mu, \Sigma}) = (2\pi)^{-k/2}\ \mathrm{det}(\bs{\Sigma})^{-1/2} \, \expb{-\frac{1}{2}(\b{x}-\bs{\mu})^\top\bs{\Sigma}^{-1}(\b{x}-\bs{\mu})}
+\]</span></p>
+<p>Note that <span class="math inline">\(\b{x^\top Ax}\)</span> is the multivariate analogue of <span class="math inline">\(Ax^2\)</span>. The normalization constants are also updated to handle multidimensional data.</p>
+</div>
+<div id="prior-distribution-for-bsmu" class="section level1">
+<h1>Prior Distribution for <span class="math inline">\(\bs\mu\)</span></h1>
+<p>In the univariate case, we figured that the univariate normal is the prior.
+Let <span class="math inline">\(\bs{\mu}_0\)</span> be the prior mean of length <span class="math inline">\(k\)</span> and <span class="math inline">\(\bs{\Lambda}_0\)</span> be the prior covariance matrix.
+<span class="math display">\[
+\begin{align}
+p(\bs{\mu} \mid \bs{\mu}_0, \bs{\Lambda}_0) &amp;= (2\pi)^{-k/2}\ \mathrm{det}(\bs{\Lambda}_0)^{-1/2} \, \expb{-\frac{1}{2}(\bs{\mu}-\bs{\mu_0})^\top\bs{\Lambda}_0^{-1}(\bs{\mu}-\bs{\mu_0})} \\
+&amp;\propto \expb{-\frac{1}{2}\left[\bs{\mu}^\top \bs{\Lambda}_0^{-1} \bs{\mu} -2\bs{\mu}^\top\bs{\Lambda}_0^{-1}\bs{\mu_0}+\bs{\mu_0}^\top\bs{\Lambda}_0^{-1}\bs{\mu_0}\right]} \\
+&amp;\propto \expb{-\frac{1}{2} \bs{\mu}^\top \bs{\Lambda}_0^{-1} \bs{\mu} + \bs{\mu}^\top \bs{\Lambda}_0^{-1} \bs{\mu_0}} \\
+\end{align}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+p(\b{x}_1,\dots,\b{x}_n \mid \bs{\mu}, \bs{\Lambda}_0) &amp;= \prodd (2\pi)^{-k/2}\ \mathrm{det}(\bs{\Lambda}_0)^{-1/2} \, \expb{-\frac{1}{2}(\b{x}_i-\bs{\mu})^\top\bs{\Lambda}_0^{-1}(\b{x}_i-\bs{\mu})} \\
+&amp;\propto \expb{-\frac{1}{2}\summ\left[\b{x}_i^\top \bs{\Lambda}_0^{-1} \b{x}_i -2\b{x}_i^\top\bs{\Lambda}_0^{-1}\bs{\mu}+\bs{\mu}^\top\bs{\Lambda}_0^{-1}\bs{\mu}\right]} \\
+&amp;\propto \expb{-\frac{1}{2} \summ\left[\bs{\mu}^\top \bs{\Lambda}_0^{-1} \bs{\mu} + \b{x}^\top \bs{\Lambda}_0^{-1} \bs{\mu}\right]} \\
+&amp;\propto \expb{-\frac{1}{2} n\bs{\mu}^\top \bs{\Lambda}_0^{-1} \bs{\mu} + \summ \bs\mu^\top \bs{\Lambda}_0^{-1} \b{x}} \\
+\end{align}
+\]</span></p>
+</div>
+<div id="prior-distribution-for-bssigma" class="section level1">
+<h1>Prior Distribution for <span class="math inline">\(\bs\Sigma\)</span></h1>
+</div>

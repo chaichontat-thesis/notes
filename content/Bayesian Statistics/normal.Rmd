@@ -4,6 +4,10 @@ section: "Bayesian Statistics"
 author: "Chaichontat Sriworarat"
 date: 2019-10-13
 tags: ["bayesian statistics"]
+bibliography: [normal.bib]
+output:
+  blogdown::html_page:
+    toc: true
 include-before:
   - '$\newcommand{\tst}{\tilde{\sigma}^2}$'
   - '$\newcommand{\summ}{\sum_{i=1}^n}$'
@@ -17,7 +21,6 @@ include-before:
 knitr::opts_chunk$set(collapse = TRUE)
 library(blogdown)
 ```
-
 
 # Problem Statement
 
@@ -52,7 +55,9 @@ p(\theta \mid x_1,\dots,x_n, \sigma^2) &\propto p(x_1,\dots,x_n\mid \theta, \sig
 &\propto \exp \left\{ a\theta^2+b\theta\right\} \ p(\theta)
 \end{align}
 $$
+
 This suggests that the conjugate prior should have a quadratic exponential term as well and the distribution that has this term is the normal distribution. Let the prior distribution has be $\mathcal{N}(\mu_0, \tau_0^2)$.
+
 $$
 \begin{align}
 p(\theta \mid x_1,\dots,x_n, \sigma^2) &\propto p(x_1,\dots,x_n\mid \theta, \sigma^2)\ p(\theta \mid \mu_0, \tau^2_0) \\
@@ -61,7 +66,9 @@ p(\theta \mid x_1,\dots,x_n, \sigma^2) &\propto p(x_1,\dots,x_n\mid \theta, \sig
 &\propto \exp\left\{ -\frac{1}{2}\left[\left(\frac{n}{\sigma^2}+\frac{1}{\tau_0^2}\right)\theta^2- 2\left( \frac{n \bar{x}}{\sigma^2} +\frac{\mu_0}{\tau_0^2} \right)\theta\right]\right\} \\
 \end{align}
 $$
+
 Let $a=\frac{n}{\sigma^2} +\frac{1}{\tau_0^2}$ and $b=\frac{n \bar{x}}{\sigma^2} +\frac{\mu_0}{\tau_0^2}$.
+
 $$
 \begin{align}
 &\propto \exp\left\{ -\frac{1}{2}(a\theta^2- 2b\theta)\right\} \\
@@ -69,6 +76,7 @@ $$
 &\propto \mathcal{N}\left(\frac{b}{a}, \frac{1}{a}\right)
 \end{align}
 $$
+
 It turns out that working with the inverse of the variance, or the _precision_ is much more convenient. We will denote $\tilde{\sigma}^2$ and $\tilde{\tau_0}^2$ as the precision,
 
 Then, the posterior mean of the mean $\theta$ is
@@ -79,6 +87,7 @@ $$
 &= \frac{\tilde{\sigma}^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}n\bar{x} + \frac{\tilde{\tau}_0^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}\mu_0
 \end{align}
 $$
+
 which means that
 
 The posterior precision is
@@ -104,25 +113,31 @@ p(\sigma^2 \mid x_1,\dots,x_n, \mu) &\propto p(x_1,\dots,x_n\mid \mu, \sigma^2)\
 &\propto (\sigma^2)^{-n/2} \exp \left\{-\frac{a}{\sigma^2} \right\} \ p(\sigma^2) \\
 \end{align}
 $$
+
 This matches the form of an inverse gamma distribution. If we reparameterize in terms of precision, we get,
 $$
 \propto (\tilde{\sigma}^2)^{n/2} \exp \left\{-a\tilde{\sigma}^2 \right\} \ p(\theta)
 $$
-which fits the gamma distribution parameterized with shape and rate. Then
+
+which fits the gamma distribution parameterized with shape and **rate**. Then
 
 $$
 \begin{align}
 p(\tst \mid \xdots, \mu) &\propto p(\xdots \mid \mu)\ p(\tst\mid \alpha, \beta) \\
 &\propto \left[ (\tst)^{n/2} \, \expb{-\frac{\tst}{2} \summ(x_i-\mu)^2} \right]\, \left[(\tst)^{\alpha-1}\, \expb{-\beta\tst}\right] \\
 &\propto (\tst)^{n/2+\alpha-1} \, \expb{-\tst\left[\frac{1}{2} \summ(x_i-\mu)^2 + \beta\right]} \\
-&\propto (\tst)^{n/2+\alpha-1} \, \expb{-\tst\left[\frac{(n-1)s_x^2}{2} + \beta\right]} \\
-&\propto \mathrm{Gamma}\left(\frac{n}{2}+\alpha, \frac{(n-1)s_x^2}{2} + \beta\right)
+&\propto (\tst)^{n/2+\alpha-1} \, \expb{-\tst\left[\frac{1}{2} \summ((x_i-\bar{x})+(\bar{x}-\mu))^2 + \beta\right]} \\
+&\propto (\tst)^{n/2+\alpha-1} \, \expb{-\tst\left[\frac{1}{2} \left[\summ(x_i-\bar{x})^2 - 2\summ(x_i-\bar{x})(\bar{x}-\mu)+\summ(\bar{x}-\mu)^2\right] + \beta\right]} \\
+&\propto (\tst)^{n/2+\alpha-1} \, \expb{-\tst\left[\frac{1}{2} \left[\summ(x_i-\bar{x})^2 +\summ(\bar{x}-\mu)^2\right] + \beta\right]} \\
+&\propto (\tst)^{n/2+\alpha-1} \, \expb{-\tst\left[\frac{1}{2} \left[(n-1)s^2_x +n(\bar{x}-\mu)^2\right] + \beta\right]} \\
+&\propto \mathrm{Gamma}\left(\frac{n}{2}+\alpha, \frac{(n-1)s^2_x +n(\bar{x}-\mu)^2}{2} + \beta\right)
 \end{align}
 $$
 If we define $\alpha = \frac{n_0}{2}$ and $\beta=\frac{n_0\sigma_0^2}{2}$, then
 $$
-p(\tst \mid \xdots, \mu) \sim \mathrm{Gamma}\pp{\frac{n+n_0}{2}, \frac{(n-1)s_x^2+n_0\sigma_0^2}{2}}
+p(\tst \mid \xdots, \mu) \sim \mathrm{Gamma}\pp{\frac{n+n_0}{2}, \frac{(n-1)s^2_x +n(\bar{x}-\mu)^2+n_0\sigma_0^2}{2}}  \> \text{(rate)}
 $$
+
 ### Interpretations
 * $n_0$: sample size where $\sigma_0^2$ is obtained.
 * $(n-1)s_x^2+n_0\sigma_0^2$: sum of sum of sqaures of the prior sample and current sample.
@@ -136,7 +151,7 @@ $$
 p(\mu,\sigma^2\mid \xdots) &= p(\mu\mid\sigma^2,\xdots)\ p(\sigma^2,\xdots) \\
 \end{align}
 $$
-Notice that we can factor out the joint distribution into two posteriors. Let us examine each posterior. 
+Notice that we can factor out the joint distribution into two posteriors. Let us examine each posterior.
 
 $$
 \begin{align}
@@ -152,12 +167,12 @@ $$
 \begin{align}
 p(\sigma^2,\xdots) &\propto p(\xdots\mid\sigma^2) \ p(\sigma^2) \\
 &= \left[\int p(\xdots \mid \theta,\sigma^2)\ p(\theta\mid \sigma^2) \, d\theta\right]\ p(\sigma^2) \\
-&= \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}+n}{2}, \frac{1}{n_{0,\sigma^2}+n}\left[n_{0,\sigma^2}\sigma_0^2+(n-1)s^2+\frac{n_{0,\mu}\, n}{n_{0,\mu}}(\bar{x}-\mu_0)^2\right]} \\
+\frac{1}{\sigma^2} &\sim \mathrm{Gamma}\pp{\frac{n_{0,\sigma^2}+n}{2}, \frac{1}{n_{0,\sigma^2}+n}\left[n_{0,\sigma^2}\sigma_0^2+(n-1)s_x^2+\frac{n_{0,\mu}\, n}{n_{0,\mu}}(\bar{x}-\mu_0)^2\right]}   \> \text{(rate)} \\
 \end{align}
 $$
 If we assume that $n_{0,\sigma^2} = n_{0,\mu}$.
 $$
-p(\sigma^2,\xdots) = \mathrm{InverseGamma}\pp{\frac{n_{0}+n}{2}, \frac{1}{n_{0}+n}\left[n_{0}\sigma_0^2+(n-1)s^2+ n(\bar{x}-\mu_0)^2\right]}
+\frac{1}{\sigma^2} \sim \mathrm{Gamma}\pp{\frac{n_{0}+n}{2}, \frac{1}{n_{0}+n}\left[n_{0}\sigma_0^2+(n-1)s_x^2+ n(\bar{x}-\mu_0)^2\right]}\> \text{(rate)}
 $$
 
 ### Interpretations
@@ -170,14 +185,14 @@ $$
 To recap, the priors are as followed.
 $$
 \begin{align}
-\sigma^2 &\sim \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}}{2}, \frac{n_{0,\sigma^2}\sigma_0^2}{2}} \\
+\frac{1}{\sigma^2} &\sim \mathrm{Gamma}\pp{\frac{n_{0,\sigma^2}}{2}, \frac{n_{0,\sigma^2}\sigma_0^2}{2}}   \> \text{(rate)} \\
 \mu\mid\sigma^2 &\sim \mathcal{N}\pp{\mu_0, \frac{\sigma^2}{n_{0,\mu^2}}}
 \end{align}
 $$
 The posteriors are
 $$
 \begin{align}
-\sigma^2 &\sim \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}+n}{2}, \frac{1}{n_{0,\sigma^2}+n}\left[n_{0,\sigma^2}\sigma_0^2+(n-1)s^2+\frac{n_{0,\mu}\, n}{n_{0,\mu}}(\bar{x}-\mu_0)^2\right]} \\
+\frac{1}{\sigma^2} &\sim \mathrm{Gamma}\pp{\frac{n_{0,\sigma^2}+n}{2}, \frac{1}{n_{0,\sigma^2}+n}\left[n_{0,\sigma^2}\sigma_0^2+(n-1)s^2+\frac{n_{0,\mu}\, n}{n_{0,\mu}}(\bar{x}-\mu_0)^2\right]}   \> \text{(rate)} \\
 \mu\mid\sigma^2 &\sim \mathcal{N}\pp{\frac{n\bar{x}+\mu_0 n_{0,\mu}}{n+n_{0,\mu}}, (n+n_{0,\mu})\tst}
 \end{align}
 $$
@@ -189,12 +204,12 @@ In the previous section, the prior is modeled as another sample set, which neces
 
 $$
 \begin{align}
-\sigma^2 &\sim \mathrm{InverseGamma}\pp{\frac{n_{0,\sigma^2}}{2}, \frac{n_{0,\sigma^2}\sigma_0^2}{2}} \\
+\frac{1}{\sigma^2} &\sim \mathrm{Gamma}\pp{\frac{n_{0,\sigma^2}}{2}, \frac{n_{0,\sigma^2}\sigma_0^2}{2}}   \> \text{(rate)}\\
 \mu &\sim \mathcal{N}\pp{\mu_0, \tau_0^2}
 \end{align}
 $$
 
-Still, it is possible to derive the joint distribution of the posterior by dependent sampling. Note that the each conjugate prior is conjugated to the full conditional of each parameter. 
+Still, it is possible to derive the joint distribution of the posterior by dependent sampling. Note that the each conjugate prior is conjugated to the full conditional of each parameter.
 
 $$
 \begin{align}
@@ -209,8 +224,10 @@ Then, note that for all combinations of $\theta$ and $\xdots$, $p(\sigma^2\mid \
 $$
 \begin{align}
 p(\sigma^2\mid \theta, \xdots) &\propto p(\xdots \mid \theta,\sigma^2)\ p(\sigma^2)\\
-&\propto \mathrm{Gamma}\pp{\frac{n+n_0}{2}, \frac{(n-1)s_x^2+n_0\sigma_0^2}{2}} \\~\\
+&\propto \mathrm{Gamma}\pp{\frac{n+n_0}{2}, \frac{(n-1)s^2_x +n(\bar{x}-\mu)^2+n_0\sigma_0^2}{2}} \> \text{(rate)} \\~\\
 p(\theta\mid \sigma^2, \xdots) &\propto p(\xdots \mid \theta,\sigma^2)\ p(\theta)\\
 &\propto \mathcal{N}\left( \frac{\tilde{\sigma}^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}n\bar{x} + \frac{\tilde{\tau}_0^2}{n\tilde{\sigma}^2+\tilde{\tau}_0^2}\mu_0, \left(\frac{n}{\sigma^2} +\frac{1}{\tau_0^2}\right)^{-1} \right)
 \end{align}
 $$
+
+[@berkeley]
