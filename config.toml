@@ -1,6 +1,6 @@
 baseurl = "/"
 languageCode = "en-us"
-title = "Gradually Numerical"
+title = "Differentiable Mind"
 theme = "hugo-lithium"
 googleAnalytics = "UA-150095279-1"
 disqusShortname = ""
@@ -17,8 +17,8 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "https://github.com/rstudio/blogdown"
 
 [params]
-    name = "Gradually Numerical"
-    description = "A website built through Hugo and blogdown."
+    name = "Differentiable Mind"
+    description = "Notes in math and science."
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"

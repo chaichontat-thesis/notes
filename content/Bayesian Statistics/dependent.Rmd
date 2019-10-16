@@ -64,10 +64,7 @@ function gibbs_normal(iter=5000)
 end
 
 t = gibbs_normal()
-```
-
-```{r}
-JuliaCall::julia_command("scatter(t[100:end,1], 1 ./ t[100:end,2], alpha=0.2, markerstrokewidth=0)")
+scatter(t[100:end,1], 1 ./ t[100:end,2], alpha=0.2, markerstrokewidth=0)
 ```
 
 # Metropolis Algorithm
