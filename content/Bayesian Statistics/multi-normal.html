@@ -12,6 +12,7 @@ include-before:
   - '$\newcommand{\pp}[1]{\left(#1\right)}$'
   - '$\newcommand{\b}[1]{\mathbf{#1}}$'
   - '$\newcommand{\bs}[1]{\boldsymbol{#1}}$'
+  - '$\newcommand{\bxdots}{\b{x}_1,\dots,\b{x}_n}$'
 ---
 
 
@@ -22,6 +23,7 @@ include-before:
 <span class="math inline">\(\newcommand{\pp}[1]{\left(#1\right)}\)</span>
 <span class="math inline">\(\newcommand{\b}[1]{\mathbf{#1}}\)</span>
 <span class="math inline">\(\newcommand{\bs}[1]{\boldsymbol{#1}}\)</span>
+<span class="math inline">\(\newcommand{\bxdots}{\b{x}_1,\dots,\b{x}_n}\)</span>
 
 <div id="the-multivariate-normal" class="section level1">
 <h1>The Multivariate Normal</h1>
@@ -38,8 +40,8 @@ p(\b{x}\mid\bs{\mu, \Sigma}) = (2\pi)^{-k/2}\ \mathrm{det}(\bs{\Sigma})^{-1/2} \
 \]</span></p>
 <p>Note that <span class="math inline">\(\b{x^\top Ax}\)</span> is the multivariate analogue of <span class="math inline">\(Ax^2\)</span>. The normalization constants are also updated to handle multidimensional data.</p>
 </div>
-<div id="prior-distribution-for-bsmu" class="section level1">
-<h1>Prior Distribution for <span class="math inline">\(\bs\mu\)</span></h1>
+<div id="infer-bsmu" class="section level1">
+<h1>Infer <span class="math inline">\(\bs\mu\)</span></h1>
 <p>In the univariate case, we figured that the univariate normal is the prior.
 Let <span class="math inline">\(\bs{\mu}_0\)</span> be the prior mean of length <span class="math inline">\(k\)</span> and <span class="math inline">\(\bs{\Lambda}_0\)</span> be the prior covariance matrix.
 <span class="math display">\[
@@ -49,15 +51,66 @@ p(\bs{\mu} \mid \bs{\mu}_0, \bs{\Lambda}_0) &amp;= (2\pi)^{-k/2}\ \mathrm{det}(\
 &amp;\propto \expb{-\frac{1}{2} \bs{\mu}^\top \bs{\Lambda}_0^{-1} \bs{\mu} + \bs{\mu}^\top \bs{\Lambda}_0^{-1} \bs{\mu_0}} \\
 \end{align}
 \]</span></p>
-<p><span class="math display">\[
+<p>Standard form
+<span class="math display">\[
 \begin{align}
-p(\b{x}_1,\dots,\b{x}_n \mid \bs{\mu}, \bs{\Lambda}_0) &amp;= \prodd (2\pi)^{-k/2}\ \mathrm{det}(\bs{\Lambda}_0)^{-1/2} \, \expb{-\frac{1}{2}(\b{x}_i-\bs{\mu})^\top\bs{\Lambda}_0^{-1}(\b{x}_i-\bs{\mu})} \\
-&amp;\propto \expb{-\frac{1}{2}\summ\left[\b{x}_i^\top \bs{\Lambda}_0^{-1} \b{x}_i -2\b{x}_i^\top\bs{\Lambda}_0^{-1}\bs{\mu}+\bs{\mu}^\top\bs{\Lambda}_0^{-1}\bs{\mu}\right]} \\
-&amp;\propto \expb{-\frac{1}{2} \summ\left[\bs{\mu}^\top \bs{\Lambda}_0^{-1} \bs{\mu} + \b{x}^\top \bs{\Lambda}_0^{-1} \bs{\mu}\right]} \\
-&amp;\propto \expb{-\frac{1}{2} n\bs{\mu}^\top \bs{\Lambda}_0^{-1} \bs{\mu} + \summ \bs\mu^\top \bs{\Lambda}_0^{-1} \b{x}} \\
+   \mathrm{MultivariateNormal}\pp{\b{A}^{-1}\b{b}, \b{A}^{-1}} \propto \expb{- \frac{1}{2} \bs{\theta}^\top\b{A} \bs{\theta} + \bs{\theta}^\top \b{b}}
+\end{align}
+\]</span></p>
+<p>Likelihood
+<span class="math display">\[
+\begin{align}
+p(\b{x}_1,\dots,\b{x}_n \mid \bs{\mu}, \bs{\Sigma}) &amp;= \prodd (2\pi)^{-k/2}\ \mathrm{det}(\bs{\Sigma})^{-1/2} \, \expb{-\frac{1}{2}(\b{x}_i-\bs{\mu})^\top\bs{\Sigma}^{-1}(\b{x}_i-\bs{\mu})} \\
+&amp;\propto \expb{-\frac{1}{2}\summ\left[\b{x}_i^\top \bs{\Sigma}^{-1} \b{x}_i -2\b{x}_i^\top\bs{\Sigma}^{-1}\bs{\mu}+\bs{\mu}^\top\bs{\Sigma}^{-1}\bs{\mu}\right]} \\
+&amp;\propto \expb{-\frac{1}{2} \summ\left[\bs{\mu}^\top \bs{\Sigma}^{-1} \bs{\mu} + \b{x}^\top \bs{\Sigma}^{-1} \bs{\mu}\right]} \\
+&amp;\propto \expb{-\frac{1}{2} \bs{\mu}^\top n\bs{\Sigma}^{-1} \bs{\mu} + \summ \bs\mu^\top \bs{\Sigma}^{-1} \b{x}} \\
+&amp;\propto \mathrm{MultivariateNormal}\pp{\bs{\mu} \mid \bar{\b{x}}, \frac{\bs{\Sigma}}{n}}
+\end{align}
+\]</span></p>
+<p>Posterior
+<span class="math display">\[
+\begin{align}
+  p(\bs{\mu} \mid \bxdots, \bs{\Sigma}, \boldsymbol{\mu}_0 \bs{\Lambda}_0) &amp;\propto p(\bxdots, \mid \boldsymbol{\mu}, \bs{\Sigma})\ p(\boldsymbol{\mu}\mid \bs{\mu}_0, \bs{\Lambda}_0) \\
+  &amp;\propto \expb{-\frac{1}{2} \bs{\mu}^\top n\bs{\Sigma}^{-1} \bs{\mu} + \summ \bs\mu^\top \bs{\Sigma}^{-1} \b{x}_i} \
+    \expb{-\frac{1}{2} \bs{\mu}^\top \bs{\Lambda}_0^{-1} \bs{\mu} + \bs\mu^\top \bs{\Lambda}_0^{-1} \boldsymbol{\mu}_0 } \\
+  &amp;\propto \expb{- \frac{1}{2} \boldsymbol{\mu}^\top(n\bs{\Sigma}^{-1}+\bs{\Lambda}_0^{-1}) \boldsymbol{\mu} + \boldsymbol{\mu}^\top(n \boldsymbol{\Sigma}^{-1} \bar{\mathbf{x}} + \boldsymbol{\Lambda}_0^{-1} \boldsymbol{\mu}_0  ) } \\
+  &amp;\propto \mathrm{MultivariateNormal}\pp{ \boldsymbol{\mu}\mid \frac{n \boldsymbol{\Sigma}^{-1} \bar{\mathbf{x}} + \boldsymbol{\Lambda}_0^{-1} \boldsymbol{\mu}_0}{n\bs{\Sigma}^{-1}+\bs{\Lambda}_0^{-1}}, \frac{1}{n\bs{\Sigma}^{-1}+\bs{\Lambda}_0^{-1}}}
 \end{align}
 \]</span></p>
 </div>
-<div id="prior-distribution-for-bssigma" class="section level1">
-<h1>Prior Distribution for <span class="math inline">\(\bs\Sigma\)</span></h1>
+<div id="infer-bssigma" class="section level1">
+<h1>Infer <span class="math inline">\(\bs\Sigma\)</span></h1>
+<p>This is weird.</p>
+<p>In the univariate case, we could derive the prior directly like we have done above. However, this is more complicated in the multivariate case, so we’re going to derive this from first principles.</p>
+<p>Desiderata for a covariance matrix
+* Symmetric (<span class="math inline">\(\sigma_{XY}^2=\sigma_{YX}^2\)</span>)
+* Positive semi-definite (<span class="math inline">\(-1 \leq\rho\leq 1\)</span> and <span class="math inline">\(\sigma \geq 0\)</span>)</p>
+<p>Using the variance formula, given a mean-centered matrix $  $, then the covariance matrix is
+<span class="math display">\[
+\boldsymbol{\Sigma} = \frac{1}{n} \mathbf{Z}^\top \mathbf{Z}  
+\]</span></p>
+<p>Then to generate a distribution of random covariance matrices given a covariance matrix,</p>
+<p><span class="math display">\[
+\begin{align}
+  \mathbf{Z} &amp;\sim \mathcal{N} ( \boldsymbol{0}, \boldsymbol{\phi}_0  ) \\
+  \boldsymbol{\Sigma}_0 \mid \boldsymbol{\phi}_0 &amp;\sim \mathbf{Z^\top Z} \\
+  &amp;\sim \mathrm{InverseWishart}(\nu_0, \boldsymbol{\phi}_0 )
+\end{align}
+\]</span>
+where <span class="math inline">\(\nu_0\)</span> is a number larger than <span class="math inline">\(k\)</span> (length of sample).</p>
+<p>In the univariate case this would be
+??????
+<span class="math display">\[
+\begin{align}
+  X &amp;\sim \mathcal{N}(0, \tau_0^2) \\
+  \sigma^2 \mid \tau^2_0 &amp;\sim X^2 \\
+  &amp;\sim \tau_0^2\, \mathcal{N}(0,1)^2 \\
+  &amp;\sim \tau_0^2\, \chi^2_1 \\
+  &amp;\sim \tau_0^2\, \mathrm{Gamma}\pp{\frac{1}{2}, \frac{1}{2} } \\
+  &amp;\sim \mathrm{Gamma}\pp{\frac{1}{2}, \frac{1}{2\tau_0^2} }
+\end{align}
+\]</span>
+<span class="math display">\[
+\summ \mathbf{b}_i^\top \mathbf{Ab}_i = \mathrm{tr}( \mathbf{B^\top B A} )  
+\]</span></p>
 </div>
