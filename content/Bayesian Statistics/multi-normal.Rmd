@@ -49,7 +49,7 @@ $$
 Standard form
 $$
 \begin{align}
-   \mathrm{MultivariateNormal}\pp{\b{A}^{-1}\b{b}, \b{A}^{-1}} \propto \expb{- \frac{1}{2} \bs{\theta}^\top\b{A} \bs{\theta} + \bs{\theta}^\top \b{b}}
+   \mathrm{MultivariateNormal}\pp{\b{A}^{-1}\b{b}, \b{A}^{-1}} \propto \expb{- \frac{1}{2} \bs{\mu}^\top\b{A} \bs{\mu} + \bs{\mu}^\top \b{b}}
 \end{align}
 $$
 
@@ -82,8 +82,8 @@ In the univariate case, we could derive the prior directly like we have done abo
 
 Desiderata for a covariance matrix
 
-* Symmetric ($\sigma_{XY}^2=\sigma_{YX}^2$)
-* Positive semi-definite ($-1 \leq\rho\leq 1$ and $\sigma \geq 0$)
+- Symmetric ($\sigma_{XY}^2=\sigma_{YX}^2$)
+- Positive semi-definite ($-1 \leq\rho\leq 1$ and $\sigma \geq 0$)
 
 Using the variance formula, given a mean-centered matrix $ \mathbf{Z} $, then the covariance matrix is
 $$
@@ -94,12 +94,12 @@ Then to generate a distribution of random covariance matrices given a covariance
 
 $$
 \begin{align}
-  \mathbf{Z} &\sim \mathcal{N} ( \boldsymbol{0}, \boldsymbol{\phi}_0  ) \\
-  \boldsymbol{\Sigma}_0,\dots,\boldsymbol{\Sigma}_{\nu_0} &\sim \mathbf{Z^\top Z} \\
-  &\sim \mathrm{InverseWishart}(\nu_0, \boldsymbol{\phi}_0 )
+  \mathbf{Z} &\sim \mathrm{MultivariateNormal} ( \boldsymbol{0}, \boldsymbol{\Sigma}_0  ) \\
+  \boldsymbol{\Sigma}_0,\dots,\boldsymbol{\Sigma}_{n_0} &\sim \mathbf{Z^\top Z} \\
+  &\sim \mathrm{InverseWishart}(n_0, \boldsymbol{\Sigma}_0^{-1} )
 \end{align}
 $$
-where $\nu_0$ is a number larger than $k$ (length of sample).
+where $n_0$ is a number larger than $k$ (length of sample).
 
 In the univariate case this would be
 ??????
@@ -115,4 +115,24 @@ $$
 $$
 $$
 \summ \mathbf{b}_i^\top \mathbf{Ab}_i = \mathrm{tr}( \mathbf{B^\top B A} )  
+$$
+
+# Infer Both
+
+Here, we are seeking to infer both the mean and variance of data distributed with a multivariate normal sampling distribution.
+
+## Full conditional of $\bs{\Sigma}$
+
+We know that the sampling distribution of the covariance matrix is conjugated to the inverse Wishart distribution.
+
+
+
+
+## Sampling scheme
+
+$$
+\begin{align}
+  \bs{\mu}\mid\b{X}_1,\dots,\b{X}_n, \bs{\Sigma} &\sim \mathrm{MultivariateNormal}(\bs{\mu}_n, \bs{\Lambda}_n) \\
+  \bs{\Sigma} \mid \b{X}_1,\dots,\b{X}_n, \bs{\mu} &\sim \mathrm{InverseWishart}(n_0+n, \bs{\Sigma}_n^{-1})\\
+\end{align}
 $$

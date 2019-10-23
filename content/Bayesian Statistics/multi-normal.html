@@ -54,7 +54,7 @@ p(\bs{\mu} \mid \bs{\mu}_0, \bs{\Lambda}_0) &amp;= (2\pi)^{-k/2}\ \mathrm{det}(\
 <p>Standard form
 <span class="math display">\[
 \begin{align}
-   \mathrm{MultivariateNormal}\pp{\b{A}^{-1}\b{b}, \b{A}^{-1}} \propto \expb{- \frac{1}{2} \bs{\theta}^\top\b{A} \bs{\theta} + \bs{\theta}^\top \b{b}}
+   \mathrm{MultivariateNormal}\pp{\b{A}^{-1}\b{b}, \b{A}^{-1}} \propto \expb{- \frac{1}{2} \bs{\mu}^\top\b{A} \bs{\mu} + \bs{\mu}^\top \b{b}}
 \end{align}
 \]</span></p>
 <p>Likelihood
@@ -82,19 +82,21 @@ p(\b{x}_1,\dots,\b{x}_n \mid \bs{\mu}, \bs{\Sigma}) &amp;= \prodd (2\pi)^{-k/2}\
 <h1>Infer <span class="math inline">\(\bs\Sigma\)</span></h1>
 <p>This is weird.</p>
 <p>In the univariate case, we could derive the prior directly like we have done above. However, this is more complicated in the multivariate case, so we’re going to derive this from first principles.</p>
-<p>Desiderata for a covariance matrix
-* Symmetric (<span class="math inline">\(\sigma_{XY}^2=\sigma_{YX}^2\)</span>)
-* Positive semi-definite (<span class="math inline">\(-1 \leq\rho\leq 1\)</span> and <span class="math inline">\(\sigma \geq 0\)</span>)</p>
+<p>Desiderata for a covariance matrix</p>
+<ul>
+<li>Symmetric (<span class="math inline">\(\sigma_{XY}^2=\sigma_{YX}^2\)</span>)</li>
+<li>Positive semi-definite (<span class="math inline">\(-1 \leq\rho\leq 1\)</span> and <span class="math inline">\(\sigma \geq 0\)</span>)</li>
+</ul>
 <p>Using the variance formula, given a mean-centered matrix $  $, then the covariance matrix is
 <span class="math display">\[
-\boldsymbol{\Sigma} = \frac{1}{n} \mathbf{Z}^\top \mathbf{Z}  
+\boldsymbol{\Sigma} = \frac{1}{n-1} \mathbf{Z}^\top \mathbf{Z}  
 \]</span></p>
 <p>Then to generate a distribution of random covariance matrices given a covariance matrix,</p>
 <p><span class="math display">\[
 \begin{align}
-  \mathbf{Z} &amp;\sim \mathcal{N} ( \boldsymbol{0}, \boldsymbol{\phi}_0  ) \\
-  \boldsymbol{\Sigma}_0 \mid \boldsymbol{\phi}_0 &amp;\sim \mathbf{Z^\top Z} \\
-  &amp;\sim \mathrm{InverseWishart}(\nu_0, \boldsymbol{\phi}_0 )
+  \mathbf{Z} &amp;\sim \mathrm{MultivariateNormal} ( \boldsymbol{0}, \boldsymbol{\Sigma}_0  ) \\
+  \boldsymbol{\Sigma}_0,\dots,\boldsymbol{\Sigma}_{\nu_0} &amp;\sim \mathbf{Z^\top Z} \\
+  &amp;\sim \mathrm{InverseWishart}(\nu_0, \boldsymbol{\Sigma}_0^{-1} )
 \end{align}
 \]</span>
 where <span class="math inline">\(\nu_0\)</span> is a number larger than <span class="math inline">\(k\)</span> (length of sample).</p>
@@ -113,4 +115,16 @@ where <span class="math inline">\(\nu_0\)</span> is a number larger than <span c
 <span class="math display">\[
 \summ \mathbf{b}_i^\top \mathbf{Ab}_i = \mathrm{tr}( \mathbf{B^\top B A} )  
 \]</span></p>
+</div>
+<div id="infer-both" class="section level1">
+<h1>Infer Both</h1>
+<div id="sampling-scheme" class="section level2">
+<h2>Sampling scheme</h2>
+<p><span class="math display">\[
+\begin{align}
+  \bs{\mu}\mid\b{X}_1,\dots,\b{X}_n, \bs{\Sigma} &amp;\sim \mathrm{MultivariateNormal}(\bs{\mu}_n, \bs{\Lambda}_n) \\
+  \bs{\Sigma} \mid \b{X}_1,\dots,\b{X}_n, \bs{\mu} &amp;\sim \mathrm{InverseWishart}(n_0+n, \bs{\Sigma}_n^{-1})\\
+\end{align}
+\]</span></p>
+</div>
 </div>
