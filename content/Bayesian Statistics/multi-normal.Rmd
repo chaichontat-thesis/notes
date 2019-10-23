@@ -81,12 +81,13 @@ This is weird.
 In the univariate case, we could derive the prior directly like we have done above. However, this is more complicated in the multivariate case, so we're going to derive this from first principles.
 
 Desiderata for a covariance matrix
+
 * Symmetric ($\sigma_{XY}^2=\sigma_{YX}^2$)
 * Positive semi-definite ($-1 \leq\rho\leq 1$ and $\sigma \geq 0$)
 
 Using the variance formula, given a mean-centered matrix $ \mathbf{Z} $, then the covariance matrix is
 $$
-\boldsymbol{\Sigma} = \frac{1}{n} \mathbf{Z}^\top \mathbf{Z}  
+\boldsymbol{\Sigma} = \frac{1}{n-1} \mathbf{Z}^\top \mathbf{Z}  
 $$
 
 Then to generate a distribution of random covariance matrices given a covariance matrix,
@@ -94,7 +95,7 @@ Then to generate a distribution of random covariance matrices given a covariance
 $$
 \begin{align}
   \mathbf{Z} &\sim \mathcal{N} ( \boldsymbol{0}, \boldsymbol{\phi}_0  ) \\
-  \boldsymbol{\Sigma}_0 \mid \boldsymbol{\phi}_0 &\sim \mathbf{Z^\top Z} \\
+  \boldsymbol{\Sigma}_0,\dots,\boldsymbol{\Sigma}_{\nu_0} &\sim \mathbf{Z^\top Z} \\
   &\sim \mathrm{InverseWishart}(\nu_0, \boldsymbol{\phi}_0 )
 \end{align}
 $$
