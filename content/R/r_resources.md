@@ -9,6 +9,10 @@ tags: ["r", "links"]
 # Environment
 * [Migrating packages](https://www.r-bloggers.com/quick-way-of-installing-all-your-old-r-libraries-on-a-new-device/)
 * `Tab` for snippet in Rmd can be enabled in Keyboard shortcuts, search for `Snippet`.
+* Keyboard layout [file](EngGreek.keylayout) for macOS.
+  * Put this file in `\Library\Keyboard Layout`.
+  * The new keyboard will be in `Other` in `Settings`.
+
 
 # Plotting
 * [Multiple Plots](https://cran.r-project.org/web/packages/egg/vignettes/Ecosystem.html)

@@ -30,7 +30,7 @@ include-before:
 <p>Recall the univariate normal
 <span class="math display">\[
 \begin{align}
-p(x\mid\mu,\sigma^2) &amp;= (2\pi\sigma^2)^{-1/2} \, \expb{-\frac{(x-\mu)^2}{2\sigma^2}}\\
+p(x\mid μ,σ^2) &amp;= (2πσ^2)^{-1/2} \, \expb{-\frac{(x-μ)^2}{2\sigma^2}}\\
 &amp;= (2\pi)^{-1/2}(\sigma^2)^{-1/2}\, \expb{-\frac{1}{2}(x-\mu)(\sigma^2)^{-1}(x-\mu)}
 \end{align}
 \]</span>
@@ -95,11 +95,28 @@ p(\b{x}_1,\dots,\b{x}_n \mid \bs{\mu}, \bs{\Sigma}) &amp;= \prodd (2\pi)^{-k/2}\
 <p><span class="math display">\[
 \begin{align}
   \mathbf{Z} &amp;\sim \mathrm{MultivariateNormal} ( \boldsymbol{0}, \boldsymbol{\Sigma}_0  ) \\
-  \boldsymbol{\Sigma}_0,\dots,\boldsymbol{\Sigma}_{\nu_0} &amp;\sim \mathbf{Z^\top Z} \\
-  &amp;\sim \mathrm{InverseWishart}(\nu_0, \boldsymbol{\Sigma}_0^{-1} )
+  \boldsymbol{\Sigma}_0,\dots,\boldsymbol{\Sigma}_{n_0} &amp;\overset{\text{i.i.d.}}{\sim} \mathbf{Z^\top Z} \\
+  &amp;\sim \mathrm{InverseWishart}(n_0, \boldsymbol{\Sigma}_0^{-1} )
 \end{align}
 \]</span>
-where <span class="math inline">\(\nu_0\)</span> is a number larger than <span class="math inline">\(k\)</span> (length of sample).</p>
+where <span class="math inline">\(n_0\)</span> is a number larger than <span class="math inline">\(k\)</span> (length of sample).</p>
+<p><span class="math display">\[
+\begin{align}
+\mathcal{L}(\bs{\Sigma}\mid \b{x}_1,\dots,\b{x}_n) &amp;=p(\b{x}_1,\dots,\b{x}_n \mid \bs{\mu}, \bs{\Sigma}) \\
+&amp;= \prodd (2\pi)^{-k/2}\ \mathrm{det}(\bs{\Sigma})^{-1/2} \, \expb{-\frac{1}{2}(\b{x}_i-\bs{\mu})^\top\bs{\Sigma}^{-1}(\b{x}_i-\bs{\mu})} \\
+&amp;\propto \mathrm{det}(\bs{\Sigma})^{-n/2}\, \expb{-\frac{1}{2}\summ (\b{x}_i-\bs{\mu})^\top\bs{\Sigma}^{-1}(\b{x}_i-\bs{\mu})} \\
+&amp;\propto \mathrm{det}(\bs{\Sigma})^{-n/2}\, \expb{-\frac{1}{2} \operatorname{tr}\pp{\summ \left[(\b{x}_i-\bs{\mu})^\top(\b{x}_i-\bs{\mu})\right]\bs{\Sigma}^{-1}}} \\
+&amp;\propto \mathrm{InverseWishart}\pp{n+p+1, \summ (\b{x}_i-\bs{\mu})^\top(\b{x}_i-\bs{\mu})}
+\end{align}
+\]</span>
+This is the Wishart distribution.
+<span class="math display">\[
+p (\bs{\Lambda}\mid \b{V}) = \frac{1}{2^{np/2} \left|{\mathbf V}\right|^{n/2} \Gamma_p\left(\frac {n}{2}\right ) }{\left|\bs{\Lambda}\right|}^{(n-p-1)/2} \expb{-\frac{1}{2}\operatorname{tr}({\mathbf V}^{-1}\bs{\Lambda})}
+\]</span>
+However, looking at the likelihood form, every parameter of interest is inverted. Therefore, it is conjugated to the inverse Wishart distribution.</p>
+<p><span class="math display">\[
+p (\bs{\Sigma}\mid \b{V}) = \frac{1}{2^{np/2} \left|{\mathbf V}\right|^{-n/2} \Gamma_p\left(\frac {n}{2}\right ) }{\left|\bs{\Sigma}\right|}^{-(n-p-1)/2} \expb{-\frac{1}{2}\operatorname{tr}({\mathbf V}\bs{\Sigma}^{-1})}
+\]</span></p>
 <p>In the univariate case this would be
 ??????
 <span class="math display">\[
@@ -118,6 +135,16 @@ where <span class="math inline">\(\nu_0\)</span> is a number larger than <span c
 </div>
 <div id="infer-both" class="section level1">
 <h1>Infer Both</h1>
+<p>Here, we are seeking to infer both the mean and variance of data distributed with a multivariate normal sampling distribution.</p>
+<div id="full-conditional-of-bssigma" class="section level2">
+<h2>Full conditional of <span class="math inline">\(\bs{\Sigma}\)</span></h2>
+<p>We know that the sampling distribution of the covariance matrix is conjugated to the inverse Wishart distribution.</p>
+<p><span class="math display">\[
+\begin{align}
+  p(\b{X}_1,\dots,\b{X}_n) &amp;\propto 
+\end{align}
+\]</span></p>
+</div>
 <div id="sampling-scheme" class="section level2">
 <h2>Sampling scheme</h2>
 <p><span class="math display">\[
