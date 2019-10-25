@@ -1,0 +1,82 @@
+---
+title: "Spectral Clustering"
+author: "Chaichontat Sriworarat"
+date: 2019-10-25
+tags: ["linear algebra"]
+include-before:
+  - '$\newcommand{\summ}{\sum_{i=1}^n}$'
+  - '$\newcommand{\prodd}{\prod_{i=1}^n}$'
+  - '$\newcommand{\xdots}{x_1, \dots, x_n}$'
+  - '$\newcommand{\expb}[1]{\exp\left\{#1\right\}}$'
+  - '$\newcommand{\pp}[1]{\left(#1\right)}$'
+  - '$\newcommand{\b}[1]{\mathbf{#1}}$'
+  - '$\newcommand{\bs}[1]{\boldsymbol{#1}}$'
+  - '$\newcommand{\bxdots}{\b{x}_1,\dots,\b{x}_n}$'
+---
+
+# Graph Theory
+
+```{definition, simgraph, name="undirected graph"}
+In a simple graph, the graph is undirected, no loops, no weights and is defined by
+$$
+  G(V, E, w)
+$$
+where $V$ is a set of vertices and E is a set of two-sets (sets with two distinct elements) of vertices, whose elements are called edges, and $w$ is a function $w: E \rightarrow \mathcal{R}^+$.
+```
+
+
+
+```{definition, adj, name="adjacency matrix"}
+An adjacency matrix describes the connections within the graph.
+$$
+  A (i,j) = \begin{cases}
+     w(i,j) & (i,j) \in E \\
+     0 & \text{otherwise}
+     \end{cases}
+$$
+The matrix is hollow, since there's no self-loop.
+```
+
+```{definition, deg, name="degree matrix"}
+$$
+  D = \mathrm{diag} \pp{\sum_j A(i,j)}
+$$
+```
+
+```{definition, laplacian, name="Laplacian matrix"}
+In a simple graph, the Laplacian matrix is an $|V| \times |V|$ matrix defined as
+$$
+  L = D-A
+$$
+where $D$ is the degree matrix and $A$ is the adjacency matrix of the graph.
+
+Let $A_i$ be the column of an adjacency matrix, then
+$$
+  L = \sum_{(i,j)\in E} (A_i - A_j)(A_i - A_j)^\top
+$$
+That is, summing over all columns of each edge elements.
+```
+
+As an example, consider a simple graph with two vertices and one edge. Then
+
+$$
+\begin{align}
+  G &= (V, E) \\
+  V &= \{v_1, v_2 \} \\
+  E &= \{ \{v_1,v_2\} \} \\
+  \\
+  D &= I_2 \\
+  A &= \begin{bmatrix}
+  0 & 1 \\
+  1 & 0
+  \end{bmatrix} \\
+  L &= \begin{bmatrix}
+  1 & -1 \\
+  -1 & 1
+  \end{bmatrix} \\
+\end{align}
+$$
+Note that for any vector $\b{x} \in \mathbb{R}^2$
+$$
+  \b{x}^\top L \b{x} = (x_1 - x_2)^2
+$$
