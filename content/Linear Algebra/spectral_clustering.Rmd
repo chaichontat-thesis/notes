@@ -17,31 +17,61 @@ include-before:
 # Graph Theory
 
 ```{definition, simgraph, name="undirected graph"}
-In a simple graph, the graph is undirected, no loops, no weights and is defined by
+In a simple graph, the graph is undirected, no loops, and is defined by
 $$
   G(V, E, w)
 $$
-where $V$ is a set of vertices and E is a set of two-sets (sets with two distinct elements) of vertices, whose elements are called edges, and $w$ is a function $w: E \rightarrow \mathcal{R}^+$.
+where $V$ is a set of vertices and E is a set of two-sets (sets with two distinct elements) of vertices, whose elements are called edges, and $w$ is a function $w: E \rightarrow \mathbb{R}$.
 ```
 
+Here, in algebraic graph theory, we are treating a set of vector as $\mathbf{x} \in \mathbb{R}^{|V|}$. That is, each vertex must have an associated value (could be viewed as the temperature). Some people decide to use $\mathbf{x}$ as a function $\mathbf{x}:V \rightarrow \mathbb{R}$, which is literally the same thing as the first treatment.
 
+Note that the values of the vertex and the edges are NOT the same thing.
 
 ```{definition, adj, name="adjacency matrix"}
 An adjacency matrix describes the connections within the graph.
 $$
   A (i,j) = \begin{cases}
-     w(i,j) & (i,j) \in E \\
+     w(i,j) & \{i,j\} \in E \\
      0 & \text{otherwise}
      \end{cases}
 $$
-The matrix is hollow, since there's no self-loop.
 ```
 
-```{definition, deg, name="degree matrix"}
+```{definition, walk, name="walk matrix"}
 $$
-  D = \mathrm{diag} \pp{\sum_j A(i,j)}
+  W_{ii} = \frac{1}{2} \\
+  W_{ij} = \begin{cases}
+\frac{1}{2d} & \{i, j\} \in E \\
+0 & \text{otherwise}
+\end{cases}
 $$
 ```
+
+We can view this as a diffusion operator on a set of vertices. Applying the operator takes the average of all neighbors and apply it on to each vertex.
+
+$$
+  (W\b{u})_i = \frac{1}{2}u_i + \frac{1}{2d} \sum_{k:\{i,j\} \in E} u_k
+$$
+
+Then, applying $W$ several times show the progression of heat diffusion. Applying a transformation repeatedly is best done in an eigenbasis. Let $\b{v}_i$ be the eigenvectors of $W$.
+
+$$
+\begin{align}
+  \b{u} &= c_1 \b{v}_1 + \cdots + c_n\b{v}_n \\
+  W\b{u} &= \lambda_1 c_1 \b{v}_1 + \cdots + \lambda_nc_n\b{v}_n \\
+  W^k\b{u} &= \lambda_1^k c_1 \b{v}_1 + \cdots + \lambda_n^k c_n\b{v}_n
+\end{align}
+$$
+Note that we can view the eigenvectors as the mode of the system. Sorting the eigenvalues from the largest to smallest, $\lambda_1 = 1, \b{v}_1 = \frac{1}{\sqrt{n}}\mathbf{1}_n$, which is the equilibrium solution.
+
+If we take an asymptotic view $\lim_{k\rightarrow\infty} W^k\b{u}$, $\lambda_1$ will remain constant while all other eigenvectors decay away (since their eigenvalues are smaller than 1).
+
+The interesting eigenvector is the second one. This is the mode that decays the slowest, suggesting that it signifies some bottleneck.
+
+Let us consider a starting condition $\b{u} = \b{v}_2$. Then in this system, as time goes by, all nodes decay at the same rate $\lambda_2$ toward zero. If that's the case, then components with closer value should be more connected and vice versa.
+
+Now, let's take a look at the Laplacian matrix whose eigenvalues are $1-x$ with the same eigenvectors.
 
 ```{definition, laplacian, name="Laplacian matrix"}
 In a simple graph, the Laplacian matrix is an $|V| \times |V|$ matrix defined as
@@ -49,13 +79,15 @@ $$
   L = D-A
 $$
 where $D$ is the degree matrix and $A$ is the adjacency matrix of the graph.
-
-Let $A_i$ be the column of an adjacency matrix, then
-$$
-  L = \sum_{(i,j)\in E} (A_i - A_j)(A_i - A_j)^\top
-$$
-That is, summing over all columns of each edge elements.
 ```
+
+Let $q$ be the total energy of the system.
+$$
+  q = \b{x}^\top L \b{x} = \sum_{\{a,b\}\in E} w_{a,b} (x_a - x_b)^2
+$$
+
+
+Also, 
 
 As an example, consider a simple graph with two vertices and one edge. Then
 
@@ -78,5 +110,9 @@ $$
 $$
 Note that for any vector $\b{x} \in \mathbb{R}^2$
 $$
-  \b{x}^\top L \b{x} = (x_1 - x_2)^2
+\begin{align}
+  \b{x}^\top L \b{x} &= x(1)^2 - 2x(1)x(2) + x(2)^2 \\
+  &= (x(1)-x(2))^2
+\end{align}
 $$
+$L$ is positive-semidefinite.
