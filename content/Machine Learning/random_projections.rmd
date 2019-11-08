@@ -7,17 +7,13 @@ tags: ["math", "ml"]
 ---
 
 $$
-% Containers
 \newcommand{\pp}[1]{\left(#1\right)}
 \newcommand{\bk}[1]{\left[#1\right]}
-\newcommand{\b}[1]{\mathbf{#1}}
 \newcommand{\bs}[1]{\boldsymbol{#1}}
 \newcommand{\on}[1]{\opertorname{#1}}
 \newcommand{\expb}[1]{\, \exp\left\{#1\right\}}
-
-% Abbreviations
+\newcommand{\mb}[1]{\mathbf{#1}}
 \newcommand{\summ}{\sum_{i=1}^n}
-\newcommand{\prodd}{\prod_{i=1}^n}
 \newcommand{\xdots}{x_1, \dots, x_n}
 \newcommand{\T}{\mathsf{T}}
 \newcommand{\normal}[1]{\mathcal{N}\left(#1\right)}
@@ -25,8 +21,6 @@ $$
 \newcommand{\Pr}[1]{\mathrm{Pr} \left(#1\right)}
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\norm}[1]{\left\|#1\right\|}
-
-% Functionals
 \newcommand{\E}[1]{\mathbb{E}\left[#1\right]}
 \newcommand{\Var}[1]{\operatorname{Var}\left[#1\right]}
 $$
@@ -35,7 +29,7 @@ $$
 There could be at most $D$ orthogonal vectors in $\real^{D}$. However, if we relax this constrain to allow vectors that are  $ϵ$-orthogonal, there are exponential of them.
 
 ### Random Vector
-Let $\b{v}$ be a random vector of length $n$ with each component being $v_i \sim \normal{0, 1}$. The normal distribution has many useful properties, one of the most important being closure under scalar multiplication and addition.
+Let $\mb{v}$ be a random vector of length $n$ with each component being $v_i \sim \normal{0, 1}$. The normal distribution has many useful properties, one of the most important being closure under scalar multiplication and addition.
 
 Define another random variable
 $$
@@ -44,6 +38,7 @@ $$
   &\sim \chi^2_n
 \end{align}
 $$
+
 The expectation of $Y$ is
 $$
 \begin{align}
@@ -52,6 +47,7 @@ $$
   &= n
 \end{align}
 $$
+
 The concentration inequality is
 $$
 \begin{align}
@@ -62,13 +58,13 @@ $$
 Knowing that
 $$
 \begin{align}
-  \frac{\norm{A\b{x}}^2}{\norm{\b{x}}} &\sim \chi^2_k
+  \frac{\norm{A\mathbf{x}}^2}{\norm{\mathbf{x}}} &\sim \chi^2_k
 \end{align}
 $$
 leads to
 $$
 \begin{align}
-  \Pr{\abs{1-\frac{\norm{F_A(\b{x})}^2}{\norm{x}^2}}\geq\delta} \leq 2 \expb{-\frac{kδ^2}{8}}
+  \Pr{\abs{1-\frac{\norm{F_A(\mb{x})}^2}{\norm{x}^2}}\geq\delta} \leq 2 \expb{-\frac{kδ^2}{8}}
 \end{align}
 $$
 
@@ -80,17 +76,17 @@ $$
   k > \frac{16}{\delta^2} \, \log\pp{\frac{n}{\sqrt{\epsilon}}}
 \end{align}
 $$
-Define $\b{A}$ as a $k \times D$ random matrix.
+Define $\mb{A}$ as a $k \times D$ random matrix.
 $$
 \begin{align}
   A_{i,j} &\sim \normal{0,1} \\
-  F_A(\b{z}) &= \frac{\b{A}}{\sqrt{k}}\b{z}
+  F_A(\mb{z}) &= \frac{\mb{A}}{\sqrt{k}}\mb{z}
 \end{align}
 $$
 Then for each pair $i, j: i≠j$
 $$
 \begin{align}
-  \Pr{\abs{1-\frac{\norm{F_A(\b{z}_i)-F_A(\b{z}_j)}}{\norm{\b{z}_i-\b{z}_j}}}\geq\delta} \leq \frac{2\epsilon}{n^2}
+  \Pr{\abs{1-\frac{\norm{F_A(\mb{z}_i)-F_A(\mb{z}_j)}}{\norm{\mb{z}_i-\mb{z}_j}}}\geq\delta} \leq \frac{2\epsilon}{n^2}
 \end{align}
 $$
 
