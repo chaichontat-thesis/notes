@@ -13,6 +13,10 @@ include-before:
   - '$\newcommand{\bs}[1]{\boldsymbol{#1}}$'
   - '$\newcommand{\bxdots}{\b{x}_1,\dots,\b{x}_n}$'
 ---
+```{r}
+library(reticulate)
+use_python("/Users/chaichontat/miniconda3/bin/python")
+```
 
 # Graph Theory
 
@@ -86,8 +90,13 @@ $$
   q = \b{x}^\top L \b{x} = \sum_{\{a,b\}\in E} w_{a,b} (x_a - x_b)^2
 $$
 
+Then, the minimum energy state is specified by the eigenvector as specified by the Courant-Fischer theorem.
 
-Also, 
+$$
+\begin{align}
+  \mathrm{arg}\min_{\b{x}} \b{x}^\top L \b{x} = \b{v}
+\end{align}
+$$
 
 As an example, consider a simple graph with two vertices and one edge. Then
 
@@ -116,3 +125,26 @@ $$
 \end{align}
 $$
 $L$ is positive-semidefinite.
+
+```{python, eval=F}
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+
+from sklearn.datasets import make_circles, make_blobs
+from sklearn.metrics import pairwise_distances
+
+sns.set()
+
+xy, ans = make_blobs(1000, cluster_std=[1.0, 2.5, 0.5])
+plt.scatter(xy[:,0], xy[:,1])
+# plt.show()
+
+e = 1.5
+W = np.exp(-pairwise_distances(xy, metric="euclidean")**2/e) - np.diag(np.ones(1000))
+D = np.diag(np.sum(W, axis=1))
+L = D - W
+l, v = np.linalg.eig(L)
+idx = np.argsort(l)
+l, v = l[idx], v[:, idx]
+```
