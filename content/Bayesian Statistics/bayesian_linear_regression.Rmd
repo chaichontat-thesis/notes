@@ -1,0 +1,140 @@
+---
+title: "Bayesian Linear Regression"
+section: "Machine Learning"
+author: "Chaichontat Sriworarat"
+date: 2019-11-07
+tags: ["math", "bayesian statistics"]
+---
+
+$$
+\newcommand{\pp}[1]{\left(#1\right)}
+\newcommand{\bk}[1]{\left[#1\right]}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+\newcommand{\on}[1]{\operatorname{#1}}
+\newcommand{\expb}[1]{\, \exp\left\{#1\right\}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\summ}{\sum_{i=1}^n}
+\newcommand{\xdots}{x_1, \dots, x_n}
+\newcommand{\T}{\mathsf{T}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\normal}[1]{\mathcal{N}\left(#1\right)}
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\Pr}[1]{\mathrm{Pr} \left(#1\right)}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\E}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\Var}[1]{\operatorname{Var}\left[#1\right]}
+\newcommand{\iid}{\mathop{\sim}^\mathrm{iid}}
+\newcommand{\yvec}{\mathbf{y}}
+\newcommand{\xvec}{\vec{x}}
+\newcommand{\bvec}{\boldsymbol{\beta}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\inv}[1]{\frac{1}{#1}}
+
+$$
+
+## Linear Regression
+We are assuming that the conditional distribution $p(y\mid \xvec)$ is changing smoothly as a function of $\bs x$. Then, the expectation of $y$ as a function of $\xvec$ is
+$$
+\begin{align}
+  \E{Y\mid\xvec} = \int y\, p(y\mid\xvec) \, dy = \beta_1x_1 + \cdots + \beta_px_p = \bs{\beta}^\T \xvec
+\end{align}
+$$
+
+Then, define $y$ as a random vector. In this model, we are trying to find the distribution of $\bvec$ and $σ^2$. For each sample,
+
+$$
+\begin{align}
+  \epsilon_1, \dots, \epsilon_n &\iid \normal{0, σ^2} \\
+  y_i &= \bs{\beta}^\T \bX_i + \epsilon_i
+\end{align}
+$$
+
+In matrix form (assuming that $\bX$ is full-rank),
+$$
+\begin{align}
+  \vec{y} &= \bX \bs \beta \\
+  p(\vec{y} \mid  \mb{X}, \bs \beta, σ^2) &\propto \expb{-\frac{(\yvec-\bX\bs{\beta})^\T (\yvec-\bX\bs{\beta})}{2σ^2}}
+\end{align}
+$$
+
+Note that the exponent term is the sum of square residuals.
+
+$$
+\begin{align}
+  \on{SSR}(\bvec) &= (\yvec-\bX\bs{\beta})^\T (\yvec-\bX\bs{\beta}) = \summ (\yvec_i-\bvec^\T \bX_i)^2
+\end{align}
+$$
+
+To find the minimization,
+$$
+\begin{align}
+  \bvec_{\on{OLS}} &= (\mb{X}^\T\mb{X})^{-1}\, \mb{X}^\T\yvec \\
+  \hat{σ}^2_{\on{OLS}} &= \frac{\on{SSR}(\bvec_{\on{OLS}})}{n-p}
+\end{align}
+$$
+
+#### Hat Matrix
+The fitted point is a projection on to the column space of $\bX$.
+$$
+\begin{align}
+  \hat{\yvec} &= \bX \hat{\bvec} \\
+  &= \bX(\mb{X}^\T\mb{X})^{-1}\mb{X}^\T\yvec \\
+  &= \mb{H}\yvec
+\end{align}
+$$
+Another proof for the OLS.
+$$
+\begin{align}
+  \on{SSR}(\bvec) &= \norm{\yvec - \bX \bvec}^2 \\
+  &= \norm{\yvec - \mb{H}\bX \bvec}^2 & \mb{HX}=\bX\\
+  &= \norm{\mb{H}\yvec + (\mb{I-H})\yvec-\mb{HX}\bvec}^2 \\
+  &= \norm{\mb{H}(\yvec-\bX\bvec)+(\mb{I-H})\yvec}^2 & \mb{H(I-H)}=0\\
+  &= \norm{\mb{H}(\yvec-\bX\bvec)}^2 + \norm{(\mb{I-H})\yvec}^2 \\
+\end{align}
+$$
+Thus, the SSR will be lowest when $\norm{\mb{H}(\yvec-\bX\bvec)}^2=0$.
+$$
+\begin{align}
+  0 &= \mb{H}\yvec-\mb{HX}\bvec \\
+  &= \bX(\mb{X}^\T\mb{X})^{-1}\mb{X}^\T\yvec-\bX\bvec \\
+  &= \bX\bk{(\mb{X}^\T\mb{X})^{-1}\mb{X}^\T\yvec-\bvec}
+\end{align}
+$$
+
+$(\mb{X}^\T\mb{X})^{-1}\mb{X}^\T\yvec-\bvec$ must be in the null space of $\bX$. Since $\bX$ is full-rank, the null space is $\bs{0}$. Therefore,
+$$
+\begin{align}
+  \bvec &= (\mb{X}^\T\mb{X})^{-1}\, \mb{X}^\T\yvec
+\end{align}
+$$
+
+[More info](https://web.stanford.edu/~mrosenfe/soc_meth_proj3/matrix_OLS_NYU_notes.pdf)
+
+
+## Bayesian Linear Regression
+Let's find the posterior distribution of $\bvec$ using its full conditional with a multivariate normal prior.
+$$
+\begin{align}
+  p(\bvec\mid \yvec,\bX,σ^2) &\propto p(\yvec\mid\bvec,\bX,σ^2)\ p(\bvec,\bX,σ^2) \\
+  &= p(\yvec\mid\bvec,\bX,σ^2)\ p(\bvec\mid\bX,σ^2) \ p(\bX,σ^2) \\
+  &\propto p(\yvec\mid\bvec,\bX,σ^2)\ p(\bvec) \\~\\
+  &= \expb{-\inv{2} \bk{(\yvec-\bX\vec{\beta})^\T (σ^2\mb{I})^{-1}(\yvec-\bX\vec{\beta}) + (\bvec-\bvec_0)^\T\bs{\Sigma}_0^{-1}(\bvec-\bvec_0)}} \\
+  &\propto \expb{-\inv{2} \bk{\bvec^\T \pp{\bX^\T\bX/σ^2 + \bs{\Sigma}_0^{-1}}\bvec + 2\bvec^\T\pp{\bX^\T\yvec/σ^2 + \bs{\Sigma}_0^{-1}\bvec_0}}} \\
+\end{align}
+$$
+
+This is a multivariable normal with
+$$
+\begin{align}
+  \E{\bvec\mid \yvec,\bX,σ^2} &= \pp{\bX^\T\bX/σ^2 + \bs{\Sigma}_0^{-1}}^{-1} \pp{\bX^\T\yvec/σ^2 + \bs{\Sigma}_0^{-1}\bvec_0} \\
+  \Var{\bvec\mid \yvec,\bX,σ^2} &= \pp{\bX^\T\bX/σ^2 + \bs{\Sigma}_0^{-1}}^{-1}
+\end{align}
+$$
+
+$$
+\begin{align}
+  p(\gamma\mid \mb{y}, \mb{X}, \bs{\beta}) &\propto p(\gamma)\ p(\bs{y}\mid\bX, \bs{\beta}, \gamma) \\
+  &\propto
+\end{align}
+$$

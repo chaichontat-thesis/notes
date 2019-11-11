@@ -61,6 +61,7 @@ $$
   \frac{\norm{A\mathbf{x}}^2}{\norm{\mathbf{x}}} &\sim \chi^2_k
 \end{align}
 $$
+
 leads to
 $$
 \begin{align}
