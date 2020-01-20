@@ -32,6 +32,7 @@ enableRobotsTXT = true
 
     # path to the favicon, under "static"
     favicon = "favicon.ico"
+    math = true
 
     [params.logo]
     url = "logo.svg"
