@@ -18,7 +18,32 @@ h3,
 h4,
 h5,
 h6 {
-  color: #222;
+  line-height: 1.2;
+  color: #010101;
+}
+h1 {
+  font-size: 2.4em;
+  font-weight: 500;
+}
+h2 {
+  font-size: 1.8em;
+  font-weight: 500;
+}
+h3 {
+  font-size: 1.4em;
+  font-weight: 400;
+}
+h4 {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+h5 {
+  font-size: 1em;
+  font-weight: 400;
+}
+h6 {
+  font-size: 1em;
+  font-weight: 400;
 }
 
 a {
