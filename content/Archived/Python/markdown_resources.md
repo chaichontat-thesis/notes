@@ -10,3 +10,5 @@ tags: ["engineering"]
 
 * `markdown-preview-plus`
 * `language-latex`
+* `latex`
+* `pdf-view` 

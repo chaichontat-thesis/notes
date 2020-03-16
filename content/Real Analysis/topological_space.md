@@ -31,7 +31,7 @@ There can be multiple possible topologies for a set.
 - If $A ⊆ X$ and $X ∖ A ∈ τ$, then $A$ is _closed_.
 - $∅, X$ are both open and closed or _clopened_.
 
-#### Example
+### Example
 Let $X = \set{1, 2, 3}$.
 - $τ = \set{∅, X}$. Note that $τ$ is a topology for any set, also called a _chaotic topology_.
 - $τ = \mathcal{P}(X)$ is also a topology for any set, called a _discrete topology_.
