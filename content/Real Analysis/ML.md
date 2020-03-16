@@ -1,3 +1,11 @@
+---
+title: "Rosenberg ML"
+section: "Real Analysis"
+author: "Chaichontat Sriworarat"
+date: 2020-03-16
+tags: ["real analysis"]
+---
+
 # Lecture 9
 
 ## Convex Optimization
@@ -60,5 +68,28 @@ Equivalently, in **primal form**,
 $$
 \begin{align}
   p^∗ &= \inf_x \, \sup_{λ⪰0} L(x,λ)
+\end{align}
+$$
+The Lagrangian dual problem is
+$$
+\begin{align}
+  d^∗ &= \sup_{λ⪰0} \, \inf_x  L(x,λ) \\
+  &= \sup_{λ⪰0} g(λ)
+\end{align}
+$$
+where $g$ is the **dual function**.
+
+Have **weak duality** if $p^∗≥d^∗$.
+
+* $p^∗-d^∗$ is called the **duality gap**.
+* Duality gap is 0 when the optimization is convex.
+* Dual function is always concave.
+* Lagrange dual gives the lower bound of $p^∗$.
+
+Dual problem (often easier to solve) is
+$$
+\begin{align}
+  \max \quad &g(λ) \\
+  \mathrm{s.t.} \quad &λ ⪰ 0.
 \end{align}
 $$
