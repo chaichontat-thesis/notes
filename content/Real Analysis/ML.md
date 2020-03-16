@@ -12,17 +12,17 @@ tags: ["real analysis"]
 A set $C$ is **convex** if $∀x_1,x_2 ∈ C$ and $0 ≤ θ≤ 1$,
 
 $$
-\begin{align}
+\begin{align*}
   θx_1+(1-θ)x_2∈C.
-\end{align}
+\end{align*}
 $$
 
 A function $f$ is convex if $∀x,y ∈\on{dom}(f)$,
 
 $$
-\begin{align}
+\begin{align*}
   f(θx+(1-θ)y)≤θf(x) + (1-θ)f(y).
-\end{align}
+\end{align*}
 $$
 
 * Convex $⟹$ local minima are global minima.
@@ -31,11 +31,11 @@ $$
 ### Standard Optimization Form
 
 $$
-\begin{align}
-  \min \quad &f_0(x) \\
-  \mathrm{s.t.} \quad &f_i(x) ≤ 0 \\
+\begin{align*}
+  \min \quad &f_0(x) \\\\
+  \mathrm{s.t.} \quad &f_i(x) ≤ 0 \\\\
   &h_i(x) = 0.
-\end{align}
+\end{align*}
 $$
 
 * A point $x$ satisfying all constraints is called a **feasible point**.
@@ -61,11 +61,11 @@ Taking the supremum over the Lagrangian gives back encoding of objective and con
 
 $$
 \begin{align}
-  \sup_{λ⪰0} L(x,λ) &= \sup_{λ⪰0}\pp{f_0(x) + \sum_{i=1}^m λ_i f_i(x)} \\
-  &= \cases{
-    f_0(x) & $f_i(x)≤0$ all $i$ \\
-    ∞ & otherwise
-  }.
+  \sup_{λ⪰0} L(x,λ) &= \sup_{λ⪰0}\pp{f_0(x) + \sum_{i=1}^m λ_i f_i(x)} \\\\
+  &= \begin{cases}
+    f_0(x) & f_i(x)≤0 \text{ all } i \\\\
+    ∞ & \text{otherwise}
+  \end{cases}.
 \end{align}
 $$
 
@@ -81,7 +81,7 @@ The Lagrangian dual problem is
 
 $$
 \begin{align}
-  d^∗ &= \sup_{λ⪰0} \, \inf_x  L(x,λ) \\
+  d^∗ &= \sup_{λ⪰0} \, \inf_x  L(x,λ) \\\\
   &= \sup_{λ⪰0} g(λ)
 \end{align}
 $$
@@ -99,7 +99,7 @@ Dual problem (often easier to solve) is
 
 $$
 \begin{align}
-  \max \quad &g(λ) \\
+  \max \quad &g(λ) \\\\
   \mathrm{s.t.} \quad &λ ⪰ 0.
 \end{align}
 $$

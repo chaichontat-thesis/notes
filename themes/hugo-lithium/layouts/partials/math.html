@@ -6,10 +6,8 @@
       displayMath: [['$$','$$']],
       processEscapes: true,
       processEnvironments: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-      TeX: { equationNumbers: { autoNumber: "AMS" },
-           extensions: ["AMSmath.js", "AMSsymbols.js"] }
-    }
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    },
   });
   MathJax.Hub.Queue(function() {
     // Fix <code> tags after MathJax finishes running. This is a
@@ -24,7 +22,13 @@
   MathJax.Hub.Config({
     // Autonumbering by mathjax
     TeX: {
-      equationNumbers: { autoNumber: "AMS" },
+      "equationNumbers": {},
+      "extensions": [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js"
+      ],
       Macros: {
         Th: "\\Theta",
         th: "\\theta",
