@@ -106,3 +106,75 @@ $$
 
 * Usually we have strong duality for convex problems.
 * Slater's constraint for strong duality (problem must be strictly feasible).
+
+# Lecture 12
+
+* **Feature extraction** is a mapping of an input from $\mathcal{X}$ to $\real^D$.
+* A **feature template** is a set of features that are computed in a similar way.
+* A **one-hot encoding** is a feature template that always has _exactly_ one non-zero value.
+
+* Extract everything that might be relevant.
+
+##### Feature Vector Representations
+* Array representation (dense features)
+    * Assumed fixed ordering of features.
+* Map representation (sparse features) - dict
+    * Common for production software.
+
+
+##### Nonlinearities that can cause problems.
+1. Non-monotonicity
+    * Ex. temperature, optimal at 37, $\phi(x) = \set{1, t(x), \set{t(x)^2}}$.
+    * Features should be simple building block.
+2. Saturation.
+    * Smooth nonlinear transformation. $\set{1, \log(1+N(x))}$.
+    * Discretization (quantiles), one-sided bucket (nested, good for defaults)?
+3. Interactions.
+    * Height vs Weight.
+    * Include cross-terms
+    * **Predicate** is a feature that is true/false. $P:\mathcal{X}→\set{0, 1}$.
+    * Interaction can be made by multiplying predicates.
+
+
+##### Expressivity of Hypothesis Space
+
+$$
+\begin{align}
+  \mathcal{F} = \set{f(x)=w^\T\phi(x)}.
+\end{align}
+$$
+By adding more features, we can make this linear space larger.
+
+# Lecture 13
+
+* To get expressive hypothesis spaces using linear models, we need high-dimensional feature spaces.
+    * Leads to explosion in interaction terms. Flower pot problem.
+    * Large feature spaces can lead to overfitting and resource exhaustion.
+
+* A method is **kernalized** if inputs only appear inside inner products: $⟨ψ(x), ψ(y)⟩$ for $x,y∈\mathcal{X}$.
+* The kernel function corresponding to $ψ$ and inner product $⟨⋅,⋅⟩$ is $k(x,y)=⟨ψ(x), ψ(y)⟩$.
+    * We can evaluate $k(x,y)$ directly.
+    * Could be think of as a similarity score.
+    * Use **Mercer kernels**, corresponding to inner products in some feature spaces.
+
+* The **kernel matrix** (Gram matrix) is the matrix of all possible inner products.
+
+#### Benefits
+1. Computational
+2. Infinite-dimensional feature spaces.
+3. Allows thinking in terms of similarity.
+
+
+#### Linear Kernel
+* Input space: $\mathcal{X} = \real^D$.
+* Feature space: $\mathcal{H} = \real^D$ with standard inner product.
+* Feature map: $\psi(x)=x$.
+* Kernel: $k(x_1,x_2)=x_1^\T x_2$.
+
+#### Polynomial Kernel
+* Input space: $\mathcal{X} = \real^D$.
+* Kernel: $k(w, x)=(1+⟨w,x⟩)^M$.
+* Corresponds to a feature map with all monomials up to degree $M$.
+
+#### Gaussian Kernel
+* Corresponds to an infinite dimensional feature vector.
