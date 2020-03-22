@@ -75,17 +75,18 @@ $$
 \begin{align}
   f(y) &≤ f(x)+∇f(x)^\T (y-x) + \frac{L}{2}\norm{y-x}^2_2 \\\\
   f(x^+) &≤ f(x) - \pp{1- \frac{Lt}{2}} t \norm{∇f(x)}_2^2 & \text{Let $y=x-t∇f(x)$.} \\\\
-  &≤ f(x) - \frac{t}{2}\norm{∇f(x)}_2^2 & \text{Let $0<t≤1/L$} \\\\
-  &≤ \bk{f(x^∗) + ∇f(x)^\T (x-x^∗)} - \frac{t}{2}\norm{∇f(x)}_2^2 & \text{By convexity of $f$.}\\\\
+  &≤f(x) - \frac{t}{2}\norm{∇f(x)}_2^2 &\text{Let $0<t≤1/L$} \\\\
+  &≤ \bk{f(x^∗) + ∇f(x)^\T (x-x^∗)} - \frac{t}{2}\norm{∇f(x)}_2^2 &\text{By convexity of $f$.}\\\\
   &= f(x^∗) + \inv{2t}\pp{\norm{x-x^∗}^2_2 - \norm{x^∗-x^+}^2_2} &\text{Check by $x^+=x-t∇f(x)$} \\\\
-  \sum_{i=1}^k \pp{f(x^{i})-f(x^∗)} &≤ \inv{2t}\pp{\norm{x^{(0)}-x^∗}^2_2 - \norm{x^∗-x^{(k)}}^2_2} \\\\
+  \summ \pp{f(x^{i})-f(x^∗)} &≤ \inv{2t}\pp{\norm{x^{(0)}-x^∗}^2_2 - \norm{x^∗-x^{(n)}}^2_2} & \\\\
   &≤ \inv{2t}\norm{x^{(0)}-x^∗}^2_2
 \end{align}
 $$
+
 Then, since $f(x^{(k)})$ is non-increasing,
 $$
 \begin{align}
-  f(x^{(k)}) - f(x^∗) ≤ \inv{k}\sum_{i=1}^k \pp{f(x^{(i)}-f(x^∗))}≤ \frac{\norm{x^{(0)}-x^∗}_2^2}{2tk}
+  f(x^{(n)}) - f(x^∗) ≤ \inv{k}\summ \pp{f(x^{(i)}-f(x^∗))}≤ \frac{\norm{x^{(0)}-x^∗}_2^2}{2tn}
 \end{align}
 $$
 
@@ -94,7 +95,7 @@ $$
 Convergence has the same rate for a step size chosen by backtracking search,
 $$
 \begin{align}
-  f(x^{(k)}) - f^∗ ≤ \frac{\norm{x^{0}-x^∗}_2^2}{2t_\min k},
+  f(x^{(k)}) - f^∗ ≤ \frac{\norm{x^{0}-x^∗}_2^2}{2t_\min n},
 \end{align}
 $$
 where $t_\min = \min\set{1,β/L}$.
