@@ -95,7 +95,7 @@ $$
 Convergence has the same rate for a step size chosen by backtracking search,
 $$
 \begin{align}
-  f(x^{(k)}) - f^∗ ≤ \frac{\norm{x^{0}-x^∗}_2^2}{2t_\min n},
+  f(x^{(k)}) - f^∗ ≤ \frac{\norm{x^{0}-x^∗}^2_2}{2t_\min n},
 \end{align}
 $$
 where $t_\min = \min\set{1,β/L}$.
