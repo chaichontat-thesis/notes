@@ -73,12 +73,12 @@ Lipschitz means that the function can be upper-bounded by a quadratic.
 **Proof**
 $$
 \begin{align}
-  f(y) &≤ f(x)+∇f(x)^\T (y-x) + \frac{L}{2}\norm{y-x}^2_2 \\
-  f(x^+) &≤ f(x) - \pp{1- \frac{Lt}{2}} t \norm{∇f(x)}_2^2 & \text{Let $y=x-t∇f(x)$.} \\
-  &≤ f(x) - \frac{t}{2}\norm{∇f(x)}_2^2 & \text{Let $0<t≤1/L$} \\
-  &≤ \bk{f(x^∗) + ∇f(x)^\T (x-x^∗)} - \frac{t}{2}\norm{∇f(x)}_2^2 & \text{By convexity of $f$.}\\
-  &= f(x^∗) + \inv{2t}\pp{\norm{x-x^∗}^2_2 - \norm{x^∗-x^+}^2_2} &\text{Check by $x^+=x-t∇f(x)$} \\
-  \sum_{i=1}^k \pp{f(x^{i})-f(x^∗)} &≤ \inv{2t}\pp{\norm{x^{(0)}-x^∗}^2_2 - \norm{x^∗-x^{(k)}}^2_2} \\
+  f(y) &≤ f(x)+∇f(x)^\T (y-x) + \frac{L}{2}\norm{y-x}^2_2 \\\\
+  f(x^+) &≤ f(x) - \pp{1- \frac{Lt}{2}} t \norm{∇f(x)}_2^2 & \text{Let $y=x-t∇f(x)$.} \\\\
+  &≤ f(x) - \frac{t}{2}\norm{∇f(x)}_2^2 & \text{Let $0<t≤1/L$} \\\\
+  &≤ \bk{f(x^∗) + ∇f(x)^\T (x-x^∗)} - \frac{t}{2}\norm{∇f(x)}_2^2 & \text{By convexity of $f$.}\\\\
+  &= f(x^∗) + \inv{2t}\pp{\norm{x-x^∗}^2_2 - \norm{x^∗-x^+}^2_2} &\text{Check by $x^+=x-t∇f(x)$} \\\\
+  \sum_{i=1}^k \pp{f(x^{i})-f(x^∗)} &≤ \inv{2t}\pp{\norm{x^{(0)}-x^∗}^2_2 - \norm{x^∗-x^{(k)}}^2_2} \\\\
   &≤ \inv{2t}\norm{x^{(0)}-x^∗}^2_2
 \end{align}
 $$
