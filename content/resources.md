@@ -3,6 +3,7 @@ title: "Resources"
 section: "Main"
 author: "Chaichontat Sriworarat"
 date: 2020-06-12
+tags: ["resources"]
 ---
 
 # Math
