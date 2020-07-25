@@ -1,41 +1,34 @@
 baseurl = "/"
-languageCode = "en-us"
-title = "Differentiable Mind"
-theme = "hugo-lithium"
-googleAnalytics = "UA-150095279-1"
-disqusShortname = ""
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 enableRobotsTXT = true
+googleAnalytics = "UA-150095279-1"
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+languageCode = "en-us"
+theme = "rocinante"
+title = "Differentiable Mind"
 
-[permalinks]
-    post = "/:section/:slug/"
+paginate = 3
 
-[[menu.main]]
-    name = "About"
-    url = "/about/"
-[[menu.main]]
-    name = "GitHub"
-    url = "https://github.com/rstudio/blogdown"
+[markup]
+[markup.highlight]
+style = "monokailight"
+[markup.goldmark.renderer]
+unsafe = true
 
 [params]
-    name = "Differentiable Mind"
-    description = "Notes in math and science."
-
-    # options for highlight.js (version, additional languages, and theme)
-    highlightjsVersion = "9.12.0"
-    highlightjsCDN = "//cdnjs.cloudflare.com/ajax/libs"
-    highlightjsLang = ["r", "yaml"]
-    highlightjsTheme = "github"
-
-    MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
-    MathJaxVersion = "2.7.5"
-
-    # path to the favicon, under "static"
-    favicon = "favicon.ico"
-    math = true
-
-    [params.logo]
-    url = "logo.svg"
-    width = 50
-    height = 50
-    alt = "Logo"
+about = """
+About section. Enter details about you here.
+"""
+favicon = "/icons/favicon.png"
+mainSections = ["resources", ]
+[[params.links]]
+[[params.links.link]]
+href = "/Resume.pdf"
+name = "Resume"
+[[params.links.link]]
+href = "https://github.com/chaichontat"
+name = "Github"
+new_tab = true
+[[params.links.link]]
+href = "https://twitter.com/chaichontat"
+name = "Twitter"
+new_tab = true
