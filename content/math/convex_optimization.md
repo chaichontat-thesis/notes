@@ -14,7 +14,7 @@ $$
 \end{align}
 $$
 
-#### Interpretation
+# Interpretation
 
 Consider the following quadratic approximation function,
 
@@ -29,7 +29,6 @@ Idea is to minimize $x$. Hence, gradient descent is
 $$
 \begin{align}
   x^+ &= \argmin{y} f(x) + ∇f(x)^\T (y-x) + \inv{2t}\norm{y-x}^2_2 \\\\
-  ~\\\\
   ∇\hat f(y) &= ∇f(x) + \inv{t}(y-x) = 0 \\\\
   y &= x-t∇f(x).
 \end{align}
@@ -37,10 +36,11 @@ $$
 
 Here, $t$ is the step size.
 
+## Finding step size
 
-### Finding step size
+Test
 
-##### Backtracking line search
+### Backtracking line search
 
 1. Fix parameters $0<β<1$ and $0<α≤1/2$
 2. At each iteration, start with $t=1$ and while
@@ -54,7 +54,7 @@ $$
 shrink $t = βt$. Else perform gradient descent update.
 Reduces slope by $\alpha$ as gradient always underestimates.
 
-##### Exact line search
+### Exact line search
 
 $$
 \begin{align}
@@ -77,7 +77,7 @@ $$
 That is, gradient descent has convergence rate $O(1/k)$.
 Lipschitz means that the function can be upper-bounded by a quadratic.
 
-##### Proof
+#### Proof
 
 $$
 \begin{align}
@@ -99,7 +99,7 @@ $$
 \end{align}
 $$
 
-#### By backtracking
+### By backtracking
 
 Convergence has the same rate for a step size chosen by backtracking search,
 
