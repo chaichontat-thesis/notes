@@ -6,7 +6,7 @@ languageCode = "en-us"
 theme = "rocinante"
 title = "Differentiable Mind"
 
-paginate = 3
+paginate = 6
 
 [markup]
 [markup.highlight]
@@ -19,16 +19,17 @@ about = """
 About section. Enter details about you here.
 """
 favicon = "/icons/favicon.png"
-mainSections = ["resources", ]
+mainSections = ["philosophy", "math", "resources"]
+
 [[params.links]]
-[[params.links.link]]
-href = "/Resume.pdf"
-name = "Resume"
-[[params.links.link]]
-href = "https://github.com/chaichontat"
-name = "Github"
-new_tab = true
-[[params.links.link]]
-href = "https://twitter.com/chaichontat"
-name = "Twitter"
-new_tab = true
+    [[params.links.link]]
+    href = "/Resume.pdf"
+    name = "Resume"
+    [[params.links.link]]
+    href = "https://github.com/chaichontat"
+    name = "Github"
+    new_tab = true
+    [[params.links.link]]
+    href = "https://twitter.com/chaichontat"
+    name = "Twitter"
+    new_tab = true
