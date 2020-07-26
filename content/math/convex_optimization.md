@@ -1,9 +1,9 @@
 ---
 title: "Convex Optimization"
-section: "Real Analysis"
-author: "Chaichontat Sriworarat"
 date: 2020-03-22
 tags: ["real analysis"]
+math: true
+mermaid: true
 ---
 
 Choose initial $x^{(0)}\in \real^n$ and repeat:

@@ -19,7 +19,7 @@ about = """
 About section. Enter details about you here.
 """
 favicon = "/icons/favicon.png"
-mainSections = ["philosophy", "math", "resources"]
+mainSections = ["philosophy", "math", "resources", "statistics"]
 
 [[params.links]]
     [[params.links.link]]
