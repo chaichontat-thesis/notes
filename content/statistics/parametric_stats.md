@@ -9,7 +9,7 @@ tags: [statistics]
 
 <!--more-->
 
-We have some sample of data. We assume that there exists some real parameter. Let $y_i$ be a random variable. Let $ϵ_i$ be the random variable specifying the
+We have some sample of data. We assume that there exists some real parameter. Let $y_i$ be a random variable. Let $\epsilon_i$ be the random variable specifying the
 
 $$
 \begin{align}
@@ -17,7 +17,7 @@ $$
 \end{align}
 $$
 
-Intuitively, we want to use the arithmetic mean as the location parameter $α$. What form of density for $p(y_i)$ and method of estimation to get the arithmetic mean as the estimator?
+Intuitively, we want to use the arithmetic mean as the location parameter $\alpha$. What form of density for $p(y_i)$ and method of estimation to get the arithmetic mean as the estimator?
 
 Let $\bx =(\xdots)$ Assuming that each draw is iid, we have
 $$
@@ -38,7 +38,7 @@ for $θ=\hat{θ}=\bar{x} = \summ \frac{x_i}{n}$.
 Consider a sample with $x_1=nu$ and $x_2,\dots,x_n=0$. Then,
 $$
 \begin{align}
-  \hat{θ} &= u \\
+  \hat{θ} &= u \\\\
   \hat{θ} -x_1 &= - n(u).
 \end{align}
 $$
@@ -63,7 +63,7 @@ which is the definition of a linear function.
 Hence, the solution is
 $$
 \begin{align}
-  g^′(u) &= au \\
+  g^′(u) &= au \\\\
   g(u) &= \inv{2}au^2+b.
 \end{align}
 $$
@@ -75,7 +75,7 @@ $$
 \end{align}
 $$
 
-Since we use a special sample, we only show that $MLE=mean$ implies this $f(x\mid\theta)$.
+Since we use a special sample, we only show that when the MLE $f(x\mid\theta)$ is equal to the arithmetic mean, .
 
 Conversely, if $f(x\mid\theta)$ is satisfied, we can show that the likelihood function always have a unique solution of mean.
 
