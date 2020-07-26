@@ -4,6 +4,11 @@ date: 2020-07-25
 tags: [statistics]
 ---
 
+> Why are Gaussians everywhere?  
+> What links the arithmetic mean and the Gaussian?
+
+<!--more-->
+
 We have some sample of data. We assume that there exists some real parameter. Let $y_i$ be a random variable. Let $ϵ_i$ be the random variable specifying the
 
 $$
