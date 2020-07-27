@@ -1,14 +1,13 @@
 ---
 title: "Python Resources"
-section: "Python"
-author: "Chaichontat Sriworarat"
-date: 2019-10-15
+date: 2020-07-27
 tags: ["python", "links"]
 ---
 
 ## VSCode
 
 - [Tutorial: Sebastian Witowski - Modern Python Developer's Toolkit](https://www.youtube.com/watch?v=WkUBx3g2QfQ)
+  - [Repo](https://pycon.switowski.com/)
 - [18 Plugins for Python in VSCode](https://switowski.com/blog/18-plugins-for-python-in-vscode)
 
 ## Plotting
@@ -18,6 +17,7 @@ tags: ["python", "links"]
 ## Color Theory
 
 - [A Better Default Colormap for Matplotlib](https://www.youtube.com/watch?v=xAoljeRJ3lU&feature=emb_title)
+
   - Use `viridis` for sequential.
   - Use [`cividis`](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0199239) for accurate deuteranomaly approximation.
   - Use [`turbo`](https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html) for sequential with more differentiation (for `matplotlib`>=3.3.0).
@@ -25,7 +25,7 @@ tags: ["python", "links"]
   - `python -m viscm view viridis`
 
 - [Type Checking](https://www.youtube.com/watch?v=pMgmKJyWKn8)
-  - Use `mypy` or `pyre or `pyright`
+  - Use `pyright`
 
 ## Visualization
 
@@ -44,9 +44,3 @@ tags: ["python", "links"]
 - [Data Science Best Practices with `pandas`](https://github.com/justmarkham/pycon-2019-tutorial)
 - [Performance of `numpy` and `pandas` - comparison](https://zerowithdot.com/python-numpy-and-pandas-performance/)
   ![pandas benchmark](https://zerowithdot.com/assets/data-science-computation-harakiri/functions.png)
-
-```mermaid
-graph TD;
-	A-->B;
-```
-

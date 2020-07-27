@@ -16,9 +16,9 @@ unsafe = true
 
 [params]
 about = """
-About section. Enter details about you here.
+A blog for gradient-ascending minds.
 """
-favicon = "/icons/favicon.png"
+favicon = "https://gohugo.io/favicon-16x16.png"
 mainSections = ["philosophy", "math", "resources", "statistics"]
 
 [[params.links]]
