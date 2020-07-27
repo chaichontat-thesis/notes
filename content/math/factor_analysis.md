@@ -1,11 +1,17 @@
-## Factor Analysis
+---
+title: "Factor Analysis"
+date: 2020-07-27
+tags: ["math"]
+---
+
 [YouTube](https://www.youtube.com/watch?v=KaTnWP1SVpk)
 
-* $p$: number of factors.
-* $q$: number of observations.
+- $p$: number of factors.
+- $q$: number of observations.
 
-#### Assumptions
-* Only keeps variations that are shared across neurons (correlation).
+### Assumptions
+
+- Only keeps variations that are shared across neurons (correlation).
 
 $$
 \begin{align}
@@ -17,7 +23,8 @@ $$
 $$
 
 Try to approximate $\mb{XX^T}$ with low-rank $\mb{CC^\T+R}$ where
-* $\mb{CC^T}$ is the shared variance, captured by the low-$d$ space.
-* $\mb{R}$ is the independent variance, which is the residual.
+
+- $\mb{CC^T}$ is the shared variance, captured by the low-$d$ space.
+- $\mb{R}$ is the independent variance, which is the residual.
 
 Typical method is the EM algorithm.

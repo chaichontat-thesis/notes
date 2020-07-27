@@ -1,7 +1,7 @@
 ---
 title: "Python Resources"
 date: 2020-07-27
-tags: ["python", "links"]
+tags: ["python", "resources"]
 ---
 
 ## VSCode
@@ -17,13 +17,11 @@ tags: ["python", "links"]
 ## Color Theory
 
 - [A Better Default Colormap for Matplotlib](https://www.youtube.com/watch?v=xAoljeRJ3lU&feature=emb_title)
-
   - Use `viridis` for sequential.
   - Use [`cividis`](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0199239) for accurate deuteranomaly approximation.
   - Use [`turbo`](https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html) for sequential with more differentiation (for `matplotlib`>=3.3.0).
   - Use `twilight_shifted` for diverging.
   - `python -m viscm view viridis`
-
 - [Type Checking](https://www.youtube.com/watch?v=pMgmKJyWKn8)
   - Use `pyright`
 
@@ -31,14 +29,14 @@ tags: ["python", "links"]
 
 - [`asciinema`](https://asciinema.org/) for terminal recording.
 
-### Style Guides
+## Style Guides
 
 - [Style Guide for Data Scientists](https://columbia-applied-data-science.github.io/pages/lowclass-python-style-guide.html)
 - [Scientific Python Cookiecutter](https://nsls-ii.github.io/scientific-python-cookiecutter/guiding-design-principles.html#)
 - [Refactoring Guru](https://refactoring.guru/design-patterns)
 - [Best Practices for Code Review: R Edition](https://mathewanalytics.com/best-practices-for-code-review-r-edition/)
 
-### `pandas`
+## `pandas`
 
 - [`pandas` cheatsheet](https://www.dataquest.io/blog/pandas-cheat-sheet/)
 - [Data Science Best Practices with `pandas`](https://github.com/justmarkham/pycon-2019-tutorial)
