@@ -19,7 +19,7 @@ about = """
 A blog for gradient-ascending minds.
 """
 favicon = "https://gohugo.io/favicon-16x16.png"
-mainSections = ["philosophy", "math", "resources", "statistics"]
+mainSections = ["philosophy", "math", "resource", "statistics"]
 
 [[params.links]]
     [[params.links.link]]
