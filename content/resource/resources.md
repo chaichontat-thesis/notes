@@ -41,3 +41,7 @@ tags: ["resources"]
 
 - [Scipy 2019](https://www.youtube.com/playlist?list=PLYx7XA2nY5GcDQblpQ_M1V3PQPoLWiDAC)
 - [`matplotlib` cheatsheet](https://github.com/matplotlib/cheatsheets/)
+
+
+## Data Science
+- [No happy little accidents](https://medium.com/s/story/no-happy-little-accidents-8663540763f8)
