@@ -4,6 +4,10 @@ date: 2020-07-29
 tags: ["python", "resources"]
 ---
 
+> Collections of articles for coding practices and Python.
+
+<!--more-->
+
 ## DevOps
 
 ### Git

@@ -25,16 +25,18 @@ conda install jupyter jupyterlab nb_conda_kernels
 import numpy as np
 ```
 
-
 ### Environment
 
 ```bash
 conda create -n name ipykernel matplotlib seaborn altair bqplot datashader scipy scikit-learn scikit-image
 ```
 
-
-
 ### CLI
 
 - https://switowski.com/blog/favorite-cli-tools
 - https://tldr.sh/
+
+## $\LaTeX$
+
+- Use `latex-workshop`.
+- See [this](https://tex.stackexchange.com/questions/445521/latexindent-cant-locate-log-log4perl-pm-in-inc-you-may-need-to-install-the-l) for formatting.
