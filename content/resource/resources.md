@@ -31,6 +31,7 @@ tags: ["resources"]
 
 ## Machine Learning
 
+- [ROC curves](https://acutecaretesting.org/en/articles/roc-curves-what-are-they-and-how-are-they-used)
 - [Geoffrey Hinton's course](https://www.youtube.com/playlist?list=PLoRl3Ht4JOcdU872GhiYWf6jwrk_SNhz9)
 
 ## Computational Neuroscience
@@ -42,6 +43,6 @@ tags: ["resources"]
 - [Scipy 2019](https://www.youtube.com/playlist?list=PLYx7XA2nY5GcDQblpQ_M1V3PQPoLWiDAC)
 - [`matplotlib` cheatsheet](https://github.com/matplotlib/cheatsheets/)
 
-
 ## Data Science
+
 - [No happy little accidents](https://medium.com/s/story/no-happy-little-accidents-8663540763f8)

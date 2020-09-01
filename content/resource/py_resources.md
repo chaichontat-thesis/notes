@@ -10,8 +10,13 @@ tags: ["python", "resources"]
 
 ## DevOps
 
+### Zsh
+
+- [Theme](https://github.com/romkatv/powerlevel10k)
+
 ### Git
 
+- [MIT Guide](https://www.mit.edu/~amidi/teaching/data-science-tools/study-guide/engineering-productivity-tips/)
 - [GitFlow](https://datasift.github.io/gitflow/IntroducingGitFlow.html)
 - [GitHub Flow](https://guides.github.com/introduction/flow/)
 - [Development Workflows for Data Scientists](https://resources.github.com/downloads/development-workflows-data-scientists.pdf)
@@ -39,14 +44,18 @@ tags: ["python", "resources"]
 
 ### Plotting
 
-- [A Dramatic Tour through Python’s Data Visualization Landscape (including ggplot and Altair)](https://dsaber.com/2016/10/02/a-dramatic-tour-through-pythons-data-visualization-landscape-including-ggplot-and-altair/)
+- [A Dramatic Tour through Python’s Data Visualization Landscape (including `ggplot` and Altair)](https://dsaber.com/2016/10/02/a-dramatic-tour-through-pythons-data-visualization-landscape-including-ggplot-and-altair/)
 
 ### Color Theory
 
 - [A Better Default Colormap for Matplotlib](https://www.youtube.com/watch?v=xAoljeRJ3lU&feature=emb_title)
   - Use `viridis` for sequential.
-  - Use [`cividis`](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0199239) for accurate deuteranomaly approximation.
-  - Use [`turbo`](https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html) for sequential with more differentiation (for `matplotlib`>=3.3.0).
+  - Use
+    [`cividis`](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0199239)
+    for accurate deuteranomaly approximation.
+  - Use
+    [`turbo`](https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html)
+    for sequential with more differentiation (for `matplotlib`>=3.3.0).
   - Use `twilight_shifted` for diverging.
   - `python -m viscm view viridis`
 - [Type Checking](https://www.youtube.com/watch?v=pMgmKJyWKn8)
@@ -62,3 +71,7 @@ tags: ["python", "resources"]
 - [Data Science Best Practices with `pandas`](https://github.com/justmarkham/pycon-2019-tutorial)
 - [Performance of `numpy` and `pandas` - comparison](https://zerowithdot.com/python-numpy-and-pandas-performance/)
   ![pandas benchmark](https://zerowithdot.com/assets/data-science-computation-harakiri/functions.png)
+
+### ML
+
+- [LSTM is Dead. Long live Transformer!](https://www.youtube.com/watch?v=S27pHKBEp30)
