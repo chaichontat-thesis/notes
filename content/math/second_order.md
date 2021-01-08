@@ -14,7 +14,7 @@ $$
 \end{align}
 $$
 
-which is the dot product, which is equivalent to the variance in symmetric matrices.
+which is the dot product{{< sidenote "unique_id" >}} or the variance in symmetric matrices. {{< /sidenote >}}.
 
 The spectral norm for a matrix $\mb{A}$ is
 
