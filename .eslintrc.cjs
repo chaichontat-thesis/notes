@@ -4,7 +4,17 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  ignorePatterns: ["node_modules", "htmlcov", "build", "dist", ".svelte-kit", "*.cjs", "svelte.config.js"],
+  ignorePatterns: [
+    "node_modules",
+    "htmlcov",
+    "build",
+    "dist",
+    ".svelte-kit",
+    "*.cjs",
+    "svelte.config.js",
+    "mdsvex.config.js",
+    "src/**/*.md",
+  ],
   parser: "@typescript-eslint/parser", // add the TypeScript parser
   plugins: ["svelte3", "@typescript-eslint", "eslint-plugin-prettier"],
   parserOptions: {
