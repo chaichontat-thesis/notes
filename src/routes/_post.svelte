@@ -8,13 +8,11 @@
   <title>{title}</title>
 </svelte:head>
 
-<div class="space-y-12">
-  <section class="flex items-center gap-x-6">
+<div class="gap-y-12">
+  <header class="flex items-center gap-x-6">
     <p class="text-4xl font-bold">{title}</p>
     <p class="text-xl">{date}</p>
-  </section>
+  </header>
 
-  <article class="prose lg:prose-lg">
-    <slot />
-  </article>
+  <slot />
 </div>
