@@ -25,15 +25,18 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-svelte3": "^3.2.1",
+    "katex": "^0.15.3",
     "mdsvex": "^0.10.5",
     "postcss": "^8.4.12",
     "prettier": "^2.6.0",
     "prettier-plugin-tailwindcss": "^0.1.8",
+    "prismjs": "^1.27.0",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-katex-svelte": "^1.0.3",
     "rehype-slug": "^5.0.1",
+    "rehype-toc": "^3.0.2",
     "remark-abbr": "^1.4.1",
-    "remark-github": "^11.2.2",
+    "remark-gfm": "^3.0.1",
     "remark-math": "^2.0.1",
     "svelte": "^3.44.0",
     "svelte-check": "^2.2.6",
@@ -45,7 +48,6 @@
   },
   "type": "module",
   "dependencies": {
-    "katex": "^0.15.3",
-    "prismjs": "^1.27.0"
+    "rehype-citation": "^0.2.5"
   }
 }
