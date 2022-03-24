@@ -1,5 +1,6 @@
 <script>
   // MDSveX does not support TS.
+  // Most of the styling is in src/routes/posts/__layout.svelte.
   export let title;
   export let date;
 </script>
@@ -8,33 +9,16 @@
   <title>{title}</title>
 </svelte:head>
 
-<article class="gap-y-12">
-  <header class="flex items-center gap-x-6">
-    <p class="text-4xl font-bold">{title}</p>
-    <p class="text-xl">{date}</p>
-  </header>
+<header class="not-prose flex gap-x-3">
+  <a href="/">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 translate-y-[6px] stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="3">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+    </svg>
+  </a>
+  <div class="flex flex-col gap-y-1">
+    <p class="text-3xl font-bold">{title}</p>
+    <p class="pl-0.5 text-lg">{date}</p>
+  </div>
+</header>
 
-  <slot />
-</article>
-
-<style lang="postcss">
-  article :global(aside) {
-    @apply font-bold;
-  }
-
-  article :global(.citation) {
-    @apply text-blue-900;
-  }
-
-  article :global(.references) {
-    @apply translate-x-8 -indent-8 text-gray-600;
-  }
-
-  article :global(h2 a) {
-    @apply text-black no-underline;
-  }
-
-  article :global(h3 a) {
-    @apply text-black no-underline;
-  }
-</style>
+<slot />
