@@ -4,7 +4,7 @@
   import "katex/dist/katex.min.css";
 </script>
 
-<main class="mx-auto mt-8 flex min-h-screen w-full max-w-4xl flex-col px-16">
+<main class="mx-auto mt-8 mb-12 flex min-h-screen w-full max-w-4xl flex-col px-16">
   <slot />
 </main>
 

@@ -17,7 +17,7 @@ const config = defineConfig({
 
   remarkPlugins: [remarkAbbr, remarkMath],
   rehypePlugins: [
-    [rehypeCitation, { bibliography: path.join(root, "test.bib") }],
+    [rehypeCitation, { bibliography: path.join(root, "test.bib"), inlineClass: ["citation"] }],
     rehypeSlug,
     rehypeKatex,
     // rehypeToc,
