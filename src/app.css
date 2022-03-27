@@ -17,7 +17,7 @@
     @apply font-semibold text-gray-800;
   }
 
-  .prose a {
+  .prose p a {
     @apply border-b border-b-blue-400 no-underline transition-all hover:border-b-2 hover:text-sky-800;
   }
 
