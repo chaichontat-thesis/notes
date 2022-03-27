@@ -28,6 +28,10 @@
   .prose blockquote {
     @apply border-l-sky-400 font-normal;
   }
+
+  .prose aside {
+    @apply font-serif;
+  }
 }
 
 @tailwind components;
