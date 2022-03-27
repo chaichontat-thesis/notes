@@ -23,8 +23,14 @@
     const bibs = document.getElementById("refs") as HTMLDivElement;
     makeLiteralLinks(bibs);
 
-    for (const el of document.getElementsByClassName("citation")) {
-      const bibEntry = getBibEntry(el as HTMLDivElement);
+    let el: HTMLDivElement;
+    for (el of document.getElementsByClassName("citation")) {
+      const bibEntry = getBibEntry(el);
+
+      // const newNode = document.createElement("aside");
+      // newNode.innerHTML = bibEntry;
+      // el.parentNode?.parentNode?.insertBefore(newNode, el.parentNode);
+
       tippy(el, {
         content: bibEntry,
         theme: "light-border",

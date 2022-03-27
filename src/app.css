@@ -18,7 +18,7 @@
   }
 
   .prose p a {
-    @apply border-b border-b-blue-400 no-underline transition-all hover:border-b-2 hover:text-sky-800;
+    @apply border-b border-b-blue-400 no-underline transition-all hover:border-b-2 hover:text-blue-900;
   }
 
   .prose img {
