@@ -1,8 +1,6 @@
 <script lang="ts">
   import { afterUpdate } from "svelte";
   import tippy from "tippy.js";
-  import "tippy.js/dist/tippy.css";
-  import "tippy.js/themes/light-border.css";
 
   const url = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 

@@ -1,14 +1,38 @@
-@tailwind base;
+@import url("https://fonts.googleapis.com/css?family=Rubik");
+@import "prismjs/themes/prism.min.css";
+@import "katex/dist/katex.min.css";
+@import "tippy.js/dist/tippy.css";
+@import "tippy.js/themes/light-border.css";
 
+@tailwind base;
 @layer base {
+  html {
+    @apply bg-neutral-50;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif, Helvetica, Arial, "Segoe UI", "Apple Color Emoji",
+      "Segoe UI Emoji";
+  }
+
+  .prose h2,
+  .prose h3 {
+    @apply font-semibold text-gray-800;
+  }
+
   .prose a {
-    @apply text-blue-800 decoration-1 underline-offset-2 transition-colors hover:text-sky-700;
+    @apply border-b border-b-blue-400 no-underline transition-all hover:border-b-2 hover:text-sky-800;
   }
 
   .prose img {
     @apply mx-auto;
   }
+
+  .prose blockquote {
+    @apply border-l-sky-400 font-normal;
+  }
 }
 
 @tailwind components;
 @tailwind utilities;
+
+.prose figure > pre {
+  @apply py-3;
+}

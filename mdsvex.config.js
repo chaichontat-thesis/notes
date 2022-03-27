@@ -30,7 +30,7 @@ const config = defineConfig({
     rehypeKatex,
     // rehypeToc,
     rehypeFigure, // Add figcaption from alt text.
-    [rehypeAutolinkHeadings, { behavior: "wrap", test: ["h1", "h2", "h3"] }],
+    // [rehypeAutolinkHeadings, { behavior: "wrap", test: ["h1", "h2", "h3"] }],
   ],
 });
 
