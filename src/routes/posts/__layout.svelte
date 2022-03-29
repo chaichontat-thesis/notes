@@ -68,9 +68,27 @@
 
   @media (max-width: 768px) {
     article :global(aside) {
-      @apply float-left clear-both mb-4 block w-full rounded bg-gray-50 px-4 py-2;
+      @apply float-left clear-both mb-4 block w-full rounded bg-gray-100 px-4 py-2;
       vertical-align: baseline;
     }
+  }
+
+  /* Asides */
+  article :global(aside) {
+    @apply relative float-right clear-right text-sm text-gray-600 md:w-[25%] lg:w-[30%];
+  }
+
+  article :global(aside > p) {
+    @apply mt-1;
+  }
+
+  article :global(aside a) {
+    @apply font-normal text-gray-800;
+  }
+
+  article > :global(:not(aside, header, .references)) {
+    /* Move away */
+    @apply w-full md:w-[65%] lg:w-[60%];
   }
 
   /* Citation and tippy */
@@ -99,6 +117,6 @@
   }
 
   article :global(.references) {
-    @apply flex flex-col gap-y-2 overflow-x-hidden md:w-full lg:w-full;
+    @apply flex flex-col gap-y-2 overflow-x-hidden;
   }
 </style>
