@@ -82,6 +82,14 @@
     @apply mt-1;
   }
 
+  article :global(aside > figure) {
+    @apply mx-auto max-w-[90%] -translate-y-4;
+  }
+
+  article :global(aside img) {
+    @apply rounded-lg;
+  }
+
   article :global(aside a) {
     @apply font-normal text-gray-800;
   }
