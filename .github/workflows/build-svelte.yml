@@ -20,6 +20,18 @@ jobs:
           node-version: "17"
           cache: "npm"
 
+      - uses: actions/cache@v3
+        with:
+          path: |
+            rehype-citation/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('rehype-citation/package-lock.json') }}
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
       - name: Build rehype-citation
         run: |
           cd rehype-citation
@@ -38,3 +50,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
+          cname: differentiablemind.com
