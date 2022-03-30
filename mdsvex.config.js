@@ -25,7 +25,7 @@ const config = defineConfig({
     remarkCaptions, // Add figcaptions from explicit mark.
   ],
   rehypePlugins: [
-    [rehypeCitation, { bibliography: path.join(root, "test.bib"), inlineClass: ["citation"] }],
+    [rehypeCitation, { bibliography: path.join(root, "references.bib"), inlineClass: ["citation"] }],
     rehypeSlug,
     rehypeKatex,
     // rehypeToc,

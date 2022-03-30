@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { afterUpdate } from "svelte";
+  import { onMount } from "svelte";
   import tippy from "tippy.js";
 
   const url = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
@@ -19,7 +19,7 @@
   }
 
   // Useful when writing.
-  afterUpdate(() => {
+  onMount(() => {
     const bibs = document.getElementById("refs") as HTMLDivElement;
     makeLiteralLinks(bibs);
 
@@ -44,7 +44,7 @@
   });
 </script>
 
-<article class="prose max-w-none">
+<article class="prose max-w-none leading-normal md:leading-relaxed">
   <slot />
 </article>
 

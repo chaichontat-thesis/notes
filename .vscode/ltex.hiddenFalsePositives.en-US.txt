@@ -1,0 +1,1 @@
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qby Yuri Lazebnik in 2002.\\E$"}

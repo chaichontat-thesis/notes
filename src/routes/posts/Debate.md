@@ -72,6 +72,8 @@ In this sense, the "explanatoriness" of a model rests on its faithful descriptio
 
 A Gabor filter optimally preserves a combination of spatial information and orientation-frequency information [@gaborTheoryCommunication1946].
 
+![](https://upload.wikimedia.org/wikipedia/commons/0/00/Gabor_filter_function.png)
+
 </aside>
 
 A clear example is the Gabor model of V1 receptive fields (RFs). This model completely ignores the biophysics that give rise to these RF shapes. Restricted to this, indeed the model is a mathematical description of the shape of the RFs. Yet, by relying on an information-theoretic explanation, we can explain why RFs are Gabor-shaped

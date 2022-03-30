@@ -15,15 +15,16 @@
   console.log(posts["./posts/test.md"].metadata);
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>
-  Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a>
-  to read the documentation
-</p>
+<section class="prose mx-auto max-w-5xl md:prose-lg">
+  <h1>Welcome</h1>
 
-{#each Object.entries(posts) as [path, post]}
-  <section class="my-2">
-    <!-- {eslint-disable-next-line @typescript-eslint/no-unsafe-call} -->
-    <a href={path.slice(0, -3)}>Hi</a>
-  </section>
-{/each}
+  <div class="flex flex-col">
+    {#each Object.entries(posts) as [path, post]}
+      <p class="my-3 leading-relaxed md:my-3">
+        <!-- {eslint-disable-next-line @typescript-eslint/no-unsafe-call} -->
+        <span class="float-right">{post.metadata.date}</span>
+        <a class="mr-6" href={path.split(".").slice(0, -1).join(".")}>{post.metadata.title}</a>
+      </p>
+    {/each}
+  </div>
+</section>

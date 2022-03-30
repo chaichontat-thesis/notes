@@ -20,7 +20,7 @@ repos:
     hooks:
       - id: codespell
         args:
-          - --skip="*/.*,package.json,package-lock.json
+          - --skip="*/.*,package.json,package-lock.json,*.bib
 
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v2.6.0
