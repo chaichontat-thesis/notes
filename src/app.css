@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css?family=Rubik");
+@import "prismjs/themes/prism.min.css";
+@import "katex/dist/katex.min.css";
+@import "tippy.js/dist/tippy.css";
+@import "tippy.js/themes/light-border.css";
+
+@tailwind base;
+@layer base {
+  html {
+    @apply bg-neutral-50;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif, Helvetica, Arial, "Segoe UI", "Apple Color Emoji",
+      "Segoe UI Emoji";
+  }
+
+  .prose h2,
+  .prose h3 {
+    @apply font-semibold text-gray-800;
+  }
+
+  .prose p a {
+    @apply border-b border-b-blue-400 no-underline transition-all hover:border-b-2 hover:text-blue-900;
+  }
+
+  .prose img {
+    @apply mx-auto;
+  }
+
+  .prose blockquote {
+    @apply border-l-sky-400 font-normal;
+  }
+
+  .prose aside {
+    @apply font-serif;
+  }
+
+  .prose :where(blockquote p:last-of-type):not(:where([class~="not-prose"] *))::after {
+    content: "" !important;
+  }
+
+  .prose :where(blockquote p:last-of-type):not(:where([class~="not-prose"] *))::before {
+    content: "" !important;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;
+
+.prose figure > pre {
+  @apply py-3;
+}
