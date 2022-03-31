@@ -34,7 +34,7 @@
     "prettier-plugin-tailwindcss": "^0.1.8",
     "prismjs": "^1.27.0",
     "rehype-autolink-headings": "^6.1.1",
-    "rehype-citation": "./rehype-citation",
+    "rehype-citation": "^0.3.0",
     "rehype-figure": "^1.0.1",
     "rehype-katex-svelte": "^1.0.3",
     "rehype-slug": "^5.0.1",

@@ -12,8 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: true
 
       - uses: actions/setup-node@v2
         with:
@@ -23,20 +21,8 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: |
-            rehype-citation/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('rehype-citation/package-lock.json') }}
-
-      - uses: actions/cache@v3
-        with:
-          path: |
             node_modules
           key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-
-      - name: Build rehype-citation
-        run: |
-          cd rehype-citation
-          npm ci
-          npm run build
 
       - name: Install dependencies
         run: npm ci

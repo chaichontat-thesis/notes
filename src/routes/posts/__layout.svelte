@@ -12,8 +12,7 @@
   }
 
   // inline citation
-  function getBibEntry(el: HTMLDivElement): string {
-    const citekey = el.getAttribute("id")?.split("-").slice(1, -1).join("-");
+  function getBibEntry(citekey: string): string {
     const bibNode = document.getElementById(`bib-${citekey}`);
     return bibNode?.innerHTML ?? "";
   }
@@ -25,7 +24,8 @@
 
     let el: HTMLDivElement;
     for (el of document.getElementsByClassName("citation")) {
-      const bibEntry = getBibEntry(el);
+      const bibEntry = `<div><div>${el.getAttribute("id")?.split("--").slice(1, -1).map(getBibEntry).join("</div><div>")}</div></div>`;
+      // const bibEntry = getBibEntry(el);
 
       // const newNode = document.createElement("aside");
       // newNode.innerHTML = bibEntry;
@@ -87,7 +87,7 @@
   }
 
   article :global(aside img) {
-    @apply rounded-lg;
+    @apply max-w-[200px] rounded-lg;
   }
 
   article :global(aside a) {
@@ -105,23 +105,25 @@
   }
   article :global(.tippy-box[data-theme~="light-border"]) {
     @apply z-50 rounded-lg bg-white/90 px-2 pb-3 pt-2 text-sm text-gray-800 shadow-lg shadow-blue-100/50 backdrop-blur transition-all hover:shadow-blue-100 md:min-w-[500px] md:text-base;
-    border: 1px solid rgba(0, 8, 16, 0.1) !important;
   }
 
   article :global(.tippy-box[data-theme~="light-border"][data-placement^="top"] > .tippy-arrow::after) {
-    @apply border-t-gray-200;
+    @apply border-t-gray-300;
   }
   article :global(.tippy-box[data-theme~="light-border"][data-placement^="bottom"] > .tippy-arrow::after) {
-    @apply border-b-gray-200;
+    @apply border-b-gray-300;
   }
   article :global(.tippy-box[data-theme~="light-border"][data-placement^="left"] > .tippy-arrow::after) {
-    @apply border-l-gray-200;
+    @apply border-l-gray-300;
   }
   article :global(.tippy-box[data-theme~="light-border"][data-placement^="right"] > .tippy-arrow::after) {
-    @apply border-r-gray-200;
+    @apply border-r-gray-300;
   }
   article :global(.tippy-content) {
     @apply translate-x-2 -indent-2;
+  }
+  article :global(.tippy-content > div) {
+    @apply flex flex-col gap-y-3;
   }
 
   article :global(.references) {
