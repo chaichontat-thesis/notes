@@ -19,8 +19,8 @@
 
   // Useful when writing.
   onMount(() => {
-    const bibs = document.getElementById("refs") as HTMLDivElement;
-    makeLiteralLinks(bibs);
+    const bibs = document.getElementById("refs") as HTMLDivElement | null;
+    if (bibs) makeLiteralLinks(bibs);
 
     let el: HTMLDivElement;
     for (el of document.getElementsByClassName("citation")) {

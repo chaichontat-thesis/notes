@@ -1,8 +1,11 @@
 <script>
   // MDSveX does not support TS.
   // Most of the styling is in src/routes/posts/__layout.svelte.
+  // @ts-ignore
   export let title;
+  // @ts-ignore
   export let subtitle;
+  // @ts-ignore
   export let date;
 </script>
 
@@ -17,9 +20,13 @@
     </svg>
   </a>
   <div class="flex flex-col gap-y-1">
-    <p class="text-3xl font-bold">{title}</p>
-    <p class="text-lg font-medium">{subtitle}</p>
-    <p class="pl-0.5 text-lg">{date}</p>
+    <p class="text-3xl font-bold">{title ?? "Untitled"}</p>
+    {#if subtitle ?? false}
+      <p class="text-lg font-medium">{subtitle}</p>
+    {/if}
+    {#if date ?? false}
+      <p class="pl-0.5 text-lg">{date}</p>
+    {/if}
   </div>
 </header>
 
