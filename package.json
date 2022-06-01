@@ -53,6 +53,7 @@
   },
   "type": "module",
   "dependencies": {
-    "tippy.js": "^6.3.7"
+    "tippy.js": "^6.3.7",
+    "vega-embed": "^6.20.8"
   }
 }
