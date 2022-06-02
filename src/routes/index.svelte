@@ -4,12 +4,14 @@
    * @type {import('@sveltejs/kit').Load}
    */
   export function load() {
-    const posts = import.meta.globEager("./posts/*.{md,svx,svelte.md}");
+    const posts = import.meta.globEager("../posts/*.{md,svx,svelte.md}");
     return { props: { posts } };
   }
 </script>
 
 <script lang="ts">
+  import { slugFromName } from "$src/lib/slug";
+
   // https://mdsvex.pngwn.io/docs#frontmatter-1
   export let posts: Record<string, Post>;
 </script>
@@ -23,7 +25,7 @@
         {#if post.metadata.date ?? false}
           <span class="float-right">{post.metadata.date}</span>
         {/if}
-        <a class="mr-6" href={path.split(".").slice(0, -1).join(".")}>{post.metadata.title}</a>
+        <a class="mr-6" href={"posts/" + slugFromName(post.metadata.title)}>{post.metadata.title}</a>
       </p>
     {/each}
   </div>
