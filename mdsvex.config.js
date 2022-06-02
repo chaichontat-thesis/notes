@@ -28,7 +28,7 @@ const config = defineConfig({
     [
       rehypeCitation,
       {
-        bibliography: "references.bib",
+        bibliography: "src/posts/references.bib",
         inlineClass: ["citation"],
       },
     ],
