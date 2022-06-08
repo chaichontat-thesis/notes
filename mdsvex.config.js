@@ -13,6 +13,11 @@ import path from "path";
 import remarkGfm from "remark-gfm";
 import rehypeLazyLoad from "rehype-plugin-image-native-lazy-loading";
 
+const katexMacros = {};
+for (let i = "a".charCodeAt(0); i <= "z".charCodeAt(0); i++) {
+  katexMacros["\\b" + String.fromCharCode(i)] = "\\mathbf{" + String.fromCharCode(i) + "}";
+}
+
 const root = process.cwd();
 const config = defineConfig({
   extensions: [".svelte.md", ".md", ".svx"],
@@ -34,7 +39,7 @@ const config = defineConfig({
       },
     ],
     rehypeSlug,
-    rehypeKatex,
+    [rehypeKatex, { macros: katexMacros }],
     // rehypeToc,
     rehypeFigure, // Add figcaption from alt text.
     rehypeLazyLoad,
