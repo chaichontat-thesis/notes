@@ -11,6 +11,7 @@ import rehypeFigure from "rehype-figure";
 import rehypeKatex from "rehype-katex-svelte";
 import path from "path";
 import remarkGfm from "remark-gfm";
+import rehypeLazyLoad from "rehype-plugin-image-native-lazy-loading";
 
 const root = process.cwd();
 const config = defineConfig({
@@ -36,6 +37,7 @@ const config = defineConfig({
     rehypeKatex,
     // rehypeToc,
     rehypeFigure, // Add figcaption from alt text.
+    rehypeLazyLoad,
     // [rehypeAutolinkHeadings, { behavior: "wrap", test: ["h1", "h2", "h3"] }],
   ],
 });
