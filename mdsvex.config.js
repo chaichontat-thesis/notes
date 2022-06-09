@@ -40,7 +40,7 @@ const config = defineConfig({
     ],
     rehypeSlug,
     [rehypeKatex, { macros: katexMacros }],
-    // rehypeToc,
+    [rehypeToc, { headings: ["h1", "h2", "h3"], cssClasses: { toc: "toc not-prose", link: "toc-link" } }],
     rehypeFigure, // Add figcaption from alt text.
     rehypeLazyLoad,
     // [rehypeAutolinkHeadings, { behavior: "wrap", test: ["h1", "h2", "h3"] }],

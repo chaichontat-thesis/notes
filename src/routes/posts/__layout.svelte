@@ -49,6 +49,10 @@
 </article>
 
 <style lang="postcss">
+  .sidebar {
+    @apply float-right clear-right text-sm text-gray-600 md:w-[25%] lg:w-[30%];
+  }
+
   /* Styles */
   article :global(.citation) {
     @apply text-blue-900;
@@ -75,7 +79,7 @@
 
   /* Asides */
   article :global(aside) {
-    @apply relative float-right clear-right text-sm text-gray-600 md:w-[25%] lg:w-[30%];
+    @apply sidebar;
   }
 
   article :global(aside > p) {
@@ -97,6 +101,28 @@
   article > :global(:not(aside, header, .references)) {
     /* Move away */
     @apply w-full md:w-[65%] lg:w-[60%];
+  }
+
+  /* TOC */
+
+  article :global(.toc) {
+    @apply sidebar sticky top-0 z-50 ml-2 w-full border-b bg-neutral-50 pt-8 pb-3 font-serif text-sm;
+  }
+
+  article :global(.toc .toc-item) {
+    @apply font-medium leading-relaxed text-gray-700;
+  }
+
+  article :global(.toc a) {
+    @apply underline-offset-2 hover:underline;
+  }
+
+  article :global(.toc .toc-item-h2) {
+    @apply pt-1;
+  }
+
+  article :global(.toc .toc-item-h3) {
+    @apply pl-4 text-xs font-normal;
   }
 
   /* Citation and tippy */

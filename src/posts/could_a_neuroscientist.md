@@ -30,7 +30,7 @@ As Craver wrote,
 > The sense of understanding is at best an unreliable indicator
 > of the quality and depth of an explanation"
 
-#### Computational explanations
+## Computational explanations
 
 <aside>
 
@@ -54,6 +54,8 @@ In this sense, A model's "explanatoriness" rests on
 its faithful description of the mechanisms that leads to the phenomenon of interest
 and can be both causal and functional.
 3M theory, however, is not the whole story as a model can be explanatory without being causal.
+
+### Imagine
 
 <aside>
 
