@@ -1,17 +1,15 @@
 <script context="module" lang="ts">
   export type Post = { metadata: { title: string; date: string } };
-  /**
-   * @type {import('@sveltejs/kit').Load}
-   */
-  export function load() {
-    const posts = import.meta.globEager("../posts/*.{md,svx,svelte.md}");
+  import { slugFromName } from "$src/lib/slug";
+  import type { Load } from "@sveltejs/kit";
+
+  export const load: Load = async ({ fetch }) => {
+    const posts = await fetch("/posts.json").then((r) => r.json());
     return { props: { posts } };
-  }
+  };
 </script>
 
 <script lang="ts">
-  import { slugFromName } from "$src/lib/slug";
-
   // https://mdsvex.pngwn.io/docs#frontmatter-1
   export let posts: Record<string, Post>;
 </script>

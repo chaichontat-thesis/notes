@@ -1,29 +1,21 @@
 <script context="module" lang="ts">
-  import { slugFromName } from "$src/lib/slug";
-  import type { SvelteComponent } from "svelte/internal";
+  import PostPage from "$src/lib/components/postPage.svelte";
+  import { posts, type Post } from "$src/lib/slug";
+  import type { Load } from "@sveltejs/kit";
 
-  const posts = Object.values(import.meta.globEager(`$posts/*.md`))
-    .filter((post) => post.metadata?.title)
-    .map((post) => {
-      const title = post.metadata.title as string;
-      const slug = slugFromName(title);
-      return { post, title, slug };
-    });
-
-  export function load({ params }) {
+  export const load: Load = ({ params }) => {
     const filteredPost = posts.find((post) => post.slug === params.slug.toLowerCase());
+    // const header = url.searchParams.get("header") === "false" ? false : true;
     return filteredPost
       ? {
-          props: {
-            page: filteredPost.post?.default,
-          },
+          props: { post: filteredPost },
         }
-      : { response: 404 };
-  }
+      : { status: 404, error: new Error("Not found.") };
+  };
 </script>
 
 <script lang="ts">
-  export let page: SvelteComponent | undefined;
+  export let post: Post;
 </script>
 
-<svelte:component this={page} />
+<PostPage {post} />

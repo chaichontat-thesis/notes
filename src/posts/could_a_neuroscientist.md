@@ -2,7 +2,9 @@
 title: Example Post
 subtitle: An exemplary post.
 date: 2021-03-27
+tags: ["neuro"]
 ---
+
 
 <aside>
 
@@ -61,7 +63,7 @@ and can be both causal and functional.
 
 A Gabor filter optimally preserves a combination of spatial information and orientation-frequency information [@gaborTheoryCommunication1946].
 
-![](https://upload.wikimedia.org/wikipedia/commons/0/00/Gabor_filter_function.png)
+![](./Gabor_filter_function.png)
 
 </aside>
 

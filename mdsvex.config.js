@@ -12,6 +12,7 @@ import rehypeKatex from "rehype-katex-svelte";
 import path from "path";
 import remarkGfm from "remark-gfm";
 import rehypeLazyLoad from "rehype-plugin-image-native-lazy-loading";
+import relativeImages from "mdsvex-relative-images";
 
 const katexMacros = {};
 for (let i = "a".charCodeAt(0); i <= "z".charCodeAt(0); i++) {
@@ -22,13 +23,12 @@ const root = process.cwd();
 const config = defineConfig({
   extensions: [".svelte.md", ".md", ".svx"],
 
-  layout: "src/routes/_post.svelte",
-
   remarkPlugins: [
     remarkGfm,
     remarkAbbr,
     remarkMath,
     remarkCaptions, // Add figcaptions from explicit mark.
+    relativeImages,
   ],
   rehypePlugins: [
     [

@@ -53,6 +53,11 @@
   },
   "type": "module",
   "dependencies": {
+    "@citation-js/core": "^0.6.1",
+    "@citation-js/plugin-bibtex": "^0.6.1",
+    "@citation-js/plugin-csl": "^0.6.1",
+    "fzf": "^0.5.1",
+    "mdsvex-relative-images": "^1.0.2",
     "rehype-plugin-image-native-lazy-loading": "^1.2.0",
     "tippy.js": "^6.3.7",
     "vega-embed": "^6.20.8"
