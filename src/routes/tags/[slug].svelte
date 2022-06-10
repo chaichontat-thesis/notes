@@ -26,9 +26,13 @@
 </header>
 
 <section class="mt-4 flex flex-col gap-y-6 divide-y-2">
-  {#each filtered as post}
-    <div class="pt-6">
-      <PostPage {post} header={false} />
-    </div>
-  {/each}
+  {#if filtered.length > 0}
+    {#each filtered as post}
+      <div class="pt-6">
+        <PostPage {post} header={false} />
+      </div>
+    {/each}
+  {:else}
+    <p class="mt-4 text-xl">No posts found.</p>
+  {/if}
 </section>

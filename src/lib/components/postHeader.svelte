@@ -14,5 +14,12 @@
     {#if metadata.date ?? false}
       <p class="text-lg">{metadata.date}</p>
     {/if}
+    {#if metadata.tags ?? false}
+      <p>
+        Tags:
+        {#each metadata.tags as tag}
+          <a class="text-neutral-800 hover:text-neutral-600" href={"/tags/" + tag}>{tag}</a>
+        {/each}
+      </p>{/if}
   </div>
 </header>

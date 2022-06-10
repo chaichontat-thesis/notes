@@ -8,7 +8,6 @@
   export let post: Post;
   export let header = true;
   export let toc = true;
-  export let i = 0;
 
   const metadata = post.post.metadata;
   const citation = metadata.citekey ? getCitation(metadata.citekey) : undefined;
