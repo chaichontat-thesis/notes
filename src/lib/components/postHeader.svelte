@@ -1,14 +1,11 @@
 <script lang="ts">
   import type { Post } from "$lib/slug";
+  import ArrowBack from "./arrowBack.svelte";
   export let metadata: Post["post"]["metadata"];
 </script>
 
 <header class="not-prose flex gap-x-3">
-  <a href="/">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 translate-y-[6px] stroke-blue-800" fill="none" viewBox="0 0 24 24" stroke-width="3">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-    </svg>
-  </a>
+  <ArrowBack />
   <div class="flex flex-col gap-y-1">
     <p class="text-3xl font-bold">{metadata.title ?? "Untitled"}</p>
     {#if metadata.subtitle ?? false}

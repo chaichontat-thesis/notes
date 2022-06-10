@@ -11,12 +11,12 @@ export function slugFromName(name: string): string {
 export type Post = {
   post: {
     default: SvelteComponent;
-    metadata: { title?: string; subtitle?: string; date?: string; citekey?: string };
+    metadata: { title?: string; subtitle?: string; date?: string; citekey?: string; tags?: string[] };
   };
   slug: string;
 };
 
-export const posts = Object.values(import.meta.globEager(`$posts/*.md`))
+export const posts = Object.values(import.meta.globEager(`$posts/**/*.md`))
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   .filter((post) => Boolean(post.metadata?.title))
   .map((post) => {
