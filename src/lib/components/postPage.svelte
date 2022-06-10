@@ -1,11 +1,22 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import tippy from "tippy.js";
+  import { getCitation } from "../cite";
+  import type { Post } from "../slug";
+  import PostHeader from "./postHeader.svelte";
 
-  const url = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+  export let post: Post;
+  export let header = true;
+  export let toc = true;
+  export let i = 0;
+
+  const metadata = post.post.metadata;
+  const citation = metadata.citekey ? getCitation(metadata.citekey) : undefined;
+  const uid = Math.random().toString(36).substring(2);
 
   function makeLiteralLinks(bibs: HTMLDivElement) {
     let csl: HTMLDivElement;
+    const url = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
     for (csl of bibs.getElementsByClassName("csl-entry")) {
       csl.innerHTML = csl.innerHTML.replace(url, "<a href='$&'>$&</a>");
     }
@@ -19,11 +30,14 @@
 
   // Useful when writing.
   onMount(() => {
-    const bibs = document.getElementById("refs") as HTMLDivElement | null;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const node = document.getElementById(`post-${uid}`)!;
+
+    const bibs = node.getElementsByClassName("references")[0] as HTMLDivElement | null;
     if (bibs) makeLiteralLinks(bibs);
 
     let el: HTMLDivElement;
-    for (el of document.getElementsByClassName("citation")) {
+    for (el of node.getElementsByClassName("citation")) {
       const bibEntry = `<div><div>${el.getAttribute("id")?.split("--").slice(1, -1).map(getBibEntry).join("</div><div>")}</div></div>`;
       // const bibEntry = getBibEntry(el);
 
@@ -41,14 +55,52 @@
         interactive: true,
       });
     }
+
+    if (!toc) {
+      node.getElementsByClassName("toc")[0].remove();
+    }
+
+    if (metadata.citekey) {
+      const div = document.createElement("div");
+      div.innerHTML = citation.html;
+      makeLiteralLinks(div);
+      node.getElementsByClassName("toc")[0].appendChild(div);
+    }
   });
 </script>
 
-<article class="prose max-w-none leading-normal md:leading-relaxed">
-  <slot />
-</article>
+<svelte:head>
+  <title>{metadata.title}</title>
+</svelte:head>
+
+<div id={`post-${uid}`}>
+  {#if header}
+    <PostHeader {metadata} />
+  {/if}
+
+  {#if metadata.citekey}
+    <div class="flex flex-col">
+      <p class="text-xl font-medium text-blue-900">{citation.title}</p>
+      <p class="">
+        {@html citation.author
+          .map((x) => `${x.given} <b>${x.family}</b>`)
+          .slice(0, 2)
+          .join(", ")}
+      </p>
+      <p class="italic">{citation["container-title"]}</p>
+    </div>
+  {/if}
+
+  <article class="prose max-w-none leading-normal md:leading-relaxed">
+    <svelte:component this={post.post.default} />
+  </article>
+</div>
 
 <style lang="postcss">
+  .sidebar {
+    @apply float-right clear-right text-sm text-gray-600 md:w-[25%] lg:w-[30%];
+  }
+
   /* Styles */
   article :global(.citation) {
     @apply text-blue-900;
@@ -75,7 +127,7 @@
 
   /* Asides */
   article :global(aside) {
-    @apply relative float-right clear-right text-sm text-gray-600 md:w-[25%] lg:w-[30%];
+    @apply sidebar;
   }
 
   article :global(aside > p) {
@@ -97,6 +149,28 @@
   article > :global(:not(aside, header, .references)) {
     /* Move away */
     @apply w-full md:w-[65%] lg:w-[60%];
+  }
+
+  /* TOC */
+
+  article :global(.toc) {
+    @apply sidebar z-50 ml-2 mb-2 w-full border-b border-b-neutral-300 bg-neutral-50/90 pb-3 font-serif text-sm backdrop-blur-sm lg:sticky lg:top-8;
+  }
+
+  article :global(.toc .toc-item) {
+    @apply font-medium leading-relaxed text-gray-700;
+  }
+
+  article :global(.toc a) {
+    @apply font-medium underline-offset-2 hover:underline;
+  }
+
+  article :global(.toc .toc-item-h2) {
+    @apply pt-1;
+  }
+
+  article :global(.toc .toc-item-h3) {
+    @apply pl-4 text-xs font-normal;
   }
 
   /* Citation and tippy */

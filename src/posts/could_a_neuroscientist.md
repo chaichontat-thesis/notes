@@ -2,6 +2,7 @@
 title: Could a Neuroscientist Understand a Microprocessor?
 subtitle: An exploration and critique of current quantitative methods in neuroscience.
 date: 2021-03-27
+tags: ["neuro"]
 ---
 
 ## Introduction
@@ -105,11 +106,13 @@ its faithful description of the mechanisms that leads to the phenomenon of inter
 and can be both causal and functional.
 3M theory, however, is not the whole story as a model can be explanatory without being causal.
 
+### Imagine
+
 <aside>
 
 A Gabor filter optimally preserves a combination of spatial information and orientation-frequency information [@gaborTheoryCommunication1946].
 
-![](https://upload.wikimedia.org/wikipedia/commons/0/00/Gabor_filter_function.png)
+![](./Gabor_filter_function.png)
 
 </aside>
 
