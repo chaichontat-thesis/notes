@@ -1,7 +1,7 @@
 import { posts } from "$src/lib/slug";
 import type { RequestHandler } from "@sveltejs/kit";
 
-export const get: RequestHandler = async ({ url }) => {
+export const get: RequestHandler = ({ url }) => {
   const limit = Number(url.searchParams.get("limit") ?? Infinity);
   if (Number.isNaN(limit)) return { status: 400 };
 

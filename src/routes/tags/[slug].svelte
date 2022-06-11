@@ -20,15 +20,19 @@
   export let slug: string;
 </script>
 
-<header class="prose flex gap-x-3">
+<header class="prose flex items-center gap-x-3">
   <ArrowBack />
   <h1 class="text-neutral-800">Tag: {slug}</h1>
 </header>
 
 <section class="mt-4 flex flex-col gap-y-6 divide-y-2">
-  {#each filtered as post}
-    <div class="pt-6">
-      <PostPage {post} header={false} />
-    </div>
-  {/each}
+  {#if filtered.length > 0}
+    {#each filtered as post}
+      <div class="pt-6">
+        <PostPage {post} arrow={false} />
+      </div>
+    {/each}
+  {:else}
+    <p class="mt-4 text-xl">No posts found.</p>
+  {/if}
 </section>
