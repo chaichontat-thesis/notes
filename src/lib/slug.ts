@@ -1,12 +1,5 @@
+import slugify from "slugify";
 import type { SvelteComponent } from "svelte/internal";
-
-export function slugFromName(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9 ]/g, "")
-    .split(" ")
-    .join("_");
-}
 
 export type Post = {
   post: {
@@ -26,6 +19,6 @@ export const posts = Object.keys(processed)
   .map((path) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const title = processed[path].metadata.title as string;
-    const slug = slugFromName(title);
+    const slug = slugify(title, { lower: true });
     return { post: processed[path], raw: raw[path], slug } as Post;
   });
