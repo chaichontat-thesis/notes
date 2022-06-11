@@ -20,7 +20,7 @@
   export let slug: string;
 </script>
 
-<header class="prose flex gap-x-3">
+<header class="prose flex items-center gap-x-3">
   <ArrowBack />
   <h1 class="text-neutral-800">Tag: {slug}</h1>
 </header>
@@ -29,7 +29,7 @@
   {#if filtered.length > 0}
     {#each filtered as post}
       <div class="pt-6">
-        <PostPage {post} header={false} />
+        <PostPage {post} arrow={false} />
       </div>
     {/each}
   {:else}

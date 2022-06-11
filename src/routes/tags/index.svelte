@@ -5,7 +5,7 @@
   const tags = new Set(posts.map((post) => post.post.metadata.tags).flat());
 </script>
 
-<header class="prose flex gap-x-3">
+<header class="prose flex items-center gap-x-3">
   <ArrowBack />
   <h1 class="text-neutral-800">Tags</h1>
 </header>

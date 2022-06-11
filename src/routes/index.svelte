@@ -12,7 +12,7 @@
         {#if post.post.metadata.date ?? false}
           <span class="float-right">{post.post.metadata.date}</span>
         {/if}
-        <a class="mr-6" href={"posts/" + post.slug}>{post.post.metadata.title}</a>
+        <a class="mr-6" href={`posts/${post.slug}`}>{post.post.metadata.title}</a>
       </p>
     {/each}
   </div>

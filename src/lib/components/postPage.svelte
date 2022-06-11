@@ -6,7 +6,7 @@
   import PostHeader from "./postHeader.svelte";
 
   export let post: Post;
-  export let header = true;
+  export let arrow = true;
   export let toc = true;
 
   const metadata = post.post.metadata;
@@ -73,22 +73,7 @@
 </svelte:head>
 
 <div id={`post-${uid}`}>
-  {#if header}
-    <PostHeader {metadata} />
-  {/if}
-
-  {#if metadata.citekey}
-    <div class="flex flex-col">
-      <p class="text-xl font-medium text-blue-900">{citation.title}</p>
-      <p class="">
-        {@html citation.author
-          .map((x) => `${x.given} <b>${x.family}</b>`)
-          .slice(0, 2)
-          .join(", ")}
-      </p>
-      <p class="italic">{citation["container-title"]}</p>
-    </div>
-  {/if}
+  <PostHeader {metadata} {citation} {arrow} />
 
   <article class="prose max-w-none leading-normal md:leading-relaxed">
     <svelte:component this={post.post.default} />
