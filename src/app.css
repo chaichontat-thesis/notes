@@ -17,8 +17,9 @@
     @apply font-semibold text-gray-800;
   }
 
-  .prose p a {
-    @apply border-b border-b-blue-400 no-underline transition-all hover:border-b-2 hover:text-blue-900;
+  a:not(.plain),
+  .prose a:not(.plain) {
+    @apply border-b border-b-blue-400 no-underline transition-all hover:border-b-blue-700 hover:text-blue-900;
   }
 
   .prose img {

@@ -14,14 +14,18 @@ export type Post = {
     metadata: { title?: string; subtitle?: string; date?: string; citekey?: string; tags?: string[] };
   };
   slug: string;
+  raw: string;
 };
 
-export const posts = Object.values(import.meta.globEager(`$posts/**/*.md`))
+const raw = import.meta.globEager(`$posts/**/*.md`, { as: "raw" });
+const processed = import.meta.globEager(`$posts/**/*.md`);
+
+export const posts = Object.keys(processed)
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  .filter((post) => Boolean(post.metadata?.title))
-  .map((post) => {
+  .filter((path) => Boolean(processed[path].metadata?.title))
+  .map((path) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const title = post.metadata.title as string;
+    const title = processed[path].metadata.title as string;
     const slug = slugFromName(title);
-    return { post, slug } as Post;
+    return { post: processed[path], raw: raw[path], slug } as Post;
   });
