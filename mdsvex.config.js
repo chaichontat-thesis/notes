@@ -14,9 +14,15 @@ import remarkGfm from "remark-gfm";
 import rehypeLazyLoad from "rehype-plugin-image-native-lazy-loading";
 import relativeImages from "mdsvex-relative-images";
 
-const katexMacros = {};
-for (let i = "a".charCodeAt(0); i <= "z".charCodeAt(0); i++) {
-  katexMacros["\\b" + String.fromCharCode(i)] = "\\mathbf{" + String.fromCharCode(i) + "}";
+function katexMacros() {
+  const out = {};
+  for (let i = "a".charCodeAt(0); i <= "z".charCodeAt(0); i++) {
+    out["\\b" + String.fromCharCode(i)] = "\\mathbf{" + String.fromCharCode(i) + "}";
+  }
+  out["\\E"] = "\\mathbb{E}";
+  out["\\N"] = "\\mathcal{N}";
+  out["\\T"] = "\\top";
+  return out;
 }
 
 const root = process.cwd();
@@ -39,7 +45,7 @@ const config = defineConfig({
       },
     ],
     rehypeSlug,
-    [rehypeKatex, { macros: katexMacros }],
+    [rehypeKatex, { macros: katexMacros() }],
     [rehypeToc, { headings: ["h1", "h2", "h3"], cssClasses: { toc: "toc not-prose", link: "toc-link" } }],
     rehypeFigure, // Add figcaption from alt text.
     rehypeLazyLoad,
