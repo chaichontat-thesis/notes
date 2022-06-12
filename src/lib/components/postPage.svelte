@@ -161,28 +161,6 @@
   article :global(.citation) {
     @apply cursor-help;
   }
-  article :global(.tippy-box[data-theme~="light-border"]) {
-    @apply z-50 min-w-[400px] rounded-lg bg-white/90 pr-3 pl-2 pb-3 pt-2 text-sm text-gray-800 shadow-lg shadow-blue-100/50 backdrop-blur transition-all hover:shadow-blue-100 md:min-w-[500px] md:text-base;
-  }
-
-  article :global(.tippy-box[data-theme~="light-border"][data-placement^="top"] > .tippy-arrow::after) {
-    @apply border-t-gray-300;
-  }
-  article :global(.tippy-box[data-theme~="light-border"][data-placement^="bottom"] > .tippy-arrow::after) {
-    @apply border-b-gray-300;
-  }
-  article :global(.tippy-box[data-theme~="light-border"][data-placement^="left"] > .tippy-arrow::after) {
-    @apply border-l-gray-300;
-  }
-  article :global(.tippy-box[data-theme~="light-border"][data-placement^="right"] > .tippy-arrow::after) {
-    @apply border-r-gray-300;
-  }
-  article :global(.tippy-content) {
-    @apply translate-x-2 -indent-2;
-  }
-  article :global(.tippy-content > div) {
-    @apply flex flex-col gap-y-3;
-  }
 
   article :global(.references) {
     @apply flex flex-col gap-y-2 overflow-x-hidden;
