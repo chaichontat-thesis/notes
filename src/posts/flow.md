@@ -26,7 +26,6 @@ Model $p(\br \mid \bx)$ of population activity $\br \in ℝ^n$ to an arbitrary s
 **Combine DNN-based models of stimulus-driven activity with a latent state model that accounts for shared stimulus-conditioned variability.**
 
 Typical models use
-![](/assets/path1050.svg)
 
 <aside>
 
