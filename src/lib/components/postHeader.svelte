@@ -43,7 +43,7 @@
       <p class="mt-0.5 text-sm font-medium text-gray-700">
         Tags:
         {#each metadata.tags as tag}
-          <a class="text-neutral-800 hover:text-neutral-600" href={`/tags/${tag}`}>{tag}</a>
+          <a class="text-neutral-800 hover:text-neutral-600" sveltekit:prefetch href={`/tags/${tag}`}>{tag}</a>
         {/each}
       </p>{/if}
   </div>
