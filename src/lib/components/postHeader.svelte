@@ -39,7 +39,7 @@
       {/if}
     {/if}
 
-    {#if metadata.tags ?? false}
+    {#if (metadata.tags?.length ?? 0) > 0}
       <p class="mt-0.5 text-sm font-medium text-gray-700">
         Tags:
         {#each metadata.tags as tag}
