@@ -45,6 +45,8 @@ The human people have behavioral correlates, another training objective.
 - Mice, primate differences [@luongoMicePrimates2021]
 - Digital twin Tolias [@ustyuzhaninovDigitalTwin2022]
 - Transformer and MTL [@whittingtonRelatingTransformers2021]
+- Noise improves similarity [@dapelloNeuralPopulation2021]
+- Adding fake V1 linear Poisson improves performance [@dapelloSimulatingPrimary2020]
 
 #### Brain
 
