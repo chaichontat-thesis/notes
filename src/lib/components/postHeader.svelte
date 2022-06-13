@@ -21,13 +21,14 @@
 
       <p class="text-neutral-700">
         {@html citation.author
-          .map((x) => `${x.given} <b>${x.family}</b>`)
+          .map((x) => `${x.given} <span class="font-semibold">${x.family}</span>`)
           .slice(0, 2)
           .join(", ")}
       </p>
       <p class="text-neutral-800">
         <i>{citation["container-title"]}</i>
         ({citation.issued["date-parts"][0][0]})
+        <a class="font-bold text-blue-900" href={citation.URL}>Link</a>
       </p>
     {:else}
       <p class="text-3xl font-bold">{metadata.title ?? "Untitled"}</p>
