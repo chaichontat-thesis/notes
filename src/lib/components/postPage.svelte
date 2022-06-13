@@ -52,6 +52,8 @@
         animation: "fade",
         duration: [200, 250],
         interactive: true,
+        interactiveBorder: 5,
+        interactiveDebounce: 20,
       });
     }
 
@@ -59,12 +61,12 @@
       node.getElementsByClassName("toc")[0].remove();
     }
 
-    if (metadata.citekey) {
-      const div = document.createElement("div");
-      div.innerHTML = citation.html;
-      makeLiteralLinks(div);
-      node.getElementsByClassName("toc")[0].appendChild(div);
-    }
+    // if (metadata.citekey) {
+    //   const div = document.createElement("div");
+    //   div.innerHTML = citation.html;
+    //   makeLiteralLinks(div);
+    //   node.getElementsByClassName("toc")[0].appendChild(div);
+    // }
   });
 </script>
 
@@ -82,7 +84,7 @@
 
 <style lang="postcss">
   .sidebar {
-    @apply float-right clear-right text-sm text-gray-600 md:w-[25%] lg:w-[30%];
+    @apply float-right clear-right text-gray-700 md:w-[25%] lg:w-[30%];
   }
 
   /* Styles */
@@ -104,9 +106,13 @@
 
   @media (max-width: 768px) {
     article :global(aside) {
-      @apply float-left clear-both mb-4 block w-full rounded bg-gray-100 px-4 py-2;
+      @apply float-left clear-both mb-4 block w-full rounded bg-gray-100 px-4 py-2 leading-snug;
       vertical-align: baseline;
     }
+  }
+
+  article :global(img) {
+    @apply w-[90%];
   }
 
   /* Asides */
@@ -115,7 +121,7 @@
   }
 
   article :global(aside > p) {
-    @apply my-1;
+    @apply mt-0.5 leading-snug;
   }
 
   article :global(aside > figure) {
@@ -123,7 +129,7 @@
   }
 
   article :global(aside img) {
-    @apply max-w-[200px] rounded-lg;
+    /* @apply; */
   }
 
   article :global(aside a) {
@@ -132,13 +138,13 @@
 
   article > :global(:not(aside, header, .references)) {
     /* Move away */
-    @apply w-full md:w-[65%] lg:w-[60%];
+    @apply w-full md:w-[65%];
   }
 
   /* TOC */
 
   article :global(.toc) {
-    @apply sidebar z-50 ml-2 mb-2 w-full border-b border-b-neutral-300 bg-neutral-50/90 pb-3 font-serif text-sm backdrop-blur-sm lg:sticky lg:top-8;
+    @apply sidebar z-50 ml-2 mb-2 -mt-8 hidden w-full -translate-x-3 border-b border-b-neutral-300 bg-neutral-50/95 px-3 pt-8 pb-3 font-serif text-sm backdrop-blur-sm lg:sticky lg:top-0;
   }
 
   article :global(.toc .toc-item) {
@@ -154,7 +160,7 @@
   }
 
   article :global(.toc .toc-item-h3) {
-    @apply pl-4 text-xs font-normal;
+    @apply pl-4 text-xs font-normal leading-relaxed;
   }
 
   /* Citation and tippy */
