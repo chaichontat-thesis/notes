@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 const config = {
   mode: "jit",
   content: ["./src/**/*.{html,js,svelte,ts}"],

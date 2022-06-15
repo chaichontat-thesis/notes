@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-  import PostPage from "$src/lib/components/postPage.svelte";
+  import PostPage from "$src/lib/elements/postPage.svelte";
   import { posts, type Post } from "$src/lib/slug";
   import type { Load } from "@sveltejs/kit";
 

@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-  import Preview from "$src/lib/components/preview.svelte";
+  import Preview from "$src/lib/elements/preview.svelte";
   import { posts, type Post } from "$src/lib/slug";
   import type { Load } from "@sveltejs/kit";
 
