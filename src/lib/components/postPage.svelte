@@ -117,11 +117,11 @@
 
   /* Asides */
   article :global(aside) {
-    @apply sidebar;
+    @apply sidebar translate-y-[1px];
   }
 
   article :global(aside > p) {
-    @apply mt-0.5 leading-snug;
+    @apply mt-0.5 leading-normal;
   }
 
   article :global(aside > figure) {
