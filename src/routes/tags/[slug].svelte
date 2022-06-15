@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
   import { posts } from "$lib/slug";
   import ArrowBack from "$src/lib/components/arrowBack.svelte";
-  import PostPage from "$src/lib/components/postPage.svelte";
+  import PostPage from "$src/lib/elements/postPage.svelte";
   import type { Load } from "@sveltejs/kit";
 
   export const load: Load = ({ params }) => {
