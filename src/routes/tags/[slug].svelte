@@ -5,7 +5,7 @@
   import type { Load } from "@sveltejs/kit";
 
   export const load: Load = ({ params }) => {
-    const filteredPost = posts.filter((post) => post.post.metadata.tags?.includes(params.slug) && post.post.metadata.citekey);
+    const filteredPost = posts.filter((post) => post.post.metadata.tags?.includes(params.slug));
     // const header = url.searchParams.get("header") === "false" ? false : true;
     return filteredPost
       ? {
@@ -25,10 +25,10 @@
   <h1 class="text-neutral-800">Tag: {slug}</h1>
 </header>
 
-<section class="mt-4 flex flex-col gap-y-6 divide-y-2">
+<section class="mt-4 flex flex-col gap-y-10 divide-y-2">
   {#if filtered.length > 0}
     {#each filtered as post}
-      <div class="pt-6">
+      <div class="pt-8">
         <PostPage {post} arrow={false} />
       </div>
     {/each}

@@ -29,7 +29,7 @@
   }
 
   .prose aside {
-    @apply font-serif;
+    @apply font-serif text-[0.9375rem] leading-4;
   }
 
   .prose :where(blockquote p:last-of-type):not(:where([class~="not-prose"] *))::after {
@@ -38,6 +38,14 @@
 
   .prose :where(blockquote p:last-of-type):not(:where([class~="not-prose"] *))::before {
     content: "" !important;
+  }
+
+  .prose :where(p + ul) {
+    @apply -mt-1;
+  }
+
+  .prose li {
+    @apply mt-0;
   }
 }
 
@@ -60,7 +68,7 @@
   @apply border-r-gray-300;
 }
 .tippy-content {
-  @apply max-h-80 translate-x-2 overflow-y-auto -indent-2;
+  @apply max-h-80 translate-x-2 overflow-y-auto text-ellipsis -indent-2;
 }
 .tippy-content > div {
   @apply flex flex-col gap-y-3;
