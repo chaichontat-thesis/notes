@@ -11,7 +11,7 @@ tags: ["representation"]
 </script>
 
 **Models neural activity by combining stimulus information with factor analysis of noise correlation.**
-Better performance at activity prediction conditioned on all other neurons.
+Discovery of latent variables governing noise correlation.
 
 ## Problem
 
@@ -35,7 +35,13 @@ $$
 p(\br \mid \bx) = \N( T_φ(\br); \bf_θ(\bx), \mathbf{C} \mathbf{C}^\T + Ψ) ⋅ |\det ∇_\br \, T_φ(r)|
 $$
 
-- Spiking data is transformed using a trained normalizing flow $T_φ(\br)$
+<aside>
+
+More [background](https://lilianweng.github.io/posts/2018-10-13-flow-models/) of flow-based models.
+
+</aside>
+
+- Spiking data is transformed using a trained **normalizing flow** $T_φ(\br)$
   $$
   T_φ(\br) = \mathrm{Affine} ∘ \exp ∘ \mathrm{Affine} ∘ \mathrm{ELU} ∘ \mathrm{Affine} ∘ \mathrm{ELU} ∘ \mathrm{Affine} ∘ \log ∘ \mathrm{Affine}
   $$
@@ -43,6 +49,7 @@ $$
   The flow acts on each dimension independently,
   that is $T_φ(\br) = [T_{φ_1}(r_1), \dots, T_{φ_n}(r_n)]^\T$.
   - ZIFFA includes a zero-inflated component to capture zero spikes.
+  - Dependency of noise correlation on the stimulus can be indirectly captured during this transformation.
 
 <aside>
 
@@ -54,14 +61,27 @@ Roughly, FA is PCA with a low-rank probabilistic component.
 - **Stimulus-conditioned variability:**: The second-order variability is captured using a factor analysis model,
   which is a covariance matrix with rank equal to the number of latent variables $\bz$.
   The self-variance $Ψ_i$ is distinct for each neuron.
-- **Stimulus-driven activity**: The means of the Gaussian transformed spikes $\E[\br\mid\bx] = \bf_θ(\bx)$ are modeled based on their previous paper [@lurzGeneralizationDatadriven2021].
+- **Stimulus-driven activity**: The means of the Gaussian transformed spikes $\E[\br\mid\bx] = \bf_θ(\bx)$ are modeled based on their previous paper [@lurzGeneralizationDatadriven2020].
 
 ### Rationale
 
-Factor analysis assumes Gaussianity.
-However, spike rates are strictly positive and are distributed like a zero-inflated overdispersed Poisson distribution.
+Factor analysis assumes Gaussianity whereas
+spike rates are strictly positive
+and are distributed like a zero-inflated overdispersed Poisson distribution.
+Fixed transformations may be too limiting and cannot capture neuron-specific transformations.
 
-For each stimulus, perform factor analysis and share the covariance matrix across all stimuli.
+### Related Papers
+
+[@keeleyIdentifyingSignal2020]
+
+### Data
+
+6,000 images from ImageNet were shown in each scan.
+
+- 1,000 images consist of 100 unique images each repeated 10 times to allow for an estimate of the neural response variability. We used the repeated images for testing.
+- 4,500 training and 500 validation images.
+
+~1,000 neurons from LM and V1 recovered.
 
 ## Performance
 
@@ -101,8 +121,7 @@ FA models fit better than independent models.
 ## Latent variables
 
 The latent variables describe **noise correlations** (neuron-neuron correlations) from FA.
-Although these are supposedly independent from the **stimulus-driven activity**,
-nonlinear flow transforms can indirectly link the two.
+These are inferred without repeats.
 
 Correlations of the extracted latent variables ($k=3$) to various values.
 Position does seem to be a significant contributor to intrinsic variability,
