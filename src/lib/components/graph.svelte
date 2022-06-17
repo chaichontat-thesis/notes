@@ -5,7 +5,7 @@
 
   let vega: Awaited<ReturnType<typeof embed>>;
   onMount(async () => {
-    vega = await embed("#vis", spec);
+    vega = await embed("#vis", spec, { renderer: "svg" });
   });
 </script>
 

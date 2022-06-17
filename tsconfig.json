@@ -22,5 +22,6 @@
     "src/**/*.svelte",
     "src/routes/posts/_posts.ts",
     "temp/[slug].json.ts"
-  ]
+  ],
+  "allowSyntheticDefaultImports": true
 }

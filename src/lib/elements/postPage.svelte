@@ -3,7 +3,7 @@
   import tippy from "tippy.js";
   import { getCitation } from "../cite";
   import type { Post } from "../slug";
-  import PostHeader from "../elements/postHeader.svelte";
+  import PostHeader from "./postHeader.svelte";
 
   export let post: Post;
   export let arrow = true;
@@ -74,7 +74,7 @@
 
 <div id={`post-${uid}`}>
   <PostHeader {metadata} {citation} {arrow} />
-
+  <div class="h-6" />
   <article class="prose max-w-none leading-normal md:leading-relaxed">
     <svelte:component this={post.post.default} />
   </article>
