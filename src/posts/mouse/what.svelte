@@ -1,10 +1,16 @@
 <script lang="ts">
   import PngViewer from "$src/lib/components/pngViewer.svelte";
+  import { throttle } from "lodash-es";
   import c from "./xtrials0pos.json";
   import c1 from "./xtrials1pos.json";
 
   //   const c = JSON.parse(header);
   let pos = 100;
+  let pos_t = 100;
+
+  const x = throttle((p: number) => (pos_t = p), 100);
+
+  $: x(pos);
 </script>
 
 <div class="flex gap-x-6">
@@ -15,8 +21,8 @@
 </div>
 <div class="h-5" />
 <aside>Sequential</aside>
-<PngViewer url="https://chaichontat-host.s3.amazonaws.com/movie/xtrials0.bin" header={c} {pos} />
+<PngViewer url="https://chaichontat-host.s3.amazonaws.com/movie/xtrials0.bin" header={c} pos={pos_t} />
 <aside class="mt-3">Scrambled</aside>
 <div class="mt-4">
-  <PngViewer url="https://chaichontat-host.s3.amazonaws.com/movie/xtrials1.bin" header={c1} {pos} xlabel="Step" />
+  <PngViewer url="https://chaichontat-host.s3.amazonaws.com/movie/xtrials1.bin" header={c1} pos={pos_t} xlabel="Step" />
 </div>
