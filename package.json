@@ -62,6 +62,7 @@
     "@citation-js/plugin-doi": "^0.6.1",
     "colormap": "^2.3.2",
     "fzf": "^0.5.1",
+    "lodash-es": "^4.17.21",
     "mdsvex-relative-images": "^1.0.2",
     "pako": "^2.0.4",
     "rehype-plugin-image-native-lazy-loading": "^1.2.0",
