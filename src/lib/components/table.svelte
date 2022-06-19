@@ -2,18 +2,11 @@
   export let data: number[][];
   import * as d3 from "d3";
 
-  const myArray = [
-    { name: "Bob", age: 30, birthday: "11/10/1990" },
-    { name: "Dan", age: 40, birthday: "11/10/1980" },
-    { name: "Thierry", age: 50, birthday: "11/10/1970" },
-    { name: "Patrick", age: 200, birthday: "11/10/1960" },
-  ];
-
   const color = [...Array(600).keys()].map((i) => d3.interpolateBlues(i / 600));
 </script>
 
-<div>
-  <table class="not-prose">
+{#if data}
+  <table class="not-prose overflow-x-auto">
     <thead>
       {#each data[0] as item}
         <th>{item}</th>
@@ -30,7 +23,7 @@
       {/each}
     </tbody>
   </table>
-</div>
+{/if}
 
 <style lang="postcss">
   table {
