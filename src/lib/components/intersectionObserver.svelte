@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
 
   export let once = true;
-  export let t = 100;
+  export let t = 200;
   export let bottom = 0;
   export let left = 0;
   export let right = 0;
