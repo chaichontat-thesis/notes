@@ -1,57 +1,48 @@
 <script lang="ts">
-  import { browser } from "$app/env";
   import * as d3 from "d3";
   import { axisBottom, axisLeft } from "d3-axis";
-  import pako from "pako";
   import { onMount } from "svelte";
 
-  export let url: string;
-  export let header: { width: number; height: number; idx: number[] };
-  export let pos: number;
+  export let data: Promise<Uint8Array | Float32Array> | Uint8Array | Float32Array;
+  export let header: { width: number; height: number };
 
   export let xlabel: string | undefined = undefined;
   export let ylabel: string | undefined = undefined;
-  export let minmax: [number, number] = [0, 5];
+  export let minmax: [number, number] = [0, 255];
+  export let diverging = false;
+  export let cmap: (t: number) => string;
 
   export let axes: { x?: boolean; y?: boolean } = { x: true, y: true };
+  export let scale = 1;
 
   let canvas: HTMLCanvasElement;
   let ctx: CanvasRenderingContext2D;
+  let scaleCanvas: HTMLCanvasElement;
+  let ctx2: CanvasRenderingContext2D;
   let svg: SVGSVGElement;
 
-  const decompressBlob =
-    browser && "CompressionStream" in window // Chromium
-      ? async (blob: Blob) => {
-          try {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-            const ds = new DecompressionStream("gzip");
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-            const decompressedStream = blob.stream().pipeThrough(ds);
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-            return await new Response(decompressedStream).arrayBuffer();
-          } catch (e) {
-            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-            throw new Error(`Error decompressing blob: ${e}`);
-          }
-        }
-      : async (blob: Blob) => {
-          return pako.inflate((await blob.arrayBuffer()) as pako.Data);
-        };
+  const h = header.height;
+  const w = header.width;
+  const arr = new Uint8ClampedArray(h * w * 4);
+  const mag = Math.max(Math.abs(minmax[0]), Math.abs(minmax[1]));
 
-  async function refresh(pos: number) {
-    pos = Number(pos);
-    const resp = await fetch(url, {
-      headers: {
-        Range: `bytes=${header.idx[pos]}-${header.idx[pos + 1] - 1}`,
-      },
-    });
+  function transform(v: number) {
+    if (diverging) {
+      return v / mag + 0.5;
+    } else {
+      return (v - minmax[0]) / (minmax[1] - minmax[0]);
+    }
+  }
 
-    const deped = await resp.blob().then(decompressBlob);
-    const uint8array = new Uint8Array(deped);
-    const arr = new Uint8ClampedArray(uint8array.length * 4);
-    uint8array.forEach((v, i) => {
+  async function refresh(d: Promise<Uint8Array | Float32Array> | Uint8Array | Float32Array) {
+    if (d instanceof Promise) {
+      d = await d;
+    }
+    if (!d) return;
+
+    d.forEach((v, i) => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const c = d3.color(d3.interpolateMagma(v / 255))!.rgb();
+      const c = d3.color(cmap(transform(v)))!.rgb();
       arr[i * 4] = c.r;
       arr[i * 4 + 1] = c.g;
       arr[i * 4 + 2] = c.b;
@@ -59,8 +50,9 @@
     });
 
     if (ctx) {
-      ctx.clearRect(0, 0, header.width, header.height);
-      ctx.putImageData(new ImageData(arr, header.width, header.height), 0, 0);
+      ctx2.clearRect(0, 0, header.width, header.height);
+      ctx2.putImageData(new ImageData(arr, header.width, header.height), 0, 0);
+      ctx.drawImage(scaleCanvas, 0, 0);
     }
   }
 
@@ -68,27 +60,33 @@
     node.call((g) => {
       g.select(".domain").remove();
       g.append("text")
-        .attr("x", xy === "x" ? 600 + 5 : 0)
+        .attr("x", xy === "x" ? w * scale + 5 : 0)
         .attr("y", xy === "x" ? -3 : -8)
-        .attr("fill", "currentColor")
+        .attr("fill", "#171717")
         .attr("font-size", 12)
         .attr("font-weight", 500)
         .attr("text-anchor", xy === "x" ? "start" : "end")
-        .text(label ?? null);
-      g.selectAll(".tick text").attr("font-size", 9);
+        .text(xy === "x" ? label ?? null : null);
+      g.selectAll(".tick text").attr("font-size", 11);
     });
   }
 
-  $: refresh(pos).catch(console.error);
+  $: refresh(data).catch(console.error);
+
   onMount(() => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     ctx = canvas.getContext("2d")!;
+    scaleCanvas = document.createElement("canvas");
+    scaleCanvas.height = header.height;
+    scaleCanvas.width = header.width;
+    ctx2 = scaleCanvas.getContext("2d")!;
+    ctx.scale(scale, scale);
 
     if (axes.x) {
       d3.select(svg)
         .append("g")
-        .attr("transform", `translate(0, ${199})`)
-        .call(axisBottom(d3.scaleLinear([0, 600]).domain([0, 600])))
+        .attr("transform", `translate(0, ${h * scale})`)
+        .call(axisBottom(d3.scaleLinear([0, w * scale]).domain([0, 600])).ticks(5))
         .call((g) => addText(g, xlabel, "x"));
     }
 
@@ -96,13 +94,26 @@
       d3.select(svg)
         .append("g")
         .attr("transform", `translate(0, 0)`)
-        .call(axisLeft(d3.scaleLinear([0, 200 - 1]).domain([0, 200])).ticks(5))
+        .call(
+          axisLeft(d3.scaleLinear([0, h * scale]).domain([0, 200]))
+            .ticks(5)
+            .tickFormat((d) => (d === 0 ? `${ylabel ?? ""} ${d}` : d))
+        )
         .call((g) => addText(g, ylabel, "y"));
     }
   });
 </script>
 
 <div class="relative" class:mb-4={axes.x}>
-  <canvas class="relative" bind:this={canvas} height={header.height} width={header.width} />
+  <canvas class="relative" bind:this={canvas} height={h * scale} width={w * scale} />
   <svg class="absolute top-0 left-0 overflow-visible" bind:this={svg} />
 </div>
+
+<style>
+  canvas {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+</style>

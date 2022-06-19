@@ -1,5 +1,4 @@
 <script lang="ts">
-  import * as Plot from "@observablehq/plot";
   import * as d3 from "d3";
   import { onMount } from "svelte";
   import { Legend } from "../legend";
@@ -9,10 +8,10 @@
   export let cmap: (t: number) => string = d3.interpolateViridis;
   export let legendAnchor: "start" | "end" = "start";
 
-  let w: SVGSVGElement;
+  let svg: SVGSVGElement;
 
   onMount(() => {
-    Legend(d3.select("#meh"), d3.scaleSequential(minmax, cmap), {
+    Legend(d3.select(svg), d3.scaleSequential(minmax, cmap), {
       title,
       legendAnchor,
     });
@@ -38,4 +37,4 @@
   });
 </script>
 
-<svg id="meh" />
+<svg bind:this={svg} />
