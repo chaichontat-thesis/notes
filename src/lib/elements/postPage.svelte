@@ -135,10 +135,15 @@
     @apply w-full md:w-[65%] lg:w-[60%];
   }
 
+  article > :global(.no-aside) {
+    /* Move away */
+    @apply w-full md:w-[100%] lg:w-[100%];
+  }
+
   /* TOC */
 
   article :global(.toc) {
-    @apply sidebar z-50 ml-2 mb-2 w-full border-b border-b-neutral-300 bg-neutral-50/90 pb-3 font-serif text-sm backdrop-blur-sm lg:sticky lg:top-8;
+    @apply sidebar z-50 ml-2 mb-2 hidden w-full border-b border-b-neutral-300 bg-neutral-50/90 pb-3 font-serif text-sm backdrop-blur-sm lg:sticky lg:top-8;
   }
 
   article :global(.toc .toc-item) {
