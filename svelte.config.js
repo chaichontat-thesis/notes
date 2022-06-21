@@ -27,6 +27,7 @@ const config = {
           $comps: path.resolve("./src/components"),
         },
       },
+      assetsInclude: ["src/**/*.csv"],
     },
     appDir: "internal",
     prerender: { default: true },
