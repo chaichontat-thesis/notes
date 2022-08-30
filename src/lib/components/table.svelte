@@ -1,28 +1,30 @@
 <script lang="ts">
-  export let data: number[][];
+  export let data: Promise<number[][]> | undefined;
   import * as d3 from "d3";
 
   const color = [...Array(600).keys()].map((i) => d3.interpolateBlues(i / 600));
 </script>
 
 {#if data}
-  <table class="not-prose overflow-x-auto">
-    <thead>
-      {#each data[0] as item}
-        <th>{item}</th>
-      {/each}
-    </thead>
-    <tbody>
-      {#each data.slice(1) as row}
-        <tr class="group">
-          <td class="group-hover:bg-blue-100">{row[0]}</td>
-          {#each row.slice(1) as item}
-            <td style={`background-color: ${color[item]}; color: ${item > 300 ? "white" : "black"};`}>{item}</td>
-          {/each}
-        </tr>
-      {/each}
-    </tbody>
-  </table>
+  {#await data then d}
+    <table class="not-prose overflow-x-auto">
+      <thead>
+        {#each d[0] as item}
+          <th>{item}</th>
+        {/each}
+      </thead>
+      <tbody>
+        {#each d.slice(1) as row}
+          <tr class="group">
+            <td class="group-hover:bg-blue-100">{row[0]}</td>
+            {#each row.slice(1) as item}
+              <td style={`background-color: ${color[item]}; color: ${item > 300 ? "white" : "black"};`}>{item}</td>
+            {/each}
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+  {/await}
 {/if}
 
 <style lang="postcss">
