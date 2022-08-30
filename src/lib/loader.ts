@@ -31,8 +31,11 @@ export async function getRange(url: string, range: [number, number], compressed:
   return compressed ? await resp.blob().then(decompressBlob) : await resp.arrayBuffer();
 }
 
-export function processCSV(csv: string, parse = true) {
-  const d = Papa.parse(csv, { fastMode: true, transform: (x: string) => (x ? Number(x) : "") }).data as number[][];
+export async function processCSV(csv: string, parse = true) {
+  const resp = await fetch(csv);
+
+  const d = Papa.parse(await resp.text(), { fastMode: true, transform: (x: string) => (x ? Number(x) : "") })
+    .data as number[][];
   if (!parse) return d;
   // corr.seq = Papa.parse(seqcorr, { fastMode: true, transform: (x: string) => (x ? Number(x) : "") }).data as number[][];
   const temp = new Float32Array(d.length * d[0].length);
