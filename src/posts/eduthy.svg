@@ -1,0 +1,87 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="180" height="180" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" zoomAndPan="magnify" preserveAspectRatio="xMidyMid" contentScriptType="application/ecmascript" id="5ddd9030-32ab-11ed-8572-7cd30ac779a6">
+<g>
+	<title>C10H14N2O5</title>
+	<desc content="structured text">C10H14N2O5</desc>
+	<!-- C10H14N2O5 -->
+	<rect x="0.5" y="0.5" width="179" height="179" stroke="#000000" stroke-width="1" fill="none"/>
+	<text x="40.4585" y="90.2928" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">N</text>
+	<text x="68.9153" y="90.2928" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">O</text>
+	<text x="54.6869" y="65.6477" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">N</text>
+	<text x="40.4568" y="41.0027" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">O</text>
+	<text x="53.7504" y="116.38" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">O</text>
+	<text x="74.6708" y="143.58" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">O</text>
+	<text x="22.5859" y="145.297" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">O</text>
+	<text x="91.1008" y="49.2177" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">C</text>
+	<text x="105.329" y="57.4327" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">C</text>
+	<text x="133.788" y="90.2928" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">N</text>
+	<text x="162.245" y="90.2928" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">O</text>
+	<text x="148.016" y="65.6477" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">N</text>
+	<text x="133.788" y="41.0027" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">O</text>
+	<text x="115.915" y="145.297" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">O</text>
+	<text x="168" y="143.58" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">O</text>
+	<text x="147.08" y="116.38" fill="#000000" font-family="Helvetica" font-size="8.8pt" text-anchor="middle" font-weight="bold">O</text>
+	<line x1="12" y1="54.2827" x2="26.2284" y2="62.4977" stroke="#000000" stroke-width="1.1015" />
+	<line x1="26.2284" y1="62.4977" x2="26.2284" y2="78.9278" stroke="#000000" stroke-width="1.1015" />
+	<line x1="29.0127" y1="64.9623" x2="29.0127" y2="76.4633" stroke="#000000" stroke-width="1.1015" />
+	<line x1="26.2284" y1="78.9278" x2="35.5879" y2="84.331" stroke="#000000" stroke-width="1.1015" />
+	<line x1="45.3291" y1="84.3307" x2="54.6869" y2="78.9278" stroke="#000000" stroke-width="1.1015" />
+	<line x1="53.9908" y1="80.1334" x2="63.3999" y2="85.5659" stroke="#000000" stroke-width="1.1015" />
+	<line x1="55.383" y1="77.7222" x2="63.3999" y2="82.3509" stroke="#000000" stroke-width="1.1015" />
+	<line x1="54.6869" y1="78.9278" x2="54.6869" y2="67.9977" stroke="#000000" stroke-width="1.1015" />
+	<line x1="49.8163" y1="59.6856" x2="40.4585" y2="54.2827" stroke="#000000" stroke-width="1.1015" />
+	<line x1="26.2284" y1="62.4977" x2="40.4585" y2="54.2827" stroke="#000000" stroke-width="1.1015" />
+	<line x1="41.8506" y1="54.2826" x2="41.8495" y2="43.3527" stroke="#000000" stroke-width="1.1015" />
+	<line x1="39.0663" y1="54.2829" x2="39.0653" y2="43.3527" stroke="#000000" stroke-width="1.1015" />
+	<polygon fill="#000000" stroke="none" points=" 40.4585,103.573 40.2035,102.303 40.7134,102.303 " />
+	<polygon fill="#000000" stroke="none" points=" 39.9485,101.033 39.6935,99.7628 41.2234,99.7628 40.9684,101.033 " />
+	<polygon fill="#000000" stroke="none" points=" 39.4386,98.4928 39.1836,97.2228 41.7334,97.2228 41.4784,98.4928 " />
+	<polygon fill="#000000" stroke="none" points=" 38.9286,95.9528 38.6736,94.6828 42.2433,94.6828 41.9883,95.9528 " />
+	<polygon fill="#000000" stroke="none" points=" 38.4187,93.4128 38.1637,92.1428 42.7533,92.1428 42.4983,93.4128 " />
+	<line x1="40.4585" y1="103.573" x2="27.1649" y2="113.23" stroke="#000000" stroke-width="1.1015" />
+	<line x1="27.1649" y1="113.23" x2="32.2435" y2="128.855" stroke="#000000" stroke-width="1.1015" />
+	<line x1="32.2435" y1="128.855" x2="48.6735" y2="128.855" stroke="#000000" stroke-width="1.1015" />
+	<line x1="48.6735" y1="128.855" x2="51.9633" y2="118.73" stroke="#000000" stroke-width="1.1015" />
+	<line x1="40.4585" y1="103.573" x2="48.235" y2="109.223" stroke="#000000" stroke-width="1.1015" />
+	<polygon fill="#000000" stroke="none" points=" 48.6735,128.855 49.9527,130.182 49.5401,130.482 " />
+	<polygon fill="#000000" stroke="none" points=" 51.2318,131.509 52.511,132.836 51.2733,133.736 50.4067,132.109 " />
+	<polygon fill="#000000" stroke="none" points=" 53.7902,134.163 55.0693,135.491 53.0065,136.989 52.1399,135.362 " />
+	<polygon fill="#000000" stroke="none" points=" 56.3485,136.818 57.6277,138.145 54.7396,140.243 53.8731,138.616 " />
+	<polygon fill="#000000" stroke="none" points=" 58.9069,139.472 60.186,140.799 56.4728,143.496 55.6062,141.869 " />
+	<line x1="58.3294" y1="142.147" x2="69.1554" y2="141.01" stroke="#000000" stroke-width="1.1015" />
+	<polygon fill="#000000" stroke="none" points=" 32.2435,128.855 29.4578,136.593 25.7448,133.896 " />
+	<line x1="96.0777" y1="48.9412" x2="100.352" y2="51.4092" stroke="#000000" stroke-width="1.1015" />
+	<line x1="96.0777" y1="51.3525" x2="100.352" y2="53.8205" stroke="#000000" stroke-width="1.1015" />
+	<line x1="96.0777" y1="46.53" x2="100.352" y2="48.998" stroke="#000000" stroke-width="1.1015" />
+	<line x1="110.306" y1="57.1559" x2="119.559" y2="62.4977" stroke="#000000" stroke-width="1.1015" />
+	<line x1="119.559" y1="62.4977" x2="119.559" y2="78.9278" stroke="#000000" stroke-width="1.1015" />
+	<line x1="122.344" y1="64.9623" x2="122.344" y2="76.4633" stroke="#000000" stroke-width="1.1015" />
+	<line x1="119.559" y1="78.9278" x2="128.917" y2="84.3307" stroke="#000000" stroke-width="1.1015" />
+	<line x1="138.658" y1="84.3307" x2="148.016" y2="78.9278" stroke="#000000" stroke-width="1.1015" />
+	<line x1="147.32" y1="80.1334" x2="156.729" y2="85.5659" stroke="#000000" stroke-width="1.1015" />
+	<line x1="148.712" y1="77.7222" x2="156.729" y2="82.3509" stroke="#000000" stroke-width="1.1015" />
+	<line x1="148.016" y1="78.9278" x2="148.016" y2="67.9977" stroke="#000000" stroke-width="1.1015" />
+	<line x1="143.145" y1="59.6856" x2="133.788" y2="54.2827" stroke="#000000" stroke-width="1.1015" />
+	<line x1="119.559" y1="62.4977" x2="133.788" y2="54.2827" stroke="#000000" stroke-width="1.1015" />
+	<line x1="135.18" y1="54.2827" x2="135.18" y2="43.3527" stroke="#000000" stroke-width="1.1015" />
+	<line x1="132.396" y1="54.2827" x2="132.396" y2="43.3527" stroke="#000000" stroke-width="1.1015" />
+	<polygon fill="#000000" stroke="none" points=" 133.788,103.573 133.533,102.303 134.043,102.303 " />
+	<polygon fill="#000000" stroke="none" points=" 133.278,101.033 133.023,99.7628 134.553,99.7628 134.298,101.033 " />
+	<polygon fill="#000000" stroke="none" points=" 132.768,98.4928 132.513,97.2228 135.063,97.2228 134.808,98.4928 " />
+	<polygon fill="#000000" stroke="none" points=" 132.258,95.9528 132.003,94.6828 135.573,94.6828 135.318,95.9528 " />
+	<polygon fill="#000000" stroke="none" points=" 131.748,93.4128 131.493,92.1428 136.082,92.1428 135.828,93.4128 " />
+	<line x1="133.788" y1="103.573" x2="120.496" y2="113.23" stroke="#000000" stroke-width="1.1015" />
+	<line x1="120.496" y1="113.23" x2="125.573" y2="128.855" stroke="#000000" stroke-width="1.1015" />
+	<polygon fill="#000000" stroke="none" points=" 125.573,128.855 122.787,136.593 119.074,133.896 " />
+	<line x1="125.573" y1="128.855" x2="142.003" y2="128.855" stroke="#000000" stroke-width="1.1015" />
+	<polygon fill="#000000" stroke="none" points=" 142.003,128.855 143.282,130.182 142.87,130.482 " />
+	<polygon fill="#000000" stroke="none" points=" 144.561,131.509 145.841,132.836 144.603,133.736 143.736,132.109 " />
+	<polygon fill="#000000" stroke="none" points=" 147.12,134.163 148.399,135.49 146.337,136.989 145.47,135.362 " />
+	<polygon fill="#000000" stroke="none" points=" 149.679,136.817 150.958,138.144 148.07,140.243 147.203,138.616 " />
+	<polygon fill="#000000" stroke="none" points=" 152.237,139.471 153.517,140.798 149.804,143.496 148.937,141.869 " />
+	<line x1="151.66" y1="142.147" x2="162.485" y2="141.01" stroke="#000000" stroke-width="1.1015" />
+	<line x1="142.003" y1="128.855" x2="145.293" y2="118.73" stroke="#000000" stroke-width="1.1015" />
+	<line x1="133.788" y1="103.573" x2="141.564" y2="109.223" stroke="#000000" stroke-width="1.1015" />
+</g>
+</svg>
